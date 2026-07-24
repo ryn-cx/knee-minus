@@ -15391,6 +15391,7 @@ class Props(GAPIBaseModel):
 class Query(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     slug: str
+    season: UUID | None = None
 
 class PinnedPlatformOptions(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from logging import NullHandler, getLogger
 from typing import TYPE_CHECKING, Any, override
+from uuid import UUID
 
 from good_ass_pydantic_integrator import GAPIBaseModel
 
@@ -18,13 +19,22 @@ logger = getLogger(__name__)
 logger.addHandler(NullHandler())
 
 
-class _EntityEndpoint[T: GAPIBaseModel](BaseEndpoint[T, [str]]):
+class _EntityEndpoint[T: GAPIBaseModel](BaseEndpoint[T, [str | UUID]]):
     """Base entity file class."""
 
     @override
-    def download(self, entity_id: str) -> dict[str, Any]:
+    def download(
+        self,
+        entity_id: str | UUID,
+        season_id: str | UUID | None = None,
+    ) -> dict[str, Any]:
         log_id = self.get_log_id(self.download, locals())
-        url = f"https://www.disneyplus.com/browse/{entity_id}"
+        # A bare UUID is turned into the ``entity-<uuid>`` browse slug; a str is
+        # used as-is (it may already be the full ``entity-...`` form).
+        slug = f"entity-{entity_id}" if isinstance(entity_id, UUID) else entity_id
+        url = f"https://www.disneyplus.com/browse/{slug}"
+        if season_id is not None:
+            url = f"{url}?season={season_id}"
         return self._client.download(url, log_id=log_id)
 
 
@@ -55,8 +65,12 @@ class Entity(_EntityEndpoint[EntityModel]):
     _response_model = EntityModel
 
     @override
-    def download_and_parse(self, entity_id: str) -> EntityModel:
-        return self.parse(self.download(entity_id))
+    def download_and_parse(
+        self,
+        entity_id: str | UUID,
+        season_id: str | UUID | None = None,
+    ) -> EntityModel:
+        return self.parse(self.download(entity_id, season_id))
 
     def extract(self, parsed: EntityModel | INPUT_TYPE) -> GroupedMainContentModel:
         """Extract `mainContent` grouped by `_type`."""
@@ -64,9 +78,13 @@ class Entity(_EntityEndpoint[EntityModel]):
             parsed = parsed.raw_input
         return GroupedMainContent.parse(parsed)
 
-    def download_and_extract(self, entity_id: str) -> GroupedMainContentModel:
+    def download_and_extract(
+        self,
+        entity_id: str | UUID,
+        season_id: str | UUID | None = None,
+    ) -> GroupedMainContentModel:
         """Downloads and extracts `mainContent` grouped by `_type`."""
-        return self.extract(self.download(entity_id))
+        return self.extract(self.download(entity_id, season_id))
 
 
 class GroupedMainContent(_EntityEndpoint[GroupedMainContentModel]):
@@ -92,6 +110,10 @@ class GroupedMainContent(_EntityEndpoint[GroupedMainContentModel]):
         return grouped
 
     @override
-    def download_and_parse(self, entity_id: str) -> GroupedMainContentModel:
-        response = self.download(entity_id)
+    def download_and_parse(
+        self,
+        entity_id: str | UUID,
+        season_id: str | UUID | None = None,
+    ) -> GroupedMainContentModel:
+        response = self.download(entity_id, season_id)
         return self.parse(response)
