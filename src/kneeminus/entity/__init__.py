@@ -102,6 +102,9 @@ class GroupedMainContent(_EntityEndpoint[GroupedMainContentModel]):
             key = item["_type"]
             if key == "CustomHTML":
                 grouped.setdefault(key, []).append(item)
+            elif key == "Section":
+                # Some pages repeat Section entries, only the first one is used.
+                grouped.setdefault(key, item)
             else:
                 if key in grouped:
                     msg = f"Duplicate single-item _type {key!r} in main content."
