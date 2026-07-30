@@ -421,7 +421,8 @@ class XxlargeImage2(GAPIBaseModel):
 
 class Data(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
-    class_name: str | None = Field(..., alias='className')
+    class_name: str | None = Field(None, alias='className')
+    color: str | None = None
 
 class Mark(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
@@ -584,26 +585,635 @@ class MetricsData(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     glimpse: Glimpse
 
+class BadgeRowItem(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    field_type: str = Field(..., alias='_type')
+    field_id: str = Field(..., alias='_id')
+    column_id: str = Field(..., alias='columnId')
+    is_highlighted: bool | None = Field(None, alias='isHighlighted')
+    is_header: bool = Field(..., alias='isHeader')
+    is_badge: bool = Field(..., alias='isBadge')
+
+class Data1(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    class_name: str = Field(..., alias='className')
+
+class Mark1(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    type: str
+    data: Data1
+
+class Data2(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    field_type: str = Field(..., alias='_type')
+    field_id: str = Field(..., alias='_id')
+    action_key: str | None = Field(None, alias='actionKey')
+    children: str | list[str]
+    copy_: str | None = Field(None, alias='copy')
+    class_name: str | None = Field(None, alias='className')
+    href: str | None = None
+    title: str | None = None
+    type: str | None = None
+    as_: str | None = Field(None, alias='as')
+
+class ContentItem3(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    type: str
+    marks: list[Mark1] | None = None
+    value: str | None = None
+    content: list[None] | None = None
+    data: Data2 | None = None
+
+class ContentItem2(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    type: str
+    content: list[ContentItem3]
+
+class RichText1(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    type: str
+    content: list[ContentItem2]
+
+class Child7(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    field_type: str = Field(..., alias='_type')
+    field_id: str = Field(..., alias='_id')
+    rich_text: RichText1 = Field(..., alias='richText')
+
+class Child6(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    field_type: str = Field(..., alias='_type')
+    field_id: str = Field(..., alias='_id')
+    children: list[Child7]
+    size: str
+
+class Footer(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    field_id: str = Field(..., alias='_id')
+    field_type: str = Field(..., alias='_type')
+    children: list[Child6]
+    text_alignment: str = Field(..., alias='textAlignment')
+
+class DefaultImage4(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    source: str
+    content_type: str = Field(..., alias='contentType')
+    width: int
+    height: int
+    ripcut_id: str = Field(..., alias='ripcutId')
+    image_id: str = Field(..., alias='imageId')
+
+class XsmallImage4(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    source: str
+    content_type: str = Field(..., alias='contentType')
+    width: int
+    height: int
+    ripcut_id: str = Field(..., alias='ripcutId')
+    image_id: str = Field(..., alias='imageId')
+
+class SmallImage4(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    source: str
+    content_type: str = Field(..., alias='contentType')
+    width: int
+    height: int
+    ripcut_id: str = Field(..., alias='ripcutId')
+    image_id: str = Field(..., alias='imageId')
+
+class MediumImage4(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    source: str
+    content_type: str = Field(..., alias='contentType')
+    width: int
+    height: int
+    ripcut_id: str = Field(..., alias='ripcutId')
+    image_id: str = Field(..., alias='imageId')
+
+class LargeImage4(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    source: str
+    content_type: str = Field(..., alias='contentType')
+    width: int
+    height: int
+    ripcut_id: str = Field(..., alias='ripcutId')
+    image_id: str = Field(..., alias='imageId')
+
+class XlargeImage4(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    source: str
+    content_type: str = Field(..., alias='contentType')
+    width: int
+    height: int
+    ripcut_id: str = Field(..., alias='ripcutId')
+    image_id: str = Field(..., alias='imageId')
+
+class XxlargeImage4(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    source: str
+    content_type: str = Field(..., alias='contentType')
+    width: int
+    height: int
+    ripcut_id: str = Field(..., alias='ripcutId')
+    image_id: str = Field(..., alias='imageId')
+
+class Data3(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    class_name: str = Field(..., alias='className')
+
+class Mark2(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    type: str
+    data: Data3 | None = None
+
+class ContentItem5(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    type: str
+    value: str
+    marks: list[Mark2]
+
+class ContentItem4(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    type: str
+    content: list[ContentItem5]
+
+class RichText2(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    type: str
+    content: list[ContentItem4]
+
+class CellContentItem(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    field_type: str = Field(..., alias='_type')
+    field_id: str = Field(..., alias='_id')
+    alt: str | None = None
+    default_image: DefaultImage4 | None = Field(None, alias='defaultImage')
+    xsmall_image: XsmallImage4 | None = Field(None, alias='xsmallImage')
+    small_image: SmallImage4 | None = Field(None, alias='smallImage')
+    medium_image: MediumImage4 | None = Field(None, alias='mediumImage')
+    large_image: LargeImage4 | None = Field(None, alias='largeImage')
+    xlarge_image: XlargeImage4 | None = Field(None, alias='xlargeImage')
+    xxlarge_image: XxlargeImage4 | None = Field(None, alias='xxlargeImage')
+    max_widths: MaxWidths | None = Field(None, alias='maxWidths')
+    size: str | None = None
+    rich_text: RichText2 | None = Field(None, alias='richText')
+
+class HeaderBody(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    field_type: str = Field(..., alias='_type')
+    field_id: str = Field(..., alias='_id')
+    column_id: str = Field(..., alias='columnId')
+    is_highlighted: bool | None = Field(None, alias='isHighlighted')
+    is_header: bool = Field(..., alias='isHeader')
+    class_name: str = Field(..., alias='className')
+    cell_content: list[CellContentItem] | None = Field(None, alias='cellContent')
+
+class Style(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    color: str
+
+class CellContentItem1(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    field_type: str = Field(..., alias='_type')
+    field_id: str = Field(..., alias='_id')
+    action_key: str | None = Field(None, alias='actionKey')
+    children: str | list[str]
+    copy_: str | None = Field(None, alias='copy')
+    common_href: str | None = Field(None, alias='commonHref')
+    size: str
+    title: str | None = None
+    style: Style | None = None
+    type: str | None = None
+    element_id: str | None = Field(None, alias='elementId')
+    data_test_id: str | None = Field(None, alias='dataTestId')
+    href: str | None = None
+    target_blank: bool | None = Field(None, alias='targetBlank')
+    format: list[str] | None = None
+
+class HeaderFooter(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    field_type: str = Field(..., alias='_type')
+    field_id: str = Field(..., alias='_id')
+    column_id: str = Field(..., alias='columnId')
+    is_highlighted: bool | None = Field(None, alias='isHighlighted')
+    is_header: bool = Field(..., alias='isHeader')
+    cell_content: list[CellContentItem1] | None = Field(None, alias='cellContent')
+
+class HeaderRow1(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    header_bodies: list[HeaderBody] = Field(..., alias='headerBodies')
+    header_footers: list[HeaderFooter] = Field(..., alias='headerFooters')
+
+class HeaderRow(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    field_type: str = Field(..., alias='_type')
+    id: str
+    header_row: HeaderRow1 = Field(..., alias='headerRow')
+    column_count: int = Field(..., alias='columnCount')
+    max_width: str = Field(..., alias='maxWidth')
+
+class Mark3(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    type: str
+    data: Data3 | None = None
+
+class Data5(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    field_type: str = Field(..., alias='_type')
+    field_id: str = Field(..., alias='_id')
+    as_: str = Field(..., alias='as')
+    children: str
+    class_name: str = Field(..., alias='className')
+
+class ContentItem7(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    type: str
+    value: str | None = None
+    marks: list[Mark3]
+    content: list[None] | None = None
+    data: Data5 | None = None
+
+class ContentItem6(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    type: str
+    content: list[ContentItem7]
+
+class RichText3(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    type: str
+    content: list[ContentItem6]
+
+class Child8(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    field_type: str = Field(..., alias='_type')
+    field_id: str = Field(..., alias='_id')
+    rich_text: RichText3 = Field(..., alias='richText')
+
+class Data6(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    class_name: str = Field(..., alias='className')
+
+class Mark4(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    type: str
+    data: Data6
+
+class ContentItem9(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    type: str
+    value: str
+    marks: list[Mark4]
+
+class ContentItem8(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    type: str
+    content: list[ContentItem9]
+
+class RichText4(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    type: str
+    content: list[ContentItem8]
+
+class CellContentItem2(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    field_type: str = Field(..., alias='_type')
+    field_id: str = Field(..., alias='_id')
+    rich_text: RichText4 | None = Field(None, alias='richText')
+    children: str | None = None
+    size: str | None = None
+
+class RowDatum(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    field_type: str = Field(..., alias='_type')
+    field_id: str = Field(..., alias='_id')
+    children: list[Child8] | None = None
+    cell_content: list[CellContentItem2] | None = Field(None, alias='cellContent')
+    column_id: str | None = Field(None, alias='columnId')
+    is_selected: bool | None = Field(None, alias='isSelected')
+
+class Row(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    row_data: list[RowDatum] = Field(..., alias='rowData')
+    id: str
+
+class BadgeRowItem1(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    field_type: str = Field(..., alias='_type')
+    field_id: str = Field(..., alias='_id')
+    column_id: str = Field(..., alias='columnId')
+    is_highlighted: bool | None = Field(None, alias='isHighlighted')
+    is_header: bool = Field(..., alias='isHeader')
+    text_alignment: str | None = Field(None, alias='textAlignment')
+    is_badge: bool = Field(..., alias='isBadge')
+
+class Mark5(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    type: str
+    data: Data6 | None = None
+
+class Data8(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    field_type: str = Field(..., alias='_type')
+    field_id: str = Field(..., alias='_id')
+    action_key: str | None = Field(None, alias='actionKey')
+    children: str | list[str]
+    copy_: str | None = Field(None, alias='copy')
+    class_name: str = Field(..., alias='className')
+    href: str | None = None
+    title: str | None = None
+    type: str | None = None
+    as_: str | None = Field(None, alias='as')
+
+class ContentItem11(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    type: str
+    marks: list[Mark5] | None = None
+    value: str | None = None
+    content: list[None] | None = None
+    data: Data8 | None = None
+
+class ContentItem10(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    type: str
+    content: list[ContentItem11]
+
+class RichText5(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    type: str
+    content: list[ContentItem10]
+
+class Child10(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    field_type: str = Field(..., alias='_type')
+    field_id: str = Field(..., alias='_id')
+    rich_text: RichText5 = Field(..., alias='richText')
+
+class Child9(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    field_type: str = Field(..., alias='_type')
+    field_id: str = Field(..., alias='_id')
+    children: list[Child10]
+    size: str
+
+class Footer1(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    field_id: str = Field(..., alias='_id')
+    field_type: str = Field(..., alias='_type')
+    children: list[Child9]
+    text_alignment: str = Field(..., alias='textAlignment')
+
+class Data9(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    class_name: str = Field(..., alias='className')
+
+class Mark6(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    type: str
+    data: Data9 | None = None
+
+class ContentItem13(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    type: str
+    value: str | None = None
+    marks: list[Mark6] | None = None
+    content: list[None] | None = None
+
+class ContentItem12(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    type: str
+    content: list[ContentItem13]
+
+class RichText6(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    type: str
+    content: list[ContentItem12]
+
+class CellContentItem3(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    field_type: str = Field(..., alias='_type')
+    field_id: str = Field(..., alias='_id')
+    rich_text: RichText6 | None = Field(None, alias='richText')
+    size: str | None = None
+
+class HeaderBody1(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    field_type: str = Field(..., alias='_type')
+    field_id: str = Field(..., alias='_id')
+    column_id: str = Field(..., alias='columnId')
+    is_highlighted: bool | None = Field(None, alias='isHighlighted')
+    is_header: bool = Field(..., alias='isHeader')
+    text_alignment: str | None = Field(None, alias='textAlignment')
+    cell_content: list[CellContentItem3] | None = Field(..., alias='cellContent')
+    class_name: str = Field(..., alias='className')
+
+class Mark7(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    type: str
+    data: Data9
+
+class ContentItem15(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    type: str
+    value: str
+    marks: list[Mark7]
+
+class ContentItem14(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    type: str
+    content: list[ContentItem15]
+
+class RichText7(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    type: str
+    content: list[ContentItem14]
+
+class Style1(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    background: str
+    color: str
+
+class CellContentItem4(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    field_type: str = Field(..., alias='_type')
+    field_id: str = Field(..., alias='_id')
+    size: str | None = None
+    rich_text: RichText7 | None = Field(None, alias='richText')
+    action_key: str | None = Field(None, alias='actionKey')
+    children: list[str] | None = None
+    copy_: str | None = Field(None, alias='copy')
+    href: str | None = None
+    title: str | None = None
+    style: Style1 | None = None
+    type: str | None = None
+    element_id: str | None = Field(None, alias='elementId')
+    data_test_id: str | None = Field(None, alias='dataTestId')
+
+class HeaderFooter1(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    field_type: str = Field(..., alias='_type')
+    field_id: str = Field(..., alias='_id')
+    column_id: str = Field(..., alias='columnId')
+    is_highlighted: bool | None = Field(None, alias='isHighlighted')
+    is_header: bool = Field(..., alias='isHeader')
+    text_alignment: str | None = Field(None, alias='textAlignment')
+    cell_content: list[CellContentItem4] = Field(..., alias='cellContent')
+
+class HeaderRow3(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    header_bodies: list[HeaderBody1] = Field(..., alias='headerBodies')
+    header_footers: list[HeaderFooter1] = Field(..., alias='headerFooters')
+
+class HeaderRow2(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    field_type: str = Field(..., alias='_type')
+    id: str
+    header_row: HeaderRow3 = Field(..., alias='headerRow')
+    column_count: int = Field(..., alias='columnCount')
+    max_width: str = Field(..., alias='maxWidth')
+
+class Mark8(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    type: str
+    data: Data9 | None = None
+
+class ContentItem17(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    type: str
+    value: str
+    marks: list[Mark8]
+
+class ContentItem16(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    type: str
+    content: list[ContentItem17]
+
+class RichText8(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    type: str
+    content: list[ContentItem16]
+
+class Child11(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    field_type: str = Field(..., alias='_type')
+    field_id: str = Field(..., alias='_id')
+    rich_text: RichText8 = Field(..., alias='richText')
+
+class Mark9(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    type: str
+    data: Data9
+
+class ContentItem19(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    type: str
+    value: str
+    marks: list[Mark9]
+
+class ContentItem18(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    type: str
+    content: list[ContentItem19]
+
+class RichText9(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    type: str
+    content: list[ContentItem18]
+
+class CellContentItem5(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    field_type: str = Field(..., alias='_type')
+    field_id: str = Field(..., alias='_id')
+    rich_text: RichText9 = Field(..., alias='richText')
+
+class RowDatum1(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    field_type: str = Field(..., alias='_type')
+    field_id: str = Field(..., alias='_id')
+    children: list[Child11] | None = None
+    cell_content: list[CellContentItem5] | None = Field(None, alias='cellContent')
+    column_id: str | None = Field(None, alias='columnId')
+    is_selected: bool | None = Field(None, alias='isSelected')
+
+class Row1(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    row_data: list[RowDatum1] = Field(..., alias='rowData')
+    id: str
+
+class Subchart(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    field_type: str = Field(..., alias='_type')
+    field_id: str = Field(..., alias='_id')
+    badge_row: list[BadgeRowItem1] = Field(..., alias='badgeRow')
+    column_count: int = Field(..., alias='columnCount')
+    footer: Footer1
+    header_row: HeaderRow2 = Field(..., alias='headerRow')
+    highlighted_column_ids: list[None] = Field(..., alias='highlightedColumnIds')
+    is_expandable: bool = Field(..., alias='isExpandable')
+    is_header_row_with_badge: bool = Field(..., alias='isHeaderRowWithBadge')
+    max_width: str = Field(..., alias='maxWidth')
+    rows: list[Row1]
+    should_expand_on_load: bool = Field(..., alias='shouldExpandOnLoad')
+
 class Child5(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     field_type: str = Field(..., alias='_type')
-    field_id: UUID = Field(..., alias='_id')
-    title: str
-    url: str
-    image_variants: ImageVariants = Field(..., alias='imageVariants')
-    aspect_ratio: float = Field(..., alias='aspectRatio')
-    loading: str
-    index: int
-    item_info_block: str = Field(..., alias='itemInfoBlock')
-    action_info_block: str = Field(..., alias='actionInfoBlock')
-    is_episode: bool = Field(..., alias='isEpisode')
-    metrics_data: MetricsData = Field(..., alias='metricsData')
+    field_id: UUID | str = Field(..., alias='_id', union_mode='left_to_right')
+    title: str | None = None
+    url: str | None = None
+    image_variants: ImageVariants | None = Field(None, alias='imageVariants')
+    aspect_ratio: float | None = Field(None, alias='aspectRatio')
+    loading: str | None = None
+    index: int | None = None
+    item_info_block: str | None = Field(None, alias='itemInfoBlock')
+    action_info_block: str | None = Field(None, alias='actionInfoBlock')
+    is_episode: bool | None = Field(None, alias='isEpisode')
+    metrics_data: MetricsData | None = Field(None, alias='metricsData')
+    badge_row: list[BadgeRowItem] | None = Field(None, alias='badgeRow')
+    column_count: int | None = Field(None, alias='columnCount')
+    custom_top_padding: str | None = Field(None, alias='customTopPadding')
+    footer: Footer | None = None
+    header_row: HeaderRow | None = Field(None, alias='headerRow')
+    highlighted_column_ids: list[None] | None = Field(None, alias='highlightedColumnIds')
+    is_expandable: bool | None = Field(None, alias='isExpandable')
+    is_header_row_with_badge: bool | None = Field(None, alias='isHeaderRowWithBadge')
+    max_width: str | None = Field(None, alias='maxWidth')
+    rows: list[Row] | None = None
+    subcharts: list[Subchart] | None = None
+
+class Data13(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    class_name: str | None = Field(None, alias='className')
+    color: str | None = None
+
+class Mark10(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    type: str
+    data: Data13
+
+class ContentItem21(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    type: str
+    value: str
+    marks: list[Mark10]
+
+class ContentItem20(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    type: str
+    content: list[ContentItem21]
+
+class RichText10(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    type: str
+    content: list[ContentItem20]
 
 class Child4(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     field_type: str = Field(..., alias='_type')
-    field_id: UUID = Field(..., alias='_id')
-    children: list[Child5]
+    field_id: UUID | str = Field(..., alias='_id', union_mode='left_to_right')
+    children: list[Child5] | None = None
+    rich_text: RichText10 | None = Field(None, alias='richText')
+    tab_id: str | None = Field(None, alias='tabId')
+    tab_name: str | None = Field(None, alias='tabName')
 
 class Title(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
@@ -614,18 +1224,27 @@ class Title(GAPIBaseModel):
     class_name: str = Field(..., alias='className')
     size: str
 
+class CapsuleProps(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    button_background: str = Field(..., alias='buttonBackground')
+    selected_text_color: str = Field(..., alias='selectedTextColor')
+
 class Child3(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
     children: list[Child4]
-    title: Title
-    disable_tile_click: bool = Field(..., alias='disableTileClick')
-    container_info_block: str = Field(..., alias='containerInfoBlock')
-    data_test_id: str = Field(..., alias='dataTestId')
-    container_style: str = Field(..., alias='containerStyle')
+    title: Title | None = None
+    disable_tile_click: bool | None = Field(None, alias='disableTileClick')
+    container_info_block: str | None = Field(None, alias='containerInfoBlock')
+    data_test_id: str | None = Field(None, alias='dataTestId')
+    container_style: str | None = Field(None, alias='containerStyle')
+    size: str | None = None
+    initial_tab_id: str | None = Field(None, alias='initialTabId')
+    capsule_props: CapsuleProps | None = Field(None, alias='capsuleProps')
+    display_mode: str | None = Field(None, alias='displayMode')
 
-class DefaultImage4(GAPIBaseModel):
+class DefaultImage5(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     source: str
     content_type: str = Field(..., alias='contentType')
@@ -633,7 +1252,7 @@ class DefaultImage4(GAPIBaseModel):
     ripcut_id: str = Field(..., alias='ripcutId')
     image_id: str = Field(..., alias='imageId')
 
-class XsmallImage4(GAPIBaseModel):
+class XsmallImage5(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     source: str
     content_type: str = Field(..., alias='contentType')
@@ -641,7 +1260,7 @@ class XsmallImage4(GAPIBaseModel):
     ripcut_id: str = Field(..., alias='ripcutId')
     image_id: str = Field(..., alias='imageId')
 
-class SmallImage4(GAPIBaseModel):
+class SmallImage5(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     source: str
     content_type: str = Field(..., alias='contentType')
@@ -649,7 +1268,7 @@ class SmallImage4(GAPIBaseModel):
     ripcut_id: str = Field(..., alias='ripcutId')
     image_id: str = Field(..., alias='imageId')
 
-class MediumImage4(GAPIBaseModel):
+class MediumImage5(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     source: str
     content_type: str = Field(..., alias='contentType')
@@ -657,7 +1276,7 @@ class MediumImage4(GAPIBaseModel):
     ripcut_id: str = Field(..., alias='ripcutId')
     image_id: str = Field(..., alias='imageId')
 
-class LargeImage4(GAPIBaseModel):
+class LargeImage5(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     source: str
     content_type: str = Field(..., alias='contentType')
@@ -665,7 +1284,7 @@ class LargeImage4(GAPIBaseModel):
     ripcut_id: str = Field(..., alias='ripcutId')
     image_id: str = Field(..., alias='imageId')
 
-class XlargeImage4(GAPIBaseModel):
+class XlargeImage5(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     source: str
     content_type: str = Field(..., alias='contentType')
@@ -673,7 +1292,7 @@ class XlargeImage4(GAPIBaseModel):
     ripcut_id: str = Field(..., alias='ripcutId')
     image_id: str = Field(..., alias='imageId')
 
-class XxlargeImage4(GAPIBaseModel):
+class XxlargeImage5(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     source: str
     content_type: str = Field(..., alias='contentType')
@@ -685,89 +1304,6 @@ class DetailIcon(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
-    alt: str
-    default_image: DefaultImage4 = Field(..., alias='defaultImage')
-    xsmall_image: XsmallImage4 = Field(..., alias='xsmallImage')
-    small_image: SmallImage4 = Field(..., alias='smallImage')
-    medium_image: MediumImage4 = Field(..., alias='mediumImage')
-    large_image: LargeImage4 = Field(..., alias='largeImage')
-    xlarge_image: XlargeImage4 = Field(..., alias='xlargeImage')
-    xxlarge_image: XxlargeImage4 = Field(..., alias='xxlargeImage')
-
-class DefaultImage5(GAPIBaseModel):
-    model_config = ConfigDict(extra='forbid')
-    source: str
-    content_type: str = Field(..., alias='contentType')
-    width: int
-    ripcut_id: UUID = Field(..., alias='ripcutId')
-    transform: str
-    max: list[int]
-    image_id: UUID = Field(..., alias='imageId')
-
-class XsmallImage5(GAPIBaseModel):
-    model_config = ConfigDict(extra='forbid')
-    source: str
-    content_type: str = Field(..., alias='contentType')
-    width: int
-    ripcut_id: UUID = Field(..., alias='ripcutId')
-    transform: str
-    max: list[int]
-    image_id: UUID = Field(..., alias='imageId')
-
-class SmallImage5(GAPIBaseModel):
-    model_config = ConfigDict(extra='forbid')
-    source: str
-    content_type: str = Field(..., alias='contentType')
-    width: int
-    ripcut_id: UUID = Field(..., alias='ripcutId')
-    transform: str
-    max: list[int]
-    image_id: UUID = Field(..., alias='imageId')
-
-class MediumImage5(GAPIBaseModel):
-    model_config = ConfigDict(extra='forbid')
-    source: str
-    content_type: str = Field(..., alias='contentType')
-    width: int
-    ripcut_id: UUID = Field(..., alias='ripcutId')
-    transform: str
-    max: list[int]
-    image_id: UUID = Field(..., alias='imageId')
-
-class LargeImage5(GAPIBaseModel):
-    model_config = ConfigDict(extra='forbid')
-    source: str
-    content_type: str = Field(..., alias='contentType')
-    width: int
-    ripcut_id: UUID = Field(..., alias='ripcutId')
-    transform: str
-    max: list[int]
-    image_id: UUID = Field(..., alias='imageId')
-
-class XlargeImage5(GAPIBaseModel):
-    model_config = ConfigDict(extra='forbid')
-    source: str
-    content_type: str = Field(..., alias='contentType')
-    width: int
-    ripcut_id: UUID = Field(..., alias='ripcutId')
-    transform: str
-    max: list[int]
-    image_id: UUID = Field(..., alias='imageId')
-
-class XxlargeImage5(GAPIBaseModel):
-    model_config = ConfigDict(extra='forbid')
-    source: str
-    content_type: str = Field(..., alias='contentType')
-    width: int
-    ripcut_id: UUID = Field(..., alias='ripcutId')
-    transform: str
-    max: list[int]
-    image_id: UUID = Field(..., alias='imageId')
-
-class TitleVisual(GAPIBaseModel):
-    model_config = ConfigDict(extra='forbid')
-    field_type: str = Field(..., alias='_type')
-    field_id: UUID = Field(..., alias='_id')
     alt: str
     default_image: DefaultImage5 = Field(..., alias='defaultImage')
     xsmall_image: XsmallImage5 = Field(..., alias='xsmallImage')
@@ -782,42 +1318,85 @@ class DefaultImage6(GAPIBaseModel):
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
-    ripcut_id: str = Field(..., alias='ripcutId')
-    image_id: str = Field(..., alias='imageId')
+    ripcut_id: UUID = Field(..., alias='ripcutId')
+    transform: str
+    max: list[int]
+    image_id: UUID = Field(..., alias='imageId')
 
 class XsmallImage6(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
-    ripcut_id: str = Field(..., alias='ripcutId')
-    image_id: str = Field(..., alias='imageId')
+    ripcut_id: UUID = Field(..., alias='ripcutId')
+    transform: str
+    max: list[int]
+    image_id: UUID = Field(..., alias='imageId')
 
 class SmallImage6(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
-    ripcut_id: str = Field(..., alias='ripcutId')
-    image_id: str = Field(..., alias='imageId')
+    ripcut_id: UUID = Field(..., alias='ripcutId')
+    transform: str
+    max: list[int]
+    image_id: UUID = Field(..., alias='imageId')
 
 class MediumImage6(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
-    ripcut_id: str = Field(..., alias='ripcutId')
-    image_id: str = Field(..., alias='imageId')
+    ripcut_id: UUID = Field(..., alias='ripcutId')
+    transform: str
+    max: list[int]
+    image_id: UUID = Field(..., alias='imageId')
 
 class LargeImage6(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
-    ripcut_id: str = Field(..., alias='ripcutId')
-    image_id: str = Field(..., alias='imageId')
+    ripcut_id: UUID = Field(..., alias='ripcutId')
+    transform: str
+    max: list[int]
+    image_id: UUID = Field(..., alias='imageId')
 
 class XlargeImage6(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    source: str
+    content_type: str = Field(..., alias='contentType')
+    width: int
+    ripcut_id: UUID = Field(..., alias='ripcutId')
+    transform: str
+    max: list[int]
+    image_id: UUID = Field(..., alias='imageId')
+
+class XxlargeImage6(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    source: str
+    content_type: str = Field(..., alias='contentType')
+    width: int
+    ripcut_id: UUID = Field(..., alias='ripcutId')
+    transform: str
+    max: list[int]
+    image_id: UUID = Field(..., alias='imageId')
+
+class TitleVisual(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    field_type: str = Field(..., alias='_type')
+    field_id: UUID = Field(..., alias='_id')
+    alt: str
+    default_image: DefaultImage6 = Field(..., alias='defaultImage')
+    xsmall_image: XsmallImage6 = Field(..., alias='xsmallImage')
+    small_image: SmallImage6 = Field(..., alias='smallImage')
+    medium_image: MediumImage6 = Field(..., alias='mediumImage')
+    large_image: LargeImage6 = Field(..., alias='largeImage')
+    xlarge_image: XlargeImage6 = Field(..., alias='xlargeImage')
+    xxlarge_image: XxlargeImage6 = Field(..., alias='xxlargeImage')
+
+class DefaultImage7(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     source: str
     content_type: str = Field(..., alias='contentType')
@@ -825,7 +1404,47 @@ class XlargeImage6(GAPIBaseModel):
     ripcut_id: str = Field(..., alias='ripcutId')
     image_id: str = Field(..., alias='imageId')
 
-class XxlargeImage6(GAPIBaseModel):
+class XsmallImage7(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    source: str
+    content_type: str = Field(..., alias='contentType')
+    width: int
+    ripcut_id: str = Field(..., alias='ripcutId')
+    image_id: str = Field(..., alias='imageId')
+
+class SmallImage7(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    source: str
+    content_type: str = Field(..., alias='contentType')
+    width: int
+    ripcut_id: str = Field(..., alias='ripcutId')
+    image_id: str = Field(..., alias='imageId')
+
+class MediumImage7(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    source: str
+    content_type: str = Field(..., alias='contentType')
+    width: int
+    ripcut_id: str = Field(..., alias='ripcutId')
+    image_id: str = Field(..., alias='imageId')
+
+class LargeImage7(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    source: str
+    content_type: str = Field(..., alias='contentType')
+    width: int
+    ripcut_id: str = Field(..., alias='ripcutId')
+    image_id: str = Field(..., alias='imageId')
+
+class XlargeImage7(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    source: str
+    content_type: str = Field(..., alias='contentType')
+    width: int
+    ripcut_id: str = Field(..., alias='ripcutId')
+    image_id: str = Field(..., alias='imageId')
+
+class XxlargeImage7(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     source: str
     content_type: str = Field(..., alias='contentType')
@@ -838,13 +1457,13 @@ class Image(GAPIBaseModel):
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
     alt: str
-    default_image: DefaultImage6 = Field(..., alias='defaultImage')
-    xsmall_image: XsmallImage6 = Field(..., alias='xsmallImage')
-    small_image: SmallImage6 = Field(..., alias='smallImage')
-    medium_image: MediumImage6 = Field(..., alias='mediumImage')
-    large_image: LargeImage6 = Field(..., alias='largeImage')
-    xlarge_image: XlargeImage6 = Field(..., alias='xlargeImage')
-    xxlarge_image: XxlargeImage6 = Field(..., alias='xxlargeImage')
+    default_image: DefaultImage7 = Field(..., alias='defaultImage')
+    xsmall_image: XsmallImage7 = Field(..., alias='xsmallImage')
+    small_image: SmallImage7 = Field(..., alias='smallImage')
+    medium_image: MediumImage7 = Field(..., alias='mediumImage')
+    large_image: LargeImage7 = Field(..., alias='largeImage')
+    xlarge_image: XlargeImage7 = Field(..., alias='xlargeImage')
+    xxlarge_image: XxlargeImage7 = Field(..., alias='xxlargeImage')
 
 class Rating(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
@@ -868,23 +1487,24 @@ class Labels(GAPIBaseModel):
     release: str
     runtime: str
 
-class Style(GAPIBaseModel):
+class Style2(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     background: str
 
 class Padding(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     top: str
-    bottom: str
+    bottom: str | None = None
 
 class MobileOptions(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     is_hidden: bool | None = Field(None, alias='isHidden')
-    full_width: bool = Field(..., alias='fullWidth')
+    full_width: bool | None = Field(None, alias='fullWidth')
 
 class TabletOptions(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
-    full_width: bool = Field(..., alias='fullWidth')
+    full_width: bool | None = Field(None, alias='fullWidth')
+    is_hidden: bool | None = Field(None, alias='isHidden')
 
 class DesktopOptions(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
@@ -918,38 +1538,33 @@ class TabletOptions1(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     is_hidden: bool = Field(..., alias='isHidden')
 
-class Data1(GAPIBaseModel):
+class Data14(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     class_name: str = Field(..., alias='className')
 
-class Mark1(GAPIBaseModel):
+class Mark11(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     type: str
-    data: Data1
+    data: Data14
 
-class ContentItem3(GAPIBaseModel):
+class ContentItem23(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     type: str
     value: str | None = None
-    marks: list[Mark1] | None = None
+    marks: list[Mark11] | None = None
     content: list[None] | None = None
 
-class ContentItem2(GAPIBaseModel):
+class ContentItem22(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     type: str
-    content: list[ContentItem3]
+    content: list[ContentItem23]
 
-class RichText1(GAPIBaseModel):
+class RichText11(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     type: str
-    content: list[ContentItem2]
+    content: list[ContentItem22]
 
-class CapsuleProps(GAPIBaseModel):
-    model_config = ConfigDict(extra='forbid')
-    button_background: str = Field(..., alias='buttonBackground')
-    selected_text_color: str = Field(..., alias='selectedTextColor')
-
-class BadgeRowItem(GAPIBaseModel):
+class BadgeRowItem2(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
@@ -958,12 +1573,12 @@ class BadgeRowItem(GAPIBaseModel):
     is_header: bool = Field(..., alias='isHeader')
     is_badge: bool = Field(..., alias='isBadge')
 
-class Mark2(GAPIBaseModel):
+class Mark12(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     type: str
-    data: Data1
+    data: Data14
 
-class Data3(GAPIBaseModel):
+class Data16(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
@@ -976,45 +1591,45 @@ class Data3(GAPIBaseModel):
     type: str | None = None
     as_: str | None = Field(None, alias='as')
 
-class ContentItem5(GAPIBaseModel):
+class ContentItem25(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     type: str
-    marks: list[Mark2] | None = None
+    marks: list[Mark12] | None = None
     value: str | None = None
     content: list[None] | None = None
-    data: Data3 | None = None
+    data: Data16 | None = None
 
-class ContentItem4(GAPIBaseModel):
+class ContentItem24(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     type: str
-    content: list[ContentItem5]
+    content: list[ContentItem25]
 
-class RichText2(GAPIBaseModel):
+class RichText12(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     type: str
-    content: list[ContentItem4]
+    content: list[ContentItem24]
 
-class Child10(GAPIBaseModel):
+class Child16(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
-    rich_text: RichText2 = Field(..., alias='richText')
+    rich_text: RichText12 = Field(..., alias='richText')
 
-class Child9(GAPIBaseModel):
+class Child15(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
-    children: list[Child10]
+    children: list[Child16]
     size: str
 
-class Footer(GAPIBaseModel):
+class Footer2(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     field_id: str = Field(..., alias='_id')
     field_type: str = Field(..., alias='_type')
-    children: list[Child9]
+    children: list[Child15]
     text_alignment: str = Field(..., alias='textAlignment')
 
-class DefaultImage7(GAPIBaseModel):
+class DefaultImage8(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     source: str
     content_type: str = Field(..., alias='contentType')
@@ -1023,7 +1638,7 @@ class DefaultImage7(GAPIBaseModel):
     ripcut_id: str = Field(..., alias='ripcutId')
     image_id: str = Field(..., alias='imageId')
 
-class XsmallImage7(GAPIBaseModel):
+class XsmallImage8(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     source: str
     content_type: str = Field(..., alias='contentType')
@@ -1032,7 +1647,7 @@ class XsmallImage7(GAPIBaseModel):
     ripcut_id: str = Field(..., alias='ripcutId')
     image_id: str = Field(..., alias='imageId')
 
-class SmallImage7(GAPIBaseModel):
+class SmallImage8(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     source: str
     content_type: str = Field(..., alias='contentType')
@@ -1041,7 +1656,7 @@ class SmallImage7(GAPIBaseModel):
     ripcut_id: str = Field(..., alias='ripcutId')
     image_id: str = Field(..., alias='imageId')
 
-class MediumImage7(GAPIBaseModel):
+class MediumImage8(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     source: str
     content_type: str = Field(..., alias='contentType')
@@ -1050,7 +1665,7 @@ class MediumImage7(GAPIBaseModel):
     ripcut_id: str = Field(..., alias='ripcutId')
     image_id: str = Field(..., alias='imageId')
 
-class LargeImage7(GAPIBaseModel):
+class LargeImage8(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     source: str
     content_type: str = Field(..., alias='contentType')
@@ -1059,7 +1674,7 @@ class LargeImage7(GAPIBaseModel):
     ripcut_id: str = Field(..., alias='ripcutId')
     image_id: str = Field(..., alias='imageId')
 
-class XlargeImage7(GAPIBaseModel):
+class XlargeImage8(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     source: str
     content_type: str = Field(..., alias='contentType')
@@ -1068,7 +1683,7 @@ class XlargeImage7(GAPIBaseModel):
     ripcut_id: str = Field(..., alias='ripcutId')
     image_id: str = Field(..., alias='imageId')
 
-class XxlargeImage7(GAPIBaseModel):
+class XxlargeImage8(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     source: str
     content_type: str = Field(..., alias='contentType')
@@ -1077,48 +1692,48 @@ class XxlargeImage7(GAPIBaseModel):
     ripcut_id: str = Field(..., alias='ripcutId')
     image_id: str = Field(..., alias='imageId')
 
-class Data4(GAPIBaseModel):
+class Data17(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     class_name: str = Field(..., alias='className')
 
-class Mark3(GAPIBaseModel):
+class Mark13(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     type: str
-    data: Data4 | None = None
+    data: Data17 | None = None
 
-class ContentItem7(GAPIBaseModel):
+class ContentItem27(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     type: str
     value: str
-    marks: list[Mark3]
+    marks: list[Mark13]
 
-class ContentItem6(GAPIBaseModel):
+class ContentItem26(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     type: str
-    content: list[ContentItem7]
+    content: list[ContentItem27]
 
-class RichText3(GAPIBaseModel):
+class RichText13(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     type: str
-    content: list[ContentItem6]
+    content: list[ContentItem26]
 
-class CellContentItem(GAPIBaseModel):
+class CellContentItem6(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
     alt: str | None = None
-    default_image: DefaultImage7 | None = Field(None, alias='defaultImage')
-    xsmall_image: XsmallImage7 | None = Field(None, alias='xsmallImage')
-    small_image: SmallImage7 | None = Field(None, alias='smallImage')
-    medium_image: MediumImage7 | None = Field(None, alias='mediumImage')
-    large_image: LargeImage7 | None = Field(None, alias='largeImage')
-    xlarge_image: XlargeImage7 | None = Field(None, alias='xlargeImage')
-    xxlarge_image: XxlargeImage7 | None = Field(None, alias='xxlargeImage')
+    default_image: DefaultImage8 | None = Field(None, alias='defaultImage')
+    xsmall_image: XsmallImage8 | None = Field(None, alias='xsmallImage')
+    small_image: SmallImage8 | None = Field(None, alias='smallImage')
+    medium_image: MediumImage8 | None = Field(None, alias='mediumImage')
+    large_image: LargeImage8 | None = Field(None, alias='largeImage')
+    xlarge_image: XlargeImage8 | None = Field(None, alias='xlargeImage')
+    xxlarge_image: XxlargeImage8 | None = Field(None, alias='xxlargeImage')
     max_widths: MaxWidths | None = Field(None, alias='maxWidths')
     size: str | None = None
-    rich_text: RichText3 | None = Field(None, alias='richText')
+    rich_text: RichText13 | None = Field(None, alias='richText')
 
-class HeaderBody(GAPIBaseModel):
+class HeaderBody2(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
@@ -1126,13 +1741,13 @@ class HeaderBody(GAPIBaseModel):
     is_highlighted: bool | None = Field(None, alias='isHighlighted')
     is_header: bool = Field(..., alias='isHeader')
     class_name: str = Field(..., alias='className')
-    cell_content: list[CellContentItem] | None = Field(None, alias='cellContent')
+    cell_content: list[CellContentItem6] | None = Field(None, alias='cellContent')
 
-class Style1(GAPIBaseModel):
+class Style3(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     color: str
 
-class CellContentItem1(GAPIBaseModel):
+class CellContentItem7(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
@@ -1142,7 +1757,7 @@ class CellContentItem1(GAPIBaseModel):
     href: str | None = None
     size: str
     title: str | None = None
-    style: Style1 | None = None
+    style: Style3 | None = None
     type: str | None = None
     element_id: str | None = Field(None, alias='elementId')
     data_test_id: str | None = Field(None, alias='dataTestId')
@@ -1150,34 +1765,34 @@ class CellContentItem1(GAPIBaseModel):
     format: list[str] | None = None
     common_href: str | None = Field(None, alias='commonHref')
 
-class HeaderFooter(GAPIBaseModel):
+class HeaderFooter2(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
     column_id: str = Field(..., alias='columnId')
     is_highlighted: bool | None = Field(None, alias='isHighlighted')
     is_header: bool = Field(..., alias='isHeader')
-    cell_content: list[CellContentItem1] | None = Field(None, alias='cellContent')
+    cell_content: list[CellContentItem7] | None = Field(None, alias='cellContent')
 
-class HeaderRow1(GAPIBaseModel):
+class HeaderRow5(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
-    header_bodies: list[HeaderBody] = Field(..., alias='headerBodies')
-    header_footers: list[HeaderFooter] = Field(..., alias='headerFooters')
+    header_bodies: list[HeaderBody2] = Field(..., alias='headerBodies')
+    header_footers: list[HeaderFooter2] = Field(..., alias='headerFooters')
 
-class HeaderRow(GAPIBaseModel):
+class HeaderRow4(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     field_type: str = Field(..., alias='_type')
     id: str
-    header_row: HeaderRow1 = Field(..., alias='headerRow')
+    header_row: HeaderRow5 = Field(..., alias='headerRow')
     column_count: int = Field(..., alias='columnCount')
     max_width: str = Field(..., alias='maxWidth')
 
-class Mark4(GAPIBaseModel):
+class Mark14(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     type: str
-    data: Data4 | None = None
+    data: Data17 | None = None
 
-class Data6(GAPIBaseModel):
+class Data19(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
@@ -1185,78 +1800,78 @@ class Data6(GAPIBaseModel):
     children: str
     class_name: str = Field(..., alias='className')
 
-class ContentItem9(GAPIBaseModel):
+class ContentItem29(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     type: str
     value: str | None = None
-    marks: list[Mark4]
+    marks: list[Mark14]
     content: list[None] | None = None
-    data: Data6 | None = None
+    data: Data19 | None = None
 
-class ContentItem8(GAPIBaseModel):
+class ContentItem28(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     type: str
-    content: list[ContentItem9]
+    content: list[ContentItem29]
 
-class RichText4(GAPIBaseModel):
+class RichText14(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     type: str
-    content: list[ContentItem8]
+    content: list[ContentItem28]
 
-class Child11(GAPIBaseModel):
+class Child17(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
-    rich_text: RichText4 = Field(..., alias='richText')
+    rich_text: RichText14 = Field(..., alias='richText')
 
-class Data7(GAPIBaseModel):
+class Data20(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     class_name: str = Field(..., alias='className')
 
-class Mark5(GAPIBaseModel):
+class Mark15(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     type: str
-    data: Data7
+    data: Data20
 
-class ContentItem11(GAPIBaseModel):
+class ContentItem31(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     type: str
     value: str
-    marks: list[Mark5]
+    marks: list[Mark15]
 
-class ContentItem10(GAPIBaseModel):
+class ContentItem30(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     type: str
-    content: list[ContentItem11]
+    content: list[ContentItem31]
 
-class RichText5(GAPIBaseModel):
+class RichText15(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     type: str
-    content: list[ContentItem10]
+    content: list[ContentItem30]
 
-class CellContentItem2(GAPIBaseModel):
+class CellContentItem8(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
-    rich_text: RichText5 | None = Field(None, alias='richText')
+    rich_text: RichText15 | None = Field(None, alias='richText')
     children: str | None = None
     size: str | None = None
 
-class RowDatum(GAPIBaseModel):
+class RowDatum2(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
-    children: list[Child11] | None = None
-    cell_content: list[CellContentItem2] | None = Field(None, alias='cellContent')
+    children: list[Child17] | None = None
+    cell_content: list[CellContentItem8] | None = Field(None, alias='cellContent')
     column_id: str | None = Field(None, alias='columnId')
     is_selected: bool | None = Field(None, alias='isSelected')
 
-class Row(GAPIBaseModel):
+class Row2(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
-    row_data: list[RowDatum] = Field(..., alias='rowData')
+    row_data: list[RowDatum2] = Field(..., alias='rowData')
     id: str
 
-class BadgeRowItem1(GAPIBaseModel):
+class BadgeRowItem3(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
@@ -1266,12 +1881,12 @@ class BadgeRowItem1(GAPIBaseModel):
     text_alignment: str | None = Field(None, alias='textAlignment')
     is_badge: bool = Field(..., alias='isBadge')
 
-class Mark6(GAPIBaseModel):
+class Mark16(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     type: str
-    data: Data7 | None = None
+    data: Data20 | None = None
 
-class Data9(GAPIBaseModel):
+class Data22(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
@@ -1284,78 +1899,78 @@ class Data9(GAPIBaseModel):
     type: str | None = None
     as_: str | None = Field(None, alias='as')
 
-class ContentItem13(GAPIBaseModel):
+class ContentItem33(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     type: str
-    marks: list[Mark6] | None = None
+    marks: list[Mark16] | None = None
     value: str | None = None
     content: list[None] | None = None
-    data: Data9 | None = None
+    data: Data22 | None = None
 
-class ContentItem12(GAPIBaseModel):
+class ContentItem32(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     type: str
-    content: list[ContentItem13]
+    content: list[ContentItem33]
 
-class RichText6(GAPIBaseModel):
+class RichText16(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     type: str
-    content: list[ContentItem12]
+    content: list[ContentItem32]
 
-class Child13(GAPIBaseModel):
+class Child19(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
-    rich_text: RichText6 = Field(..., alias='richText')
+    rich_text: RichText16 = Field(..., alias='richText')
 
-class Child12(GAPIBaseModel):
+class Child18(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
-    children: list[Child13]
+    children: list[Child19]
     size: str
 
-class Footer1(GAPIBaseModel):
+class Footer3(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     field_id: str = Field(..., alias='_id')
     field_type: str = Field(..., alias='_type')
-    children: list[Child12]
+    children: list[Child18]
     text_alignment: str = Field(..., alias='textAlignment')
 
-class Data10(GAPIBaseModel):
+class Data23(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     class_name: str = Field(..., alias='className')
 
-class Mark7(GAPIBaseModel):
+class Mark17(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     type: str
-    data: Data10 | None = None
+    data: Data23 | None = None
 
-class ContentItem15(GAPIBaseModel):
+class ContentItem35(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     type: str
     value: str | None = None
-    marks: list[Mark7] | None = None
+    marks: list[Mark17] | None = None
     content: list[None] | None = None
 
-class ContentItem14(GAPIBaseModel):
+class ContentItem34(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     type: str
-    content: list[ContentItem15]
+    content: list[ContentItem35]
 
-class RichText7(GAPIBaseModel):
+class RichText17(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     type: str
-    content: list[ContentItem14]
+    content: list[ContentItem34]
 
-class CellContentItem3(GAPIBaseModel):
+class CellContentItem9(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
-    rich_text: RichText7 | None = Field(None, alias='richText')
+    rich_text: RichText17 | None = Field(None, alias='richText')
     size: str | None = None
 
-class HeaderBody1(GAPIBaseModel):
+class HeaderBody3(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
@@ -1363,52 +1978,52 @@ class HeaderBody1(GAPIBaseModel):
     is_highlighted: bool | None = Field(None, alias='isHighlighted')
     is_header: bool = Field(..., alias='isHeader')
     text_alignment: str | None = Field(None, alias='textAlignment')
-    cell_content: list[CellContentItem3] | None = Field(..., alias='cellContent')
+    cell_content: list[CellContentItem9] | None = Field(..., alias='cellContent')
     class_name: str = Field(..., alias='className')
 
-class Mark8(GAPIBaseModel):
+class Mark18(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     type: str
-    data: Data10
+    data: Data23
 
-class ContentItem17(GAPIBaseModel):
+class ContentItem37(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     type: str
     value: str
-    marks: list[Mark8]
+    marks: list[Mark18]
 
-class ContentItem16(GAPIBaseModel):
+class ContentItem36(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     type: str
-    content: list[ContentItem17]
+    content: list[ContentItem37]
 
-class RichText8(GAPIBaseModel):
+class RichText18(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     type: str
-    content: list[ContentItem16]
+    content: list[ContentItem36]
 
-class Style2(GAPIBaseModel):
+class Style4(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     background: str
     color: str
 
-class CellContentItem4(GAPIBaseModel):
+class CellContentItem10(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
     size: str | None = None
-    rich_text: RichText8 | None = Field(None, alias='richText')
+    rich_text: RichText18 | None = Field(None, alias='richText')
     action_key: str | None = Field(None, alias='actionKey')
     children: list[str] | None = None
     copy_: str | None = Field(None, alias='copy')
     href: str | None = None
     title: str | None = None
-    style: Style2 | None = None
+    style: Style4 | None = None
     type: str | None = None
     element_id: str | None = Field(None, alias='elementId')
     data_test_id: str | None = Field(None, alias='dataTestId')
 
-class HeaderFooter1(GAPIBaseModel):
+class HeaderFooter3(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
@@ -1416,136 +2031,136 @@ class HeaderFooter1(GAPIBaseModel):
     is_highlighted: bool | None = Field(None, alias='isHighlighted')
     is_header: bool = Field(..., alias='isHeader')
     text_alignment: str | None = Field(None, alias='textAlignment')
-    cell_content: list[CellContentItem4] = Field(..., alias='cellContent')
+    cell_content: list[CellContentItem10] = Field(..., alias='cellContent')
 
-class HeaderRow3(GAPIBaseModel):
+class HeaderRow7(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
-    header_bodies: list[HeaderBody1] = Field(..., alias='headerBodies')
-    header_footers: list[HeaderFooter1] = Field(..., alias='headerFooters')
+    header_bodies: list[HeaderBody3] = Field(..., alias='headerBodies')
+    header_footers: list[HeaderFooter3] = Field(..., alias='headerFooters')
 
-class HeaderRow2(GAPIBaseModel):
+class HeaderRow6(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     field_type: str = Field(..., alias='_type')
     id: str
-    header_row: HeaderRow3 = Field(..., alias='headerRow')
+    header_row: HeaderRow7 = Field(..., alias='headerRow')
     column_count: int = Field(..., alias='columnCount')
     max_width: str = Field(..., alias='maxWidth')
 
-class Mark9(GAPIBaseModel):
+class Mark19(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     type: str
-    data: Data10 | None = None
+    data: Data23 | None = None
 
-class ContentItem19(GAPIBaseModel):
+class ContentItem39(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     type: str
     value: str
-    marks: list[Mark9]
+    marks: list[Mark19]
 
-class ContentItem18(GAPIBaseModel):
+class ContentItem38(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     type: str
-    content: list[ContentItem19]
+    content: list[ContentItem39]
 
-class RichText9(GAPIBaseModel):
+class RichText19(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     type: str
-    content: list[ContentItem18]
+    content: list[ContentItem38]
+
+class Child20(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    field_type: str = Field(..., alias='_type')
+    field_id: str = Field(..., alias='_id')
+    rich_text: RichText19 = Field(..., alias='richText')
+
+class Mark20(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    type: str
+    data: Data23
+
+class ContentItem41(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    type: str
+    value: str
+    marks: list[Mark20]
+
+class ContentItem40(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    type: str
+    content: list[ContentItem41]
+
+class RichText20(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    type: str
+    content: list[ContentItem40]
+
+class CellContentItem11(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    field_type: str = Field(..., alias='_type')
+    field_id: str = Field(..., alias='_id')
+    rich_text: RichText20 = Field(..., alias='richText')
+
+class RowDatum3(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    field_type: str = Field(..., alias='_type')
+    field_id: str = Field(..., alias='_id')
+    children: list[Child20] | None = None
+    cell_content: list[CellContentItem11] | None = Field(None, alias='cellContent')
+    column_id: str | None = Field(None, alias='columnId')
+    is_selected: bool | None = Field(None, alias='isSelected')
+
+class Row3(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    row_data: list[RowDatum3] = Field(..., alias='rowData')
+    id: str
+
+class Subchart1(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    field_type: str = Field(..., alias='_type')
+    field_id: str = Field(..., alias='_id')
+    badge_row: list[BadgeRowItem3] = Field(..., alias='badgeRow')
+    column_count: int = Field(..., alias='columnCount')
+    footer: Footer3
+    header_row: HeaderRow6 = Field(..., alias='headerRow')
+    highlighted_column_ids: list[None] = Field(..., alias='highlightedColumnIds')
+    is_expandable: bool = Field(..., alias='isExpandable')
+    is_header_row_with_badge: bool = Field(..., alias='isHeaderRowWithBadge')
+    max_width: str = Field(..., alias='maxWidth')
+    rows: list[Row3]
+    should_expand_on_load: bool = Field(..., alias='shouldExpandOnLoad')
 
 class Child14(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
-    rich_text: RichText9 = Field(..., alias='richText')
-
-class Mark10(GAPIBaseModel):
-    model_config = ConfigDict(extra='forbid')
-    type: str
-    data: Data10
-
-class ContentItem21(GAPIBaseModel):
-    model_config = ConfigDict(extra='forbid')
-    type: str
-    value: str
-    marks: list[Mark10]
-
-class ContentItem20(GAPIBaseModel):
-    model_config = ConfigDict(extra='forbid')
-    type: str
-    content: list[ContentItem21]
-
-class RichText10(GAPIBaseModel):
-    model_config = ConfigDict(extra='forbid')
-    type: str
-    content: list[ContentItem20]
-
-class CellContentItem5(GAPIBaseModel):
-    model_config = ConfigDict(extra='forbid')
-    field_type: str = Field(..., alias='_type')
-    field_id: str = Field(..., alias='_id')
-    rich_text: RichText10 = Field(..., alias='richText')
-
-class RowDatum1(GAPIBaseModel):
-    model_config = ConfigDict(extra='forbid')
-    field_type: str = Field(..., alias='_type')
-    field_id: str = Field(..., alias='_id')
-    children: list[Child14] | None = None
-    cell_content: list[CellContentItem5] | None = Field(None, alias='cellContent')
-    column_id: str | None = Field(None, alias='columnId')
-    is_selected: bool | None = Field(None, alias='isSelected')
-
-class Row1(GAPIBaseModel):
-    model_config = ConfigDict(extra='forbid')
-    row_data: list[RowDatum1] = Field(..., alias='rowData')
-    id: str
-
-class Subchart(GAPIBaseModel):
-    model_config = ConfigDict(extra='forbid')
-    field_type: str = Field(..., alias='_type')
-    field_id: str = Field(..., alias='_id')
-    badge_row: list[BadgeRowItem1] = Field(..., alias='badgeRow')
-    column_count: int = Field(..., alias='columnCount')
-    footer: Footer1
-    header_row: HeaderRow2 = Field(..., alias='headerRow')
-    highlighted_column_ids: list[None] = Field(..., alias='highlightedColumnIds')
-    is_expandable: bool = Field(..., alias='isExpandable')
-    is_header_row_with_badge: bool = Field(..., alias='isHeaderRowWithBadge')
-    max_width: str = Field(..., alias='maxWidth')
-    rows: list[Row1]
-    should_expand_on_load: bool = Field(..., alias='shouldExpandOnLoad')
-
-class Child8(GAPIBaseModel):
-    model_config = ConfigDict(extra='forbid')
-    field_type: str = Field(..., alias='_type')
-    field_id: str = Field(..., alias='_id')
-    badge_row: list[BadgeRowItem] = Field(..., alias='badgeRow')
+    badge_row: list[BadgeRowItem2] = Field(..., alias='badgeRow')
     column_count: int = Field(..., alias='columnCount')
     custom_top_padding: str = Field(..., alias='customTopPadding')
-    footer: Footer | None = None
-    header_row: HeaderRow = Field(..., alias='headerRow')
+    footer: Footer2 | None = None
+    header_row: HeaderRow4 = Field(..., alias='headerRow')
     highlighted_column_ids: list[None] = Field(..., alias='highlightedColumnIds')
     is_expandable: bool = Field(..., alias='isExpandable')
     is_header_row_with_badge: bool = Field(..., alias='isHeaderRowWithBadge')
     max_width: str = Field(..., alias='maxWidth')
-    rows: list[Row]
-    subcharts: list[Subchart] | None = None
+    rows: list[Row2]
+    subcharts: list[Subchart1] | None = None
 
-class Child7(GAPIBaseModel):
+class Child13(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     field_id: str = Field(..., alias='_id')
     field_type: str = Field(..., alias='_type')
-    children: list[Child8]
+    children: list[Child14]
     tab_id: str = Field(..., alias='tabId')
     tab_name: str = Field(..., alias='tabName')
 
-class Child6(GAPIBaseModel):
+class Child12(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
-    rich_text: RichText1 | None = Field(None, alias='richText')
+    rich_text: RichText11 | None = Field(None, alias='richText')
     initial_tab_id: str | None = Field(None, alias='initialTabId')
     capsule_props: CapsuleProps | None = Field(None, alias='capsuleProps')
-    children: list[Child7] | None = None
+    children: list[Child13] | None = None
     display_mode: str | None = Field(None, alias='displayMode')
 
 class MetricsData2(GAPIBaseModel):
@@ -1563,7 +2178,7 @@ class Component(GAPIBaseModel):
     padding: Padding1
     mobile_options: MobileOptions1 = Field(..., alias='mobileOptions')
     tablet_options: TabletOptions1 = Field(..., alias='tabletOptions')
-    children: list[Child6]
+    children: list[Child12]
     metrics_data: MetricsData2 = Field(..., alias='metricsData')
 
 class Variant(GAPIBaseModel):
@@ -1608,6 +2223,19 @@ class ItemListElementItem(GAPIBaseModel):
     position: int
     item: Item1
 
+class EpisodeItem(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    field_type: str = Field(..., alias='@type')
+    name: str
+    episode_number: int = Field(..., alias='episodeNumber')
+
+class ContainsSeasonItem(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    field_type: str = Field(..., alias='@type')
+    name: str
+    season_number: int = Field(..., alias='seasonNumber')
+    episode: list[EpisodeItem]
+
 class FieldGraphItem(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     field_type: str = Field(..., alias='@type')
@@ -1619,6 +2247,7 @@ class FieldGraphItem(GAPIBaseModel):
     genre: list[str] | None = None
     primary_image_of_page: str | None = Field(None, alias='primaryImageOfPage')
     item_list_element: list[ItemListElementItem] | None = Field(None, alias='itemListElement')
+    contains_season: list[ContainsSeasonItem] | None = Field(None, alias='containsSeason')
 
 class LdJson(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
@@ -1630,49 +2259,49 @@ class DebugMetaTag(GAPIBaseModel):
     name: str
     content: str
 
-class DefaultImage8(GAPIBaseModel):
+class DefaultImage9(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     source: str
     content_type: str = Field(..., alias='contentType')
     ripcut_id: UUID = Field(..., alias='ripcutId')
     image_id: UUID = Field(..., alias='imageId')
 
-class XsmallImage8(GAPIBaseModel):
+class XsmallImage9(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     source: str
     content_type: str = Field(..., alias='contentType')
     ripcut_id: UUID = Field(..., alias='ripcutId')
     image_id: UUID = Field(..., alias='imageId')
 
-class SmallImage8(GAPIBaseModel):
+class SmallImage9(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     source: str
     content_type: str = Field(..., alias='contentType')
     ripcut_id: UUID = Field(..., alias='ripcutId')
     image_id: UUID = Field(..., alias='imageId')
 
-class MediumImage8(GAPIBaseModel):
+class MediumImage9(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     source: str
     content_type: str = Field(..., alias='contentType')
     ripcut_id: UUID = Field(..., alias='ripcutId')
     image_id: UUID = Field(..., alias='imageId')
 
-class LargeImage8(GAPIBaseModel):
+class LargeImage9(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     source: str
     content_type: str = Field(..., alias='contentType')
     ripcut_id: UUID = Field(..., alias='ripcutId')
     image_id: UUID = Field(..., alias='imageId')
 
-class XlargeImage8(GAPIBaseModel):
+class XlargeImage9(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     source: str
     content_type: str = Field(..., alias='contentType')
     ripcut_id: UUID = Field(..., alias='ripcutId')
     image_id: UUID = Field(..., alias='imageId')
 
-class XxlargeImage8(GAPIBaseModel):
+class XxlargeImage9(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     source: str
     content_type: str = Field(..., alias='contentType')
@@ -1684,13 +2313,13 @@ class ImageVariants1(GAPIBaseModel):
     field_type: str = Field(..., alias='_type')
     field_id: UUID = Field(..., alias='_id')
     alt: str
-    default_image: DefaultImage8 = Field(..., alias='defaultImage')
-    xsmall_image: XsmallImage8 = Field(..., alias='xsmallImage')
-    small_image: SmallImage8 = Field(..., alias='smallImage')
-    medium_image: MediumImage8 = Field(..., alias='mediumImage')
-    large_image: LargeImage8 = Field(..., alias='largeImage')
-    xlarge_image: XlargeImage8 = Field(..., alias='xlargeImage')
-    xxlarge_image: XxlargeImage8 = Field(..., alias='xxlargeImage')
+    default_image: DefaultImage9 = Field(..., alias='defaultImage')
+    xsmall_image: XsmallImage9 = Field(..., alias='xsmallImage')
+    small_image: SmallImage9 = Field(..., alias='smallImage')
+    medium_image: MediumImage9 = Field(..., alias='mediumImage')
+    large_image: LargeImage9 = Field(..., alias='largeImage')
+    xlarge_image: XlargeImage9 = Field(..., alias='xlargeImage')
+    xxlarge_image: XxlargeImage9 = Field(..., alias='xxlargeImage')
     loading: str
 
 class Metadata(GAPIBaseModel):
@@ -1723,7 +2352,7 @@ class Season(GAPIBaseModel):
     id: UUID
     name: str
 
-class DefaultImage9(GAPIBaseModel):
+class DefaultImage10(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     source: str
     content_type: str = Field(..., alias='contentType')
@@ -1732,7 +2361,7 @@ class DefaultImage9(GAPIBaseModel):
     ripcut_id: str = Field(..., alias='ripcutId')
     image_id: str = Field(..., alias='imageId')
 
-class XsmallImage9(GAPIBaseModel):
+class XsmallImage10(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     source: str
     content_type: str = Field(..., alias='contentType')
@@ -1741,7 +2370,7 @@ class XsmallImage9(GAPIBaseModel):
     ripcut_id: str = Field(..., alias='ripcutId')
     image_id: str = Field(..., alias='imageId')
 
-class SmallImage9(GAPIBaseModel):
+class SmallImage10(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     source: str
     content_type: str = Field(..., alias='contentType')
@@ -1750,7 +2379,7 @@ class SmallImage9(GAPIBaseModel):
     ripcut_id: str = Field(..., alias='ripcutId')
     image_id: str = Field(..., alias='imageId')
 
-class MediumImage9(GAPIBaseModel):
+class MediumImage10(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     source: str
     content_type: str = Field(..., alias='contentType')
@@ -1759,7 +2388,7 @@ class MediumImage9(GAPIBaseModel):
     ripcut_id: str = Field(..., alias='ripcutId')
     image_id: str = Field(..., alias='imageId')
 
-class LargeImage9(GAPIBaseModel):
+class LargeImage10(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     source: str
     content_type: str = Field(..., alias='contentType')
@@ -1768,7 +2397,7 @@ class LargeImage9(GAPIBaseModel):
     ripcut_id: str = Field(..., alias='ripcutId')
     image_id: str = Field(..., alias='imageId')
 
-class XlargeImage9(GAPIBaseModel):
+class XlargeImage10(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     source: str
     content_type: str = Field(..., alias='contentType')
@@ -1777,7 +2406,7 @@ class XlargeImage9(GAPIBaseModel):
     ripcut_id: str = Field(..., alias='ripcutId')
     image_id: str = Field(..., alias='imageId')
 
-class XxlargeImage9(GAPIBaseModel):
+class XxlargeImage10(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     source: str
     content_type: str = Field(..., alias='contentType')
@@ -1786,28 +2415,28 @@ class XxlargeImage9(GAPIBaseModel):
     ripcut_id: str = Field(..., alias='ripcutId')
     image_id: str = Field(..., alias='imageId')
 
-class Mark11(GAPIBaseModel):
+class Mark21(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     type: str
-    data: Data10 | None = None
+    data: Data23 | None = None
 
-class ContentItem23(GAPIBaseModel):
+class ContentItem43(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     type: str
     value: str
-    marks: list[Mark11]
+    marks: list[Mark21]
 
-class ContentItem22(GAPIBaseModel):
+class ContentItem42(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     type: str
-    content: list[ContentItem23]
+    content: list[ContentItem43]
 
-class RichText11(GAPIBaseModel):
+class RichText21(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     type: str
-    content: list[ContentItem22]
+    content: list[ContentItem42]
 
-class Style3(GAPIBaseModel):
+class Style5(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     color: str
 
@@ -1816,15 +2445,15 @@ class ModalContentItem(GAPIBaseModel):
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
     alt: str | None = None
-    default_image: DefaultImage9 | None = Field(None, alias='defaultImage')
-    xsmall_image: XsmallImage9 | None = Field(None, alias='xsmallImage')
-    small_image: SmallImage9 | None = Field(None, alias='smallImage')
-    medium_image: MediumImage9 | None = Field(None, alias='mediumImage')
-    large_image: LargeImage9 | None = Field(None, alias='largeImage')
-    xlarge_image: XlargeImage9 | None = Field(None, alias='xlargeImage')
-    xxlarge_image: XxlargeImage9 | None = Field(None, alias='xxlargeImage')
+    default_image: DefaultImage10 | None = Field(None, alias='defaultImage')
+    xsmall_image: XsmallImage10 | None = Field(None, alias='xsmallImage')
+    small_image: SmallImage10 | None = Field(None, alias='smallImage')
+    medium_image: MediumImage10 | None = Field(None, alias='mediumImage')
+    large_image: LargeImage10 | None = Field(None, alias='largeImage')
+    xlarge_image: XlargeImage10 | None = Field(None, alias='xlargeImage')
+    xxlarge_image: XxlargeImage10 | None = Field(None, alias='xxlargeImage')
     max_widths: MaxWidths | None = Field(None, alias='maxWidths')
-    rich_text: RichText11 | None = Field(None, alias='richText')
+    rich_text: RichText21 | None = Field(None, alias='richText')
     action_key: str | None = Field(None, alias='actionKey')
     children: list[str] | None = None
     copy_: str | None = Field(None, alias='copy')
@@ -1832,13 +2461,13 @@ class ModalContentItem(GAPIBaseModel):
     href: str | None = None
     size: str | None = None
     title: str | None = None
-    style: Style3 | None = None
+    style: Style5 | None = None
     type: str | None = None
     element_id: str | None = Field(None, alias='elementId')
     data_test_id: str | None = Field(None, alias='dataTestId')
     css: str | None = None
 
-class Style4(GAPIBaseModel):
+class Style6(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     text_align: str = Field(..., alias='textAlign')
 
@@ -1869,9 +2498,112 @@ class EpisodeSelectModal(GAPIBaseModel):
     should_open_on_page_load: bool = Field(..., alias='shouldOpenOnPageLoad')
     text_alignment: str = Field(..., alias='textAlignment')
     modal_content: list[ModalContentItem] = Field(..., alias='modalContent')
-    style: Style4
+    style: Style6
     id: str
     metrics_data: MetricsData4 = Field(..., alias='metricsData')
+
+class DefaultImage11(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    source: str
+    content_type: str = Field(..., alias='contentType')
+    ripcut_id: UUID = Field(..., alias='ripcutId')
+    image_id: UUID = Field(..., alias='imageId')
+
+class XsmallImage11(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    source: str
+    content_type: str = Field(..., alias='contentType')
+    ripcut_id: UUID = Field(..., alias='ripcutId')
+    image_id: UUID = Field(..., alias='imageId')
+
+class SmallImage11(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    source: str
+    content_type: str = Field(..., alias='contentType')
+    ripcut_id: UUID = Field(..., alias='ripcutId')
+    image_id: UUID = Field(..., alias='imageId')
+
+class MediumImage11(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    source: str
+    content_type: str = Field(..., alias='contentType')
+    ripcut_id: UUID = Field(..., alias='ripcutId')
+    image_id: UUID = Field(..., alias='imageId')
+
+class LargeImage11(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    source: str
+    content_type: str = Field(..., alias='contentType')
+    ripcut_id: UUID = Field(..., alias='ripcutId')
+    image_id: UUID = Field(..., alias='imageId')
+
+class XlargeImage11(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    source: str
+    content_type: str = Field(..., alias='contentType')
+    ripcut_id: UUID = Field(..., alias='ripcutId')
+    image_id: UUID = Field(..., alias='imageId')
+
+class XxlargeImage11(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    source: str
+    content_type: str = Field(..., alias='contentType')
+    ripcut_id: UUID = Field(..., alias='ripcutId')
+    image_id: UUID = Field(..., alias='imageId')
+
+class ImageVariants2(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    field_type: str = Field(..., alias='_type')
+    field_id: UUID = Field(..., alias='_id')
+    alt: str
+    default_image: DefaultImage11 = Field(..., alias='defaultImage')
+    xsmall_image: XsmallImage11 = Field(..., alias='xsmallImage')
+    small_image: SmallImage11 = Field(..., alias='smallImage')
+    medium_image: MediumImage11 = Field(..., alias='mediumImage')
+    large_image: LargeImage11 = Field(..., alias='largeImage')
+    xlarge_image: XlargeImage11 = Field(..., alias='xlargeImage')
+    xxlarge_image: XxlargeImage11 = Field(..., alias='xxlargeImage')
+    loading: str
+
+class Payload3(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    content_type: str = Field(..., alias='contentType')
+    element_id: UUID = Field(..., alias='elementId')
+    element_id_type: str = Field(..., alias='elementIdType')
+    element_index: int = Field(..., alias='elementIndex')
+    element_type: str = Field(..., alias='elementType')
+    interaction_type: str = Field(..., alias='interactionType')
+    is_authenticated: bool = Field(..., alias='isAuthenticated')
+    item_info_block: str = Field(..., alias='itemInfoBlock')
+    action_info_block: str = Field(..., alias='actionInfoBlock')
+    program_type: str = Field(..., alias='programType')
+    content_keys: dict[str, Any] = Field(..., alias='contentKeys')
+
+class Glimpse5(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    event_urn: str = Field(..., alias='eventUrn')
+    payload: Payload3
+
+class MetricsData5(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    glimpse: Glimpse5
+
+class Episode1(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    field_type: str = Field(..., alias='_type')
+    field_id: UUID = Field(..., alias='_id')
+    title: str
+    image_variants: ImageVariants2 = Field(..., alias='imageVariants')
+    aspect_ratio: float = Field(..., alias='aspectRatio')
+    loading: str
+    metadata: Metadata
+    metrics_data: MetricsData5 = Field(..., alias='metricsData')
+
+class SeoSeason(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    season_id: UUID = Field(..., alias='seasonId')
+    season_name: str = Field(..., alias='seasonName')
+    episodes: list[Episode1]
 
 class MainContentItem(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
@@ -1900,7 +2632,7 @@ class MainContentItem(GAPIBaseModel):
     labels: Labels | None = None
     id: str | None = None
     alignment: str | None = None
-    style: Style | None = None
+    style: Style2 | None = None
     data_testid: str | None = Field(None, alias='data-testid')
     padding: Padding | None = None
     mobile_options: MobileOptions | None = Field(None, alias='mobileOptions')
@@ -1925,6 +2657,8 @@ class MainContentItem(GAPIBaseModel):
     seasons: list[Season] | None = None
     selected_season_id: UUID | None = Field(None, alias='selectedSeasonId')
     episode_select_modal: EpisodeSelectModal | None = Field(None, alias='episodeSelectModal')
+    seo_seasons: list[SeoSeason] | None = Field(None, alias='seoSeasons')
+    class_name: str | None = Field(None, alias='className')
 
 class Headline(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
@@ -1934,7 +2668,7 @@ class Headline(GAPIBaseModel):
     as_: str = Field(..., alias='as')
     class_name: str | None = Field(None, alias='className')
 
-class Child18(GAPIBaseModel):
+class Child24(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
@@ -1946,13 +2680,13 @@ class Child18(GAPIBaseModel):
     rel: list[None] | None = None
     class_name: str | None = Field(None, alias='className')
 
-class Child17(GAPIBaseModel):
+class Child23(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
     title: str | None = None
     direction: str | None = None
-    children: list[Child18] | None = None
+    children: list[Child24] | None = None
     mobile_alignment: str | None = Field(None, alias='mobileAlignment')
     tablet_alignment: str | None = Field(None, alias='tabletAlignment')
     desktop_alignment: str | None = Field(None, alias='desktopAlignment')
@@ -1962,7 +2696,7 @@ class Child17(GAPIBaseModel):
     href: str | None = None
     target: str | None = None
 
-class DefaultImage10(GAPIBaseModel):
+class DefaultImage12(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     source: str
     content_type: str = Field(..., alias='contentType')
@@ -1970,7 +2704,7 @@ class DefaultImage10(GAPIBaseModel):
     height: int
     ripcut_id: str = Field(..., alias='ripcutId')
 
-class Child16(GAPIBaseModel):
+class Child22(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
@@ -1978,27 +2712,27 @@ class Child16(GAPIBaseModel):
     label: str | None = None
     mobile_collapse: bool | None = Field(None, alias='mobileCollapse')
     headline: Headline | None = None
-    children: str | list[Child17] | None = None
+    children: str | list[Child23] | None = None
     direction: str | None = None
     title: str | None = None
     mobile_alignment: str | None = Field(None, alias='mobileAlignment')
     tablet_alignment: str | None = Field(None, alias='tabletAlignment')
     desktop_alignment: str | None = Field(None, alias='desktopAlignment')
     alt: str | None = None
-    default_image: DefaultImage10 | None = Field(None, alias='defaultImage')
+    default_image: DefaultImage12 | None = Field(None, alias='defaultImage')
     alt_text: str | None = Field(None, alias='altText')
     as_: str | None = Field(None, alias='as')
     class_name: str | None = Field(None, alias='className')
     copy_: str | None = Field(None, alias='copy')
     show_year: bool | None = Field(None, alias='showYear')
 
-class Child15(GAPIBaseModel):
+class Child21(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
     title: str | None = None
     direction: str
-    children: list[Child16]
+    children: list[Child22]
     mobile_alignment: str | None = Field(None, alias='mobileAlignment')
     tablet_alignment: str | None = Field(None, alias='tabletAlignment')
     desktop_alignment: str | None = Field(None, alias='desktopAlignment')
@@ -2007,9 +2741,9 @@ class Block(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
-    children: list[Child15]
+    children: list[Child21]
 
-class Data15(GAPIBaseModel):
+class Data28(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
@@ -2020,38 +2754,38 @@ class Data15(GAPIBaseModel):
     field_hash: str = Field(..., alias='_hash')
     field_created_at: AwareDatetime = Field(..., alias='_createdAt')
 
-class Glimpse5(GAPIBaseModel):
+class Glimpse6(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     container_key: str = Field(..., alias='containerKey')
     container_type: str = Field(..., alias='containerType')
     vertical_position: int = Field(..., alias='verticalPosition')
     container_style: str = Field(..., alias='containerStyle')
 
-class MetricsData5(GAPIBaseModel):
+class MetricsData6(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
-    glimpse: Glimpse5
+    glimpse: Glimpse6
 
 class PostContentItem(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
-    data: Data15
+    data: Data28
     enable_cmp: bool = Field(..., alias='enableCMP')
     locale: str
     lang_selector_languages: None = Field(..., alias='langSelectorLanguages')
     region_groupings: None = Field(..., alias='regionGroupings')
-    metrics_data: MetricsData5 = Field(..., alias='metricsData')
+    metrics_data: MetricsData6 = Field(..., alias='metricsData')
 
-class Data16(GAPIBaseModel):
+class Data29(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     class_name: str | None = Field(..., alias='className')
 
-class Mark12(GAPIBaseModel):
+class Mark22(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     type: str
-    data: Data16 | None = None
+    data: Data29 | None = None
 
-class Data17(GAPIBaseModel):
+class Data30(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
@@ -2064,25 +2798,25 @@ class Data17(GAPIBaseModel):
     title: str
     type: str
 
-class ContentItem25(GAPIBaseModel):
+class ContentItem45(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     type: str
     value: str | None = None
-    marks: list[Mark12] | None = None
+    marks: list[Mark22] | None = None
     content: list[None] | None = None
-    data: Data17 | None = None
+    data: Data30 | None = None
 
-class ContentItem24(GAPIBaseModel):
+class ContentItem44(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     type: str
-    content: list[ContentItem25]
+    content: list[ContentItem45]
 
-class RichText12(GAPIBaseModel):
+class RichText22(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     type: str
-    content: list[ContentItem24]
+    content: list[ContentItem44]
 
-class DefaultImage11(GAPIBaseModel):
+class DefaultImage13(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     source: str
     content_type: str = Field(..., alias='contentType')
@@ -2091,7 +2825,61 @@ class DefaultImage11(GAPIBaseModel):
     ripcut_id: str = Field(..., alias='ripcutId')
     image_id: str = Field(..., alias='imageId')
 
-class Style5(GAPIBaseModel):
+class XsmallImage12(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    source: str
+    content_type: str = Field(..., alias='contentType')
+    width: int
+    height: int
+    ripcut_id: str = Field(..., alias='ripcutId')
+    image_id: str = Field(..., alias='imageId')
+
+class SmallImage12(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    source: str
+    content_type: str = Field(..., alias='contentType')
+    width: int
+    height: int
+    ripcut_id: str = Field(..., alias='ripcutId')
+    image_id: str = Field(..., alias='imageId')
+
+class MediumImage12(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    source: str
+    content_type: str = Field(..., alias='contentType')
+    width: int
+    height: int
+    ripcut_id: str = Field(..., alias='ripcutId')
+    image_id: str = Field(..., alias='imageId')
+
+class LargeImage12(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    source: str
+    content_type: str = Field(..., alias='contentType')
+    width: int
+    height: int
+    ripcut_id: str = Field(..., alias='ripcutId')
+    image_id: str = Field(..., alias='imageId')
+
+class XlargeImage12(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    source: str
+    content_type: str = Field(..., alias='contentType')
+    width: int
+    height: int
+    ripcut_id: str = Field(..., alias='ripcutId')
+    image_id: str = Field(..., alias='imageId')
+
+class XxlargeImage12(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    source: str
+    content_type: str = Field(..., alias='contentType')
+    width: int
+    height: int
+    ripcut_id: str = Field(..., alias='ripcutId')
+    image_id: str = Field(..., alias='imageId')
+
+class Style7(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     color: str
 
@@ -2099,15 +2887,15 @@ class ModalContentItem1(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
-    rich_text: RichText12 | None = Field(None, alias='richText')
+    rich_text: RichText22 | None = Field(None, alias='richText')
     alt: str | None = None
-    default_image: DefaultImage11 | None = Field(None, alias='defaultImage')
-    xsmall_image: XsmallImage9 | None = Field(None, alias='xsmallImage')
-    small_image: SmallImage9 | None = Field(None, alias='smallImage')
-    medium_image: MediumImage9 | None = Field(None, alias='mediumImage')
-    large_image: LargeImage9 | None = Field(None, alias='largeImage')
-    xlarge_image: XlargeImage9 | None = Field(None, alias='xlargeImage')
-    xxlarge_image: XxlargeImage9 | None = Field(None, alias='xxlargeImage')
+    default_image: DefaultImage13 | None = Field(None, alias='defaultImage')
+    xsmall_image: XsmallImage12 | None = Field(None, alias='xsmallImage')
+    small_image: SmallImage12 | None = Field(None, alias='smallImage')
+    medium_image: MediumImage12 | None = Field(None, alias='mediumImage')
+    large_image: LargeImage12 | None = Field(None, alias='largeImage')
+    xlarge_image: XlargeImage12 | None = Field(None, alias='xlargeImage')
+    xxlarge_image: XxlargeImage12 | None = Field(None, alias='xxlargeImage')
     max_widths: MaxWidths | None = Field(None, alias='maxWidths')
     action_key: str | None = Field(None, alias='actionKey')
     children: list[str] | None = None
@@ -2116,24 +2904,34 @@ class ModalContentItem1(GAPIBaseModel):
     href: str | None = None
     size: str | None = None
     title: str | None = None
-    style: Style5 | None = None
+    style: Style7 | None = None
     type: str | None = None
     element_id: str | None = Field(None, alias='elementId')
     data_test_id: str | None = Field(None, alias='dataTestId')
     css: str | None = None
 
-class Style6(GAPIBaseModel):
+class Style8(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     text_align: str = Field(..., alias='textAlign')
 
-class Glimpse6(GAPIBaseModel):
+class Payload4(GAPIBaseModel):
+    model_config = ConfigDict(extra='forbid')
+    container_style: str = Field(..., alias='containerStyle')
+    container_type: str = Field(..., alias='containerType')
+    elements: list[None]
+    elements_per_width: int = Field(..., alias='elementsPerWidth')
+    horizontal_position: int = Field(..., alias='horizontalPosition')
+    vertical_position: int = Field(..., alias='verticalPosition')
+    container_key: str = Field(..., alias='containerKey')
+
+class Glimpse7(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     event_urn: str = Field(..., alias='eventUrn')
-    payload: Payload2
+    payload: Payload4
 
-class MetricsData6(GAPIBaseModel):
+class MetricsData7(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
-    glimpse: Glimpse6
+    glimpse: Glimpse7
 
 class Modal(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
@@ -2143,9 +2941,9 @@ class Modal(GAPIBaseModel):
     should_open_on_page_load: bool = Field(..., alias='shouldOpenOnPageLoad')
     text_alignment: str = Field(..., alias='textAlignment')
     modal_content: list[ModalContentItem1] = Field(..., alias='modalContent')
-    style: Style6
+    style: Style8
     id: str
-    metrics_data: MetricsData6 = Field(..., alias='metricsData')
+    metrics_data: MetricsData7 = Field(..., alias='metricsData')
 
 class Url(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
@@ -2181,13 +2979,13 @@ class StitchDocument(GAPIBaseModel):
     modals: list[Modal]
     overrides: Overrides
 
-class Glimpse7(GAPIBaseModel):
+class Glimpse8(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
     page_info_block: str = Field(..., alias='pageInfoBlock')
 
-class MetricsData7(GAPIBaseModel):
+class MetricsData8(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
-    glimpse: Glimpse7
+    glimpse: Glimpse8
 
 class Signup(GAPIBaseModel):
     model_config = ConfigDict(extra='forbid')
@@ -15371,7 +16169,7 @@ class PageProps(GAPIBaseModel):
     identity_sdk_config: IdentitySdkConfig = Field(..., alias='identitySDKConfig')
     stitch_document: StitchDocument = Field(..., alias='stitchDocument')
     page_id: str = Field(..., alias='pageId')
-    metrics_data: MetricsData7 = Field(..., alias='metricsData')
+    metrics_data: MetricsData8 = Field(..., alias='metricsData')
     language: str
     region: str
     toast_cta_props: ToastCtaProps = Field(..., alias='toastCtaProps')
