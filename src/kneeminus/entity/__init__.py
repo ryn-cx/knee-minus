@@ -15,6 +15,11 @@ if TYPE_CHECKING:
 logger = getLogger(__name__)
 logger.addHandler(NullHandler())
 
+# A/B testing scaffolding that carries no media data. It is by far the largest and
+# most deeply nested entry in `mainContent`, and modelling it makes generating the
+# model take minutes instead of seconds, so it is dropped before validation.
+IGNORED_TYPES = frozenset({"ExperimentContainer"})
+
 
 class Entity(BaseEndpoint[EntityModel, [str | UUID]]):
     """Manage the entity file.
@@ -52,6 +57,8 @@ class Entity(BaseEndpoint[EntityModel, [str | UUID]]):
         grouped: dict[str, Any] = {}
         for item in main_content:
             key = item["_type"]
+            if key in IGNORED_TYPES:
+                continue
             if key == "CustomHTML":
                 grouped.setdefault(key, []).append(item)
             elif key == "Section":
