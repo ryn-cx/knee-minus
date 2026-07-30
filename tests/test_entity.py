@@ -6,7 +6,7 @@ from uuid import UUID
 import pytest
 from pydantic import BaseModel
 
-from tests.utils import download_and_save, parse_json
+from tests.utils import download_and_save, parsed_json
 
 if TYPE_CHECKING:
     from kneeminus import KneeMinus
@@ -51,6 +51,13 @@ TEST_DATA = [
         id=UUID("a21ee2fc-421e-4839-bfcc-0bf2ba815875"),
         name="Moana 2",
     ),
+    # Test series that repeats the `Section` entry in `mainContent`.
+    TestData(
+        id=UUID("e316aa0d-6df1-445b-98d9-ea1d165bcf81"),
+        name="CSI: Crime Scene Investigation",
+        # The title contains a colon, which is not a valid file name character.
+        show_name="CSI Crime Scene Investigation",
+    ),
 ]
 
 
@@ -73,15 +80,8 @@ class TestEntity:
         )
 
     def test_parse(self, endpoint: Entity, test_data: TestData) -> None:
-        entity = parse_json(endpoint, test_data.file_name)
-        main_content = entity.props.page_props.stitch_document.main_content
-        assert main_content[1].title == test_data.name
+        parsed = parsed_json(endpoint, test_data.file_name)
+        assert parsed.media_details.title == test_data.name
         if test_data.season_id:
-            assert main_content[2].selected_season_id == test_data.season_id
-
-    def test_extract(self, endpoint: Entity, test_data: TestData) -> None:
-        grouped = endpoint.extract(parse_json(endpoint, test_data.file_name))
-        assert grouped.media_details.title == test_data.name
-        if test_data.season_id:
-            assert grouped.episodes
-            assert grouped.episodes.selected_season_id == test_data.season_id
+            assert parsed.episodes
+            assert parsed.episodes.selected_season_id == test_data.season_id

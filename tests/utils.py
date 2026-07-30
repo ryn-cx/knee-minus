@@ -8,8 +8,6 @@ from typing import TYPE_CHECKING
 
 import pytest
 
-from kneeminus.constants import FILES_PATH
-
 if TYPE_CHECKING:
     from collections.abc import Callable
     from pathlib import Path
@@ -20,89 +18,95 @@ if TYPE_CHECKING:
     from kneeminus.base_api_endpoint import BaseEndpoint
 
 
-def get_json_path(
-    endpoint: GAPIClient[Any],
-    name: str,
-    *,
-    folder: str | None = None,
-) -> Path:
-    if folder is not None:
-        return FILES_PATH / folder / f"{name}.json"
-    return endpoint.json_files_folder() / f"{name}.json"
+def json_path(gapi_client: GAPIClient[Any], name: str) -> Path:
+    return gapi_client.json_files_folder() / f"{name}.json"
 
 
-def parse_json[T: GAPIBaseModel](endpoint: BaseEndpoint[T, ...], name: str) -> T:
-    json_path = get_json_path(endpoint, name)
-    return endpoint.parse(json.loads(json_path.read_text()))
+def multipage_json_path(gapi_client: GAPIClient[Any], name: str) -> Path:
+    return (
+        gapi_client.json_files_folder().parent
+        / "Multipage"
+        / gapi_client.json_files_folder().stem
+        / f"{name}.json"
+    )
 
 
-def single_dict(endpoint: BaseEndpoint[Any, ...], name: str) -> dict[str, Any]:
-    """A single recorded page as a raw dict."""
-    return json.loads(get_json_path(endpoint, name).read_text())
+def errors_json_path(gapi_client: GAPIClient[Any], name: str) -> Path:
+    return (
+        gapi_client.json_files_folder().parent
+        / "Errors"
+        / gapi_client.json_files_folder().stem
+        / f"{name}.json"
+    )
+
+
+def json_content[T: GAPIBaseModel](gapi_client: BaseEndpoint[T, ...], name: str) -> str:
+    return json_path(gapi_client, name).read_text()
+
+
+def loaded_json(gapi_client: BaseEndpoint[Any, ...], name: str) -> dict[str, Any]:
+    return json.loads(json_content(gapi_client, name))
+
+
+def parsed_json[T: GAPIBaseModel](gapi_client: BaseEndpoint[T, ...], name: str) -> T:
+    return gapi_client.parse(loaded_json(gapi_client, name))
 
 
 def page_dicts(
-    endpoint: BaseEndpoint[Any, ...],
+    gapi_client: BaseEndpoint[Any, ...],
     name: str,
-    *,
-    folder: str | None = None,
 ) -> list[dict[str, Any]]:
     """Recorded page(s) as a list of raw dicts, wrapping a single page."""
     content: list[dict[str, Any]] | dict[str, Any] = json.loads(
-        get_json_path(endpoint, name, folder=folder).read_text(),
+        json_path(gapi_client, name).read_text(),
     )
     return content if isinstance(content, list) else [content]
 
 
 def page_models[T: GAPIBaseModel](
-    endpoint: BaseEndpoint[T, ...],
+    gapi_client: BaseEndpoint[T, ...],
     name: str,
-    *,
-    folder: str | None = None,
 ) -> list[T]:
     """Recorded page(s) as a list of parsed models, wrapping a single page."""
-    return [endpoint.parse(page) for page in page_dicts(endpoint, name, folder=folder)]
+    return [gapi_client.parse(page) for page in page_dicts(gapi_client, name)]
 
 
 def download_and_save(
-    endpoint: GAPIClient[Any],
+    gapi_client: GAPIClient[Any],
     name: str,
     get: Callable[[], dict[str, Any] | list[dict[str, Any]]],
-    *,
-    folder: str | None = None,
 ) -> Path:
-    json_path = get_json_path(endpoint, name, folder=folder)
-    if json_path.exists():
-        pytest.skip(f"File already recorded for {type(endpoint).__name__}/{name}")
-    json_path.parent.mkdir(parents=True, exist_ok=True)
-    json_path.write_text(json.dumps(get(), indent=2))
-    return json_path
+    file = json_path(gapi_client, name)
+    if file.exists():
+        pytest.skip(f"File already recorded for {type(gapi_client).__name__}/{name}")
+    file.parent.mkdir(parents=True, exist_ok=True)
+    file.write_text(json.dumps(get(), indent=2))
+    return file
 
 
 def assert_error(
-    endpoint: GAPIClient[Any],
+    gapi_client: GAPIClient[Any],
     name: str,
     download: Callable[[], object],
     error: type[Exception],
 ) -> None:
-    if get_error_path(endpoint, name).exists():
-        pytest.skip(f"File already recorded for {type(endpoint).__name__}/{name}")
+    if get_error_path(gapi_client, name).exists():
+        pytest.skip(f"File already recorded for {type(gapi_client).__name__}/{name}")
     with pytest.raises(error) as excinfo:
         download()
-    record_error(endpoint, name, getattr(excinfo.value, "response", None))
+    record_error(gapi_client, name, getattr(excinfo.value, "response", None))
 
 
-def get_error_path(endpoint: GAPIClient[Any], name: str) -> Path:
-    folder = f"Errors/{endpoint.json_files_folder().name}"
-    return get_json_path(endpoint, name, folder=folder)
+def get_error_path(gapi_client: GAPIClient[Any], name: str) -> Path:
+    return errors_json_path(gapi_client, name)
 
 
 def record_error(
-    endpoint: GAPIClient[Any],
+    gapi_client: GAPIClient[Any],
     name: str,
     data: dict[str, Any] | None = None,
 ) -> None:
-    json_path = get_error_path(endpoint, name)
-    json_path.parent.mkdir(parents=True, exist_ok=True)
+    path = get_error_path(gapi_client, name)
+    path.parent.mkdir(parents=True, exist_ok=True)
     content = json.dumps(data, indent=2) if data is not None else ""
-    json_path.write_text(content)
+    path.write_text(content)
