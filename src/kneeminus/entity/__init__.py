@@ -1,36 +1,29 @@
+# TODO: Validate
 """Contains the Entity class."""
 
 from __future__ import annotations
 
+import json
+from http import HTTPStatus
 from logging import NullHandler, getLogger
-from typing import TYPE_CHECKING, Any, override
 from uuid import UUID
 
 from kneeminus.base_api_endpoint import BaseEndpoint
-from kneeminus.entity.models import EntityModel
-
-if TYPE_CHECKING:
-    from good_ass_pydantic_integrator.constants import INPUT_TYPE
+from kneeminus.entity.models import EntityModel, model_validate_json
+from kneeminus.exceptions import EntityNotFoundError, ResourceNotFoundError
 
 logger = getLogger(__name__)
 logger.addHandler(NullHandler())
 
-# A/B testing scaffolding that carries no media data. It is by far the largest and
-# most deeply nested entry in `mainContent`, and modelling it makes generating the
-# model take minutes instead of seconds, so it is dropped before validation.
-IGNORED_TYPES = frozenset({"ExperimentContainer"})
 
+# TODO: Validate
+class Entity(BaseEndpoint):
+    """Manage the entity file, which is a movie or a series.
 
-class Entity(BaseEndpoint[EntityModel, [str | UUID]]):
-    """Manage the entity file.
+    Source: https://www.disneyplus.com/browse/entity-{entity_id}
 
-    Downloads https://www.disneyplus.com/browse/entity-<entity_id>, extracts the
-    __NEXT_DATA__ JSON from the page, and keeps only `mainContent`, grouped by
-    `_type`. The full page JSON is still what gets saved to disk, so the grouping
-    is only ever applied on the way into a model.
-
-    Example headers
-        - GET /browse/entity-3135b0cb-a002-438d-a9fd-60d86284c93f HTTP/1.1
+    Example request:
+        - GET /browse/entity-{entity_id} HTTP/1.1
         - Host: www.disneyplus.com
         - User-Agent: __REDACTED__
         - Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
@@ -38,6 +31,7 @@ class Entity(BaseEndpoint[EntityModel, [str | UUID]]):
         - Accept-Encoding: gzip, deflate, br, zstd
         - Sec-GPC: 1
         - Connection: keep-alive
+        - Referer: https://www.disneyplus.com/
         - Cookie: __REDACTED__
         - Upgrade-Insecure-Requests: 1
         - Sec-Fetch-Dest: document
@@ -47,49 +41,50 @@ class Entity(BaseEndpoint[EntityModel, [str | UUID]]):
         - Priority: u=0, i
     """
 
-    _response_model = EntityModel
+    # TODO: Validate
+    def __call__(
+        self,
+        entity_id: str | UUID,
+        *,
+        season_id: str | UUID | None = None,
+    ) -> EntityModel:
+        """Look the entity up and return the model it is read into."""
+        log_id = self.get_log_id(self.__call__, locals())
+        return self.load(self.download(entity_id, season_id=season_id), log_id)
 
-    @override
-    @classmethod
-    def transform_input(cls, data: INPUT_TYPE) -> INPUT_TYPE:  # type: ignore[misc]
-        document: Any = data
-        main_content = document["props"]["pageProps"]["stitchDocument"]["mainContent"]
-        grouped: dict[str, Any] = {}
-        for item in main_content:
-            key = item["_type"]
-            if key in IGNORED_TYPES:
-                continue
-            if key == "CustomHTML":
-                grouped.setdefault(key, []).append(item)
-            elif key == "Section":
-                # Some pages repeat Section entries, only the first one is used.
-                grouped.setdefault(key, item)
-            else:
-                if key in grouped:
-                    msg = f"Duplicate single-item _type {key!r} in main content."
-                    raise ValueError(msg)
-                grouped[key] = item
-        return grouped
-
-    @override
+    # TODO: Validate
     def download(
         self,
         entity_id: str | UUID,
+        *,
         season_id: str | UUID | None = None,
-    ) -> dict[str, Any]:
+    ) -> str:
+        """Download the entity file."""
         log_id = self.get_log_id(self.download, locals())
-        # A bare UUID is turned into the ``entity-<uuid>`` browse slug; a str is
-        # used as-is (it may already be the full ``entity-...`` form).
+        # A bare UUID is turned into the browse slug the site names a page by; a
+        # str is used as it is, since it may already be that slug.
         slug = f"entity-{entity_id}" if isinstance(entity_id, UUID) else entity_id
-        url = f"https://www.disneyplus.com/browse/{slug}"
-        if season_id is not None:
-            url = f"{url}?season={season_id}"
-        return self._client.download(url, log_id=log_id)
+        params = {} if season_id is None else {"season": str(season_id)}
+        try:
+            response = self._client.download(
+                endpoint=f"browse/{slug}",
+                params=params,
+                headers={"referer": "https://www.disneyplus.com/"},
+                log_id=log_id,
+            )
+        except ResourceNotFoundError as err:
+            raise EntityNotFoundError(slug, err.status_code, err.response) from err
+        return self._validate_download(response, slug)
 
-    @override
-    def download_and_parse(
-        self,
-        entity_id: str | UUID,
-        season_id: str | UUID | None = None,
-    ) -> EntityModel:
-        return self.parse(self.download(entity_id, season_id))
+    # TODO: Validate
+    def _validate_download(self, response: str, slug: str) -> str:
+        """Check that the page is the one that was asked for."""
+        page_id = json.loads(response)["props"]["pageProps"]["pageId"]
+        if page_id != slug:
+            raise EntityNotFoundError(slug, HTTPStatus.OK, response)
+        return response
+
+    # TODO: Validate
+    def load(self, data: str, log_id: str = "") -> EntityModel:
+        """Read a downloaded entity file into its model."""
+        return model_validate_json(data, log_id or type(self).__name__)

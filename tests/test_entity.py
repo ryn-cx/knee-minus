@@ -1,87 +1,86 @@
+# TODO: Validate
 from __future__ import annotations
 
 from typing import TYPE_CHECKING
-from uuid import UUID
 
 import pytest
-from pydantic import BaseModel
 
-from tests.utils import download_and_save, parsed_json
+from kneeminus.entity.models import EntityModel
+from kneeminus.exceptions import EntityNotFoundError
+from tests.utils import RecordedEndpoint
 
 if TYPE_CHECKING:
     from kneeminus import KneeMinus
-    from kneeminus.entity import Entity
 
-
-class TestData(BaseModel):
-    id: UUID
-    name: str
-    season_id: UUID | None = None
-    show_name: str | None = None
-    season_name: str | None = None
-
-    @property
-    def file_name(self) -> str:
-        """Saved JSON file name.
-
-        `show_name` and `season_name` combined when both are set (e.g. a
-        specific season), otherwise `show_name`, otherwise `name`.
-        """
-        if self.show_name and self.season_name:
-            return f"{self.show_name} {self.season_name}"
-        return self.show_name or self.name
-
-
-TEST_DATA = [
-    # Test series.
-    TestData(
-        id=UUID("cac75c8f-a9e2-4d95-ac73-1cf1cc7b9568"),
-        name="The Simpsons",
+ENTITIES = [
+    # https://www.disneyplus.com/browse/entity-a21ee2fc-421e-4839-bfcc-0bf2ba815875
+    pytest.param(
+        "entity-a21ee2fc-421e-4839-bfcc-0bf2ba815875",
+        None,
+        id="moana 2, a movie",
     ),
-    # Test series, specific season.
-    TestData(
-        id=UUID("cac75c8f-a9e2-4d95-ac73-1cf1cc7b9568"),
-        name="The Simpsons",
-        season_id=UUID("fbfaed8f-e7b8-4b24-ab63-c042905f7e47"),
-        show_name="The Simpsons",
-        season_name="Season 18",
+    # https://www.disneyplus.com/browse/entity-422f6dcc-226f-44e7-98d4-22de69b31cf3
+    pytest.param(
+        "entity-422f6dcc-226f-44e7-98d4-22de69b31cf3",
+        None,
+        id="the mandalorian, a series",
     ),
-    # Test movie.
-    TestData(
-        id=UUID("a21ee2fc-421e-4839-bfcc-0bf2ba815875"),
-        name="Moana 2",
-    ),
-    # Test series that repeats the `Section` entry in `mainContent`.
-    TestData(
-        id=UUID("e316aa0d-6df1-445b-98d9-ea1d165bcf81"),
-        name="CSI: Crime Scene Investigation",
-        # The title contains a colon, which is not a valid file name character.
-        show_name="CSI Crime Scene Investigation",
+    pytest.param(
+        "entity-422f6dcc-226f-44e7-98d4-22de69b31cf3",
+        "38ff3861-23ba-44b4-a2de-d756de57ba41",
+        id="the mandalorian, season 1",
     ),
 ]
 
 
-@pytest.fixture(scope="session")
-def endpoint(client: KneeMinus) -> Entity:
-    return client.entity
+# TODO: Validate
+def recording_name(entity_id: str, season_id: str | None) -> str:
+    """Return the name the recording for an entity and a season is filed under."""
+    if season_id is None:
+        return entity_id
+    return f"{entity_id}-season-{season_id}"
 
 
-@pytest.fixture(params=TEST_DATA, ids=lambda test_data: test_data.file_name)
-def test_data(request: pytest.FixtureRequest) -> TestData:
-    return request.param
+# TODO: Validate
+class EntityTest(RecordedEndpoint):
+    MODEL = EntityModel
+    # The build id and the scripts the page loads change every time Disney+
+    # deploys, whichever entity is asked for.
+    IGNORED = ("EntityModel.build_id", "EntityModel.script_loader")
 
 
-class TestEntity:
-    def test_download(self, endpoint: Entity, test_data: TestData) -> None:
-        download_and_save(
-            endpoint,
-            test_data.file_name,
-            lambda: endpoint.download(test_data.id, test_data.season_id),
-        )
+# TODO: Validate
+@pytest.mark.parametrize(("entity_id", "season_id"), ENTITIES)
+def test_download(client: KneeMinus, entity_id: str, season_id: str | None) -> None:
+    EntityTest.download_test(
+        recording_name(entity_id, season_id),
+        lambda: client.entity.download(entity_id, season_id=season_id),
+    )
 
-    def test_parse(self, endpoint: Entity, test_data: TestData) -> None:
-        parsed = parsed_json(endpoint, test_data.file_name)
-        assert parsed.media_details.title == test_data.name
-        if test_data.season_id:
-            assert parsed.episodes
-            assert parsed.episodes.selected_season_id == test_data.season_id
+
+# TODO: Validate
+@pytest.mark.parametrize(("entity_id", "season_id"), ENTITIES)
+def test_parse(client: KneeMinus, entity_id: str, season_id: str | None) -> None:
+    entity = client.entity.load(
+        EntityTest.recorded_content(recording_name(entity_id, season_id)),
+    )
+    assert entity.props.page_props.page_id == entity_id
+
+
+# TODO: Validate
+@pytest.mark.parametrize(
+    "entity_id",
+    [
+        pytest.param(
+            "entity-00000000-0000-0000-0000-000000000000",
+            id="entity that does not exist",
+        ),
+        pytest.param("0000000", id="id that is not an entity slug"),
+    ],
+)
+def test_download_invalid(client: KneeMinus, entity_id: str) -> None:
+    EntityTest.error_test(
+        entity_id,
+        lambda: client.entity.download(entity_id),
+        EntityNotFoundError,
+    )

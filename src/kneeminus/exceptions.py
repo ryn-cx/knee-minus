@@ -3,24 +3,60 @@
 
 from __future__ import annotations
 
-
-class KneeminusError(Exception):
-    """Base exception for the kneeminus library."""
+from typing import Any
 
 
-class HTTPError(KneeminusError):
-    """Raised when an HTTP request fails with an unexpected status code."""
+# TODO: Validate
+class KneeMinusError(Exception):
+    """Base exception for KneeMinus."""
 
-    def __init__(self, status_code: int, body: str) -> None:
+    response: str | dict[str, Any] | None = None
+    """The response that caused the error."""
+
+
+# TODO: Validate
+class HTTPError(KneeMinusError):
+    """Raised when HTTP request fails with unexpected status code."""
+
+    # TODO: Validate
+    def __init__(
+        self,
+        status_code: int,
+        response: str | dict[str, Any] | None,
+    ) -> None:
         """Initialize the HTTPError with the status code and response body."""
         self.status_code = status_code
-        self.body = body
+        self.response = response
         super().__init__(f"Unexpected response status code: {status_code}")
 
 
-class ExtractionError(KneeminusError):
-    """Raised when the `__NEXT_DATA__` JSON cannot be found in a page's HTML."""
+# TODO: Validate
+class ResourceNotFoundError(HTTPError):
+    """Raised when the site reports that the requested page does not exist."""
 
 
-class ContentNotFoundError(KneeminusError):
-    """Raised when a page's `__NEXT_DATA__` holds no content document."""
+# TODO: Validate
+class EntityNotFoundError(ResourceNotFoundError):
+    """Raised when the requested entity does not exist."""
+
+    # TODO: Validate
+    def __init__(
+        self,
+        entity_id: str,
+        status_code: int,
+        response: str | dict[str, Any] | None,
+    ) -> None:
+        """Initialize with the entity id and the originating response."""
+        self.entity_id = entity_id
+        super().__init__(status_code, response)
+
+
+# TODO: Validate
+class ExtractionError(KneeMinusError):
+    """Raised when the downloaded page carries no __NEXT_DATA__ script."""
+
+    # TODO: Validate
+    def __init__(self, response: str) -> None:
+        """Initialize with the page the script was looked for in."""
+        self.response = response
+        super().__init__("The downloaded page carries no __NEXT_DATA__ script")
