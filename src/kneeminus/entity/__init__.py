@@ -6,6 +6,7 @@ from __future__ import annotations
 import json
 from http import HTTPStatus
 from logging import NullHandler, getLogger
+from typing import Any
 from uuid import UUID
 
 from kneeminus.base_api_endpoint import BaseEndpoint
@@ -14,6 +15,35 @@ from kneeminus.exceptions import EntityNotFoundError, ResourceNotFoundError
 
 logger = getLogger(__name__)
 logger.addHandler(NullHandler())
+
+STRIPPED_PAGE_PROPS = (
+    "remoteConfig",
+    "dictionary",
+    "debug",
+    "metricsData",
+    "identitySDKConfig",
+)
+"""The page props that say nothing about the media.
+
+`remoteConfig` is the site's per-country configuration and `dictionary` its
+interface translations; between them they are over ninety per cent of the page.
+The rest is telemetry and SDK setup.
+"""
+
+
+# TODO: Validate
+def read_entity(data: str) -> dict[str, Any]:
+    """Parse a downloaded entity file and drop what is not about the media.
+
+    `load` reads a downloaded page with this, and the model generator reads the
+    recorded pages with it too, so the two can never disagree.
+    """
+    page = json.loads(data)
+    page.pop("runtimeConfig", None)
+    page_props = page.get("props", {}).get("pageProps", {})
+    for name in STRIPPED_PAGE_PROPS:
+        page_props.pop(name, None)
+    return page
 
 
 # TODO: Validate
@@ -86,5 +116,8 @@ class Entity(BaseEndpoint):
 
     # TODO: Validate
     def load(self, data: str, log_id: str = "") -> EntityModel:
-        """Read a downloaded entity file into its model."""
-        return model_validate_json(data, log_id or self.default_log_id)
+        """Read a downloaded entity file into its model, without the rest of the page.
+
+        Everything the page carries that is not the media is dropped first.
+        """
+        return model_validate_json(read_entity(data), log_id or self.default_log_id)

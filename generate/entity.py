@@ -10,6 +10,7 @@ from get_around import build_client_automatically
 from generate.constants import FILES_PATH, KNEEMINUS_PATH
 from generate.utils import download_if_missing, load_ids, rebuild_model
 from kneeminus import KneeMinus
+from kneeminus.entity import read_entity
 
 ENTITIES = load_ids("EntityModel")
 """Each entity the model is built from, with the season it was asked for."""
@@ -40,6 +41,7 @@ def generate_entity(client: KneeMinus) -> None:
         FILES_PATH,
         KNEEMINUS_PATH,
         "EntityModel",
+        read_entity,
         name_of=lambda entity: recording_name(*entity),
     )
 
