@@ -1960,7 +1960,7 @@ class MainContentItem(BaseModel):
     seasons_available: str | None = Field(None, alias='seasonsAvailable')
     genres: list[str] | None = None
     locale: str | None = None
-    promotion: None = None
+    promotion: None = Field(None)
     promotion_sub_label: None = Field(None, alias='promotionSubLabel')
     synopsis_text: str | None = Field(None, alias='synopsisText')
     title_visual: TitleVisual | None = Field(None, alias='titleVisual')

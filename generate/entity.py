@@ -6,23 +6,12 @@ from __future__ import annotations
 import logging
 
 from get_around import build_client_automatically
-from good_ass_pydantic_integrator import generate_model
 
 from generate.constants import FILES_PATH, KNEEMINUS_PATH
-from generate.utils import download_if_missing
+from generate.utils import download_if_missing, load_ids, rebuild_model
 from kneeminus import KneeMinus
 
-ENTITIES = [
-    # Moana 2, a movie.
-    ("entity-a21ee2fc-421e-4839-bfcc-0bf2ba815875", None),
-    # The Mandalorian, a series.
-    ("entity-422f6dcc-226f-44e7-98d4-22de69b31cf3", None),
-    # The Mandalorian, season 1.
-    (
-        "entity-422f6dcc-226f-44e7-98d4-22de69b31cf3",
-        "38ff3861-23ba-44b4-a2de-d756de57ba41",
-    ),
-]
+ENTITIES = load_ids("EntityModel")
 """Each entity the model is built from, with the season it was asked for."""
 
 
@@ -47,7 +36,12 @@ def generate_entity(client: KneeMinus) -> None:
                 season_id=season_id,
             ),
         )
-    generate_model(FILES_PATH, KNEEMINUS_PATH, "EntityModel")
+    rebuild_model(
+        FILES_PATH,
+        KNEEMINUS_PATH,
+        "EntityModel",
+        name_of=lambda entity: recording_name(*entity),
+    )
 
 
 if __name__ == "__main__":
