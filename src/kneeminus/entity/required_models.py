@@ -1,12 +1,10 @@
 from typing import Self
 from pydantic import ModelWrapValidatorHandler, PrivateAttr, model_validator
-from pydantic import ConfigDict
 from pydantic import AwareDatetime, BaseModel, Field
 from typing import Any
 from uuid import UUID
 
 class Application(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     age_gate_denied_heading: str
     age_gate_denied_body: str
     age_gate_prompt_body: str
@@ -44,7 +42,6 @@ class Application(BaseModel):
     unauthdetail_you_may_also_like: str
 
 class Accessibility(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     badge_label_event_live_tts: str
     btn_banner_web_close_tts: str
     btn_flip_card_close: str
@@ -77,7 +74,6 @@ class Accessibility(BaseModel):
     video_controls_play: str
 
 class Ratings(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     image_rating_kijkwijzer_12: str
     image_rating_kijkwijzer_16: str
     image_rating_kijkwijzer_6: str
@@ -107,14 +103,12 @@ class Ratings(BaseModel):
     image_rating_tvpg_tv_y7: str = Field(..., alias='image_rating_tvpg_tv-y7')
 
 class UnifiedCommerceOnboarding(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     next_landing_button1: str
     next_landing_button2: str
     next_landing_header: str
     next_landing_subhead: str
 
 class Seo(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     description_collection_brand: str
     title_collection_brand: str
     title_details_event: str
@@ -122,7 +116,6 @@ class Seo(BaseModel):
     title_details_series: str
 
 class Dictionary(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     application: Application
     accessibility: Accessibility
     ratings: Ratings
@@ -130,13 +123,11 @@ class Dictionary(BaseModel):
     seo: Seo
 
 class FeatureFlags(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     block_datadog_rum: bool = Field(..., alias='blockDatadogRum')
     enable_identity_sdkv5: bool = Field(..., alias='enableIdentitySDKV5')
     enable_always_reload_on_consent_change: bool = Field(..., alias='enableAlwaysReloadOnConsentChange')
 
 class IdentitySdkConfig(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     client_id: str = Field(..., alias='clientId')
     enabled: bool
     environment: str
@@ -146,7 +137,6 @@ class IdentitySdkConfig(BaseModel):
     enable_identity_sdkv5: bool = Field(..., alias='enableIdentitySDKV5')
 
 class DefaultImage(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -155,7 +145,6 @@ class DefaultImage(BaseModel):
     image_id: str = Field(..., alias='imageId')
 
 class XsmallImage(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -164,7 +153,6 @@ class XsmallImage(BaseModel):
     image_id: str = Field(..., alias='imageId')
 
 class SmallImage(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -173,7 +161,6 @@ class SmallImage(BaseModel):
     image_id: str = Field(..., alias='imageId')
 
 class MediumImage(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -182,7 +169,6 @@ class MediumImage(BaseModel):
     image_id: str = Field(..., alias='imageId')
 
 class LargeImage(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -191,7 +177,6 @@ class LargeImage(BaseModel):
     image_id: str = Field(..., alias='imageId')
 
 class XlargeImage(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -200,7 +185,6 @@ class XlargeImage(BaseModel):
     image_id: str = Field(..., alias='imageId')
 
 class XxlargeImage(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -209,13 +193,11 @@ class XxlargeImage(BaseModel):
     image_id: str = Field(..., alias='imageId')
 
 class MaxWidths(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     sm_max_width: int = Field(..., alias='smMaxWidth')
     md_max_width: int = Field(..., alias='mdMaxWidth')
     lg_max_width: int = Field(..., alias='lgMaxWidth')
 
 class Child(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
     alt: str
@@ -229,7 +211,6 @@ class Child(BaseModel):
     max_widths: MaxWidths = Field(..., alias='maxWidths')
 
 class LeftItem(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
     action_key: str = Field(..., alias='actionKey')
@@ -241,7 +222,6 @@ class LeftItem(BaseModel):
     data_test_id: str = Field(..., alias='dataTestId')
 
 class RightItem(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
     action_key: str = Field(..., alias='actionKey')
@@ -257,13 +237,11 @@ class RightItem(BaseModel):
     common_href: str | None = Field(None, alias='commonHref')
 
 class StaticContainer(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     left: list[LeftItem]
     right: list[RightItem]
     center: list[None]
 
 class PreContentItem(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
     is_sticky: bool = Field(..., alias='isSticky')
@@ -273,7 +251,6 @@ class PreContentItem(BaseModel):
     sticky_background_override: str | None = Field(None, alias='stickyBackgroundOverride')
 
 class DefaultImage1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -281,7 +258,6 @@ class DefaultImage1(BaseModel):
     image_id: UUID = Field(..., alias='imageId')
 
 class XsmallImage1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -289,7 +265,6 @@ class XsmallImage1(BaseModel):
     image_id: UUID = Field(..., alias='imageId')
 
 class SmallImage1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -297,7 +272,6 @@ class SmallImage1(BaseModel):
     image_id: UUID = Field(..., alias='imageId')
 
 class MediumImage1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -305,7 +279,6 @@ class MediumImage1(BaseModel):
     image_id: UUID = Field(..., alias='imageId')
 
 class LargeImage1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -313,7 +286,6 @@ class LargeImage1(BaseModel):
     image_id: UUID = Field(..., alias='imageId')
 
 class XlargeImage1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -321,7 +293,6 @@ class XlargeImage1(BaseModel):
     image_id: UUID = Field(..., alias='imageId')
 
 class XxlargeImage1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -329,7 +300,6 @@ class XxlargeImage1(BaseModel):
     image_id: UUID = Field(..., alias='imageId')
 
 class BackgroundImage(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='_type')
     field_id: UUID = Field(..., alias='_id')
     alt: str
@@ -342,12 +312,10 @@ class BackgroundImage(BaseModel):
     xxlarge_image: XxlargeImage1 = Field(..., alias='xxlargeImage')
 
 class Alignments(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     text: str
     vertical: str
 
 class FooterItem(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
     children: list[str]
@@ -361,7 +329,6 @@ class FooterItem(BaseModel):
     data_test_id: str = Field(..., alias='dataTestId')
 
 class DefaultImage2(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -370,7 +337,6 @@ class DefaultImage2(BaseModel):
     image_id: str = Field(..., alias='imageId')
 
 class XsmallImage2(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -379,7 +345,6 @@ class XsmallImage2(BaseModel):
     image_id: str = Field(..., alias='imageId')
 
 class SmallImage2(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -388,7 +353,6 @@ class SmallImage2(BaseModel):
     image_id: str = Field(..., alias='imageId')
 
 class MediumImage2(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -397,7 +361,6 @@ class MediumImage2(BaseModel):
     image_id: str = Field(..., alias='imageId')
 
 class LargeImage2(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -406,7 +369,6 @@ class LargeImage2(BaseModel):
     image_id: str = Field(..., alias='imageId')
 
 class XlargeImage2(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -415,7 +377,6 @@ class XlargeImage2(BaseModel):
     image_id: str = Field(..., alias='imageId')
 
 class XxlargeImage2(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -424,33 +385,27 @@ class XxlargeImage2(BaseModel):
     image_id: str = Field(..., alias='imageId')
 
 class Data(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     class_name: str | None = Field(None, alias='className')
     color: str | None = None
 
 class Mark(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     data: Data | None = None
 
 class ContentItem1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     value: str
     marks: list[Mark]
 
 class ContentItem(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     content: list[ContentItem1]
 
 class RichText(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     content: list[ContentItem]
 
 class Child2(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
     default_image: DefaultImage2 | None = Field(None, alias='defaultImage')
@@ -464,13 +419,11 @@ class Child2(BaseModel):
     rich_text: RichText | None = Field(None, alias='richText')
 
 class ColSize(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     desktop: int
     tablet: int
     mobile: int
 
 class Child1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
     alignments: Alignments
@@ -481,7 +434,6 @@ class Child1(BaseModel):
     grid_item_index: int = Field(..., alias='gridItemIndex')
 
 class Offers(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_id: str = Field(..., alias='_id')
     field_type: str = Field(..., alias='_type')
     alignment: str
@@ -490,7 +442,6 @@ class Offers(BaseModel):
     gap: str
 
 class DefaultImage3(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -499,7 +450,6 @@ class DefaultImage3(BaseModel):
     image_id: UUID = Field(..., alias='imageId')
 
 class XsmallImage3(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -508,7 +458,6 @@ class XsmallImage3(BaseModel):
     image_id: UUID = Field(..., alias='imageId')
 
 class SmallImage3(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -517,7 +466,6 @@ class SmallImage3(BaseModel):
     image_id: UUID = Field(..., alias='imageId')
 
 class MediumImage3(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -526,7 +474,6 @@ class MediumImage3(BaseModel):
     image_id: UUID = Field(..., alias='imageId')
 
 class LargeImage3(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -535,7 +482,6 @@ class LargeImage3(BaseModel):
     image_id: UUID = Field(..., alias='imageId')
 
 class XlargeImage3(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -544,7 +490,6 @@ class XlargeImage3(BaseModel):
     image_id: UUID = Field(..., alias='imageId')
 
 class XxlargeImage3(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -553,7 +498,6 @@ class XxlargeImage3(BaseModel):
     image_id: UUID = Field(..., alias='imageId')
 
 class ImageVariants(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='_type')
     field_id: UUID = Field(..., alias='_id')
     alt: str
@@ -567,7 +511,6 @@ class ImageVariants(BaseModel):
     loading: str
 
 class Payload(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     content_type: str = Field(..., alias='contentType')
     element_id: UUID = Field(..., alias='elementId')
     element_id_type: str = Field(..., alias='elementIdType')
@@ -581,16 +524,13 @@ class Payload(BaseModel):
     content_keys: dict[str, Any] = Field(..., alias='contentKeys')
 
 class Glimpse(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     event_urn: str = Field(..., alias='eventUrn')
     payload: Payload
 
 class MetricsData(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     glimpse: Glimpse
 
 class BadgeRowItem(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
     column_id: str = Field(..., alias='columnId')
@@ -599,16 +539,13 @@ class BadgeRowItem(BaseModel):
     is_badge: bool = Field(..., alias='isBadge')
 
 class Data1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     class_name: str = Field(..., alias='className')
 
 class Mark1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     data: Data1
 
 class Data2(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
     action_key: str | None = Field(None, alias='actionKey')
@@ -621,7 +558,6 @@ class Data2(BaseModel):
     as_: str | None = Field(None, alias='as')
 
 class ContentItem3(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     marks: list[Mark1] | None = None
     value: str | None = None
@@ -629,37 +565,31 @@ class ContentItem3(BaseModel):
     data: Data2 | None = None
 
 class ContentItem2(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     content: list[ContentItem3]
 
 class RichText1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     content: list[ContentItem2]
 
 class Child7(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
     rich_text: RichText1 = Field(..., alias='richText')
 
 class Child6(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
     children: list[Child7]
     size: str
 
 class Footer(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_id: str = Field(..., alias='_id')
     field_type: str = Field(..., alias='_type')
     children: list[Child6]
     text_alignment: str = Field(..., alias='textAlignment')
 
 class DefaultImage4(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -668,7 +598,6 @@ class DefaultImage4(BaseModel):
     image_id: str = Field(..., alias='imageId')
 
 class XsmallImage4(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -677,7 +606,6 @@ class XsmallImage4(BaseModel):
     image_id: str = Field(..., alias='imageId')
 
 class SmallImage4(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -686,7 +614,6 @@ class SmallImage4(BaseModel):
     image_id: str = Field(..., alias='imageId')
 
 class MediumImage4(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -695,7 +622,6 @@ class MediumImage4(BaseModel):
     image_id: str = Field(..., alias='imageId')
 
 class LargeImage4(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -704,7 +630,6 @@ class LargeImage4(BaseModel):
     image_id: str = Field(..., alias='imageId')
 
 class XlargeImage4(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -713,7 +638,6 @@ class XlargeImage4(BaseModel):
     image_id: str = Field(..., alias='imageId')
 
 class XxlargeImage4(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -722,32 +646,26 @@ class XxlargeImage4(BaseModel):
     image_id: str = Field(..., alias='imageId')
 
 class Data3(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     class_name: str = Field(..., alias='className')
 
 class Mark2(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     data: Data3 | None = None
 
 class ContentItem5(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     value: str
     marks: list[Mark2]
 
 class ContentItem4(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     content: list[ContentItem5]
 
 class RichText2(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     content: list[ContentItem4]
 
 class CellContentItem(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
     alt: str | None = None
@@ -763,7 +681,6 @@ class CellContentItem(BaseModel):
     rich_text: RichText2 | None = Field(None, alias='richText')
 
 class HeaderBody(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
     column_id: str = Field(..., alias='columnId')
@@ -773,11 +690,9 @@ class HeaderBody(BaseModel):
     cell_content: list[CellContentItem] | None = Field(None, alias='cellContent')
 
 class Style(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     color: str
 
 class CellContentItem1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
     action_key: str | None = Field(None, alias='actionKey')
@@ -795,7 +710,6 @@ class CellContentItem1(BaseModel):
     format: list[str] | None = None
 
 class HeaderFooter(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
     column_id: str = Field(..., alias='columnId')
@@ -804,12 +718,10 @@ class HeaderFooter(BaseModel):
     cell_content: list[CellContentItem1] | None = Field(None, alias='cellContent')
 
 class HeaderRow1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     header_bodies: list[HeaderBody] = Field(..., alias='headerBodies')
     header_footers: list[HeaderFooter] = Field(..., alias='headerFooters')
 
 class HeaderRow(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='_type')
     id: str
     header_row: HeaderRow1 = Field(..., alias='headerRow')
@@ -817,12 +729,10 @@ class HeaderRow(BaseModel):
     max_width: str = Field(..., alias='maxWidth')
 
 class Mark3(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     data: Data3 | None = None
 
 class Data5(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
     as_: str = Field(..., alias='as')
@@ -830,7 +740,6 @@ class Data5(BaseModel):
     class_name: str = Field(..., alias='className')
 
 class ContentItem7(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     value: str | None = None
     marks: list[Mark3]
@@ -838,48 +747,39 @@ class ContentItem7(BaseModel):
     data: Data5 | None = None
 
 class ContentItem6(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     content: list[ContentItem7]
 
 class RichText3(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     content: list[ContentItem6]
 
 class Child8(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
     rich_text: RichText3 = Field(..., alias='richText')
 
 class Data6(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     class_name: str = Field(..., alias='className')
 
 class Mark4(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     data: Data6
 
 class ContentItem9(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     value: str
     marks: list[Mark4]
 
 class ContentItem8(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     content: list[ContentItem9]
 
 class RichText4(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     content: list[ContentItem8]
 
 class CellContentItem2(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
     rich_text: RichText4 | None = Field(None, alias='richText')
@@ -887,7 +787,6 @@ class CellContentItem2(BaseModel):
     size: str | None = None
 
 class RowDatum(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
     children: list[Child8] | None = None
@@ -896,12 +795,10 @@ class RowDatum(BaseModel):
     is_selected: bool | None = Field(None, alias='isSelected')
 
 class Row(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     row_data: list[RowDatum] = Field(..., alias='rowData')
     id: str
 
 class BadgeRowItem1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
     column_id: str = Field(..., alias='columnId')
@@ -911,12 +808,10 @@ class BadgeRowItem1(BaseModel):
     is_badge: bool = Field(..., alias='isBadge')
 
 class Mark5(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     data: Data6 | None = None
 
 class Data8(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
     action_key: str | None = Field(None, alias='actionKey')
@@ -929,7 +824,6 @@ class Data8(BaseModel):
     as_: str | None = Field(None, alias='as')
 
 class ContentItem11(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     marks: list[Mark5] | None = None
     value: str | None = None
@@ -937,70 +831,58 @@ class ContentItem11(BaseModel):
     data: Data8 | None = None
 
 class ContentItem10(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     content: list[ContentItem11]
 
 class RichText5(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     content: list[ContentItem10]
 
 class Child10(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
     rich_text: RichText5 = Field(..., alias='richText')
 
 class Child9(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
     children: list[Child10]
     size: str
 
 class Footer1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_id: str = Field(..., alias='_id')
     field_type: str = Field(..., alias='_type')
     children: list[Child9]
     text_alignment: str = Field(..., alias='textAlignment')
 
 class Data9(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     class_name: str = Field(..., alias='className')
 
 class Mark6(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     data: Data9 | None = None
 
 class ContentItem13(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     value: str | None = None
     marks: list[Mark6] | None = None
     content: list[None] | None = None
 
 class ContentItem12(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     content: list[ContentItem13]
 
 class RichText6(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     content: list[ContentItem12]
 
 class CellContentItem3(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
     rich_text: RichText6 | None = Field(None, alias='richText')
     size: str | None = None
 
 class HeaderBody1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
     column_id: str = Field(..., alias='columnId')
@@ -1011,33 +893,27 @@ class HeaderBody1(BaseModel):
     class_name: str = Field(..., alias='className')
 
 class Mark7(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     data: Data9
 
 class ContentItem15(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     value: str
     marks: list[Mark7]
 
 class ContentItem14(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     content: list[ContentItem15]
 
 class RichText7(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     content: list[ContentItem14]
 
 class Style1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     background: str
     color: str
 
 class CellContentItem4(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
     size: str | None = None
@@ -1053,7 +929,6 @@ class CellContentItem4(BaseModel):
     data_test_id: str | None = Field(None, alias='dataTestId')
 
 class HeaderFooter1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
     column_id: str = Field(..., alias='columnId')
@@ -1063,12 +938,10 @@ class HeaderFooter1(BaseModel):
     cell_content: list[CellContentItem4] = Field(..., alias='cellContent')
 
 class HeaderRow3(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     header_bodies: list[HeaderBody1] = Field(..., alias='headerBodies')
     header_footers: list[HeaderFooter1] = Field(..., alias='headerFooters')
 
 class HeaderRow2(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='_type')
     id: str
     header_row: HeaderRow3 = Field(..., alias='headerRow')
@@ -1076,61 +949,50 @@ class HeaderRow2(BaseModel):
     max_width: str = Field(..., alias='maxWidth')
 
 class Mark8(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     data: Data9 | None = None
 
 class ContentItem17(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     value: str
     marks: list[Mark8]
 
 class ContentItem16(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     content: list[ContentItem17]
 
 class RichText8(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     content: list[ContentItem16]
 
 class Child11(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
     rich_text: RichText8 = Field(..., alias='richText')
 
 class Mark9(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     data: Data9
 
 class ContentItem19(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     value: str
     marks: list[Mark9]
 
 class ContentItem18(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     content: list[ContentItem19]
 
 class RichText9(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     content: list[ContentItem18]
 
 class CellContentItem5(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
     rich_text: RichText9 = Field(..., alias='richText')
 
 class RowDatum1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
     children: list[Child11] | None = None
@@ -1139,12 +1001,10 @@ class RowDatum1(BaseModel):
     is_selected: bool | None = Field(None, alias='isSelected')
 
 class Row1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     row_data: list[RowDatum1] = Field(..., alias='rowData')
     id: str
 
 class Subchart(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
     badge_row: list[BadgeRowItem1] = Field(..., alias='badgeRow')
@@ -1159,7 +1019,6 @@ class Subchart(BaseModel):
     should_expand_on_load: bool = Field(..., alias='shouldExpandOnLoad')
 
 class Child5(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='_type')
     field_id: UUID | str = Field(..., alias='_id', union_mode='left_to_right')
     title: str | None = None
@@ -1185,33 +1044,27 @@ class Child5(BaseModel):
     subcharts: list[Subchart] | None = None
 
 class Data13(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     class_name: str | None = Field(None, alias='className')
     color: str | None = None
 
 class Mark10(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     data: Data13
 
 class ContentItem21(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     value: str
     marks: list[Mark10]
 
 class ContentItem20(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     content: list[ContentItem21]
 
 class RichText10(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     content: list[ContentItem20]
 
 class Child4(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='_type')
     field_id: UUID | str = Field(..., alias='_id', union_mode='left_to_right')
     children: list[Child5] | None = None
@@ -1220,7 +1073,6 @@ class Child4(BaseModel):
     tab_name: str | None = Field(None, alias='tabName')
 
 class Title(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
     as_: str = Field(..., alias='as')
@@ -1229,12 +1081,10 @@ class Title(BaseModel):
     size: str
 
 class CapsuleProps(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     button_background: str = Field(..., alias='buttonBackground')
     selected_text_color: str = Field(..., alias='selectedTextColor')
 
 class Child3(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
     children: list[Child4]
@@ -1249,7 +1099,6 @@ class Child3(BaseModel):
     display_mode: str | None = Field(None, alias='displayMode')
 
 class DefaultImage5(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -1257,7 +1106,6 @@ class DefaultImage5(BaseModel):
     image_id: str = Field(..., alias='imageId')
 
 class XsmallImage5(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -1265,7 +1113,6 @@ class XsmallImage5(BaseModel):
     image_id: str = Field(..., alias='imageId')
 
 class SmallImage5(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -1273,7 +1120,6 @@ class SmallImage5(BaseModel):
     image_id: str = Field(..., alias='imageId')
 
 class MediumImage5(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -1281,7 +1127,6 @@ class MediumImage5(BaseModel):
     image_id: str = Field(..., alias='imageId')
 
 class LargeImage5(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -1289,7 +1134,6 @@ class LargeImage5(BaseModel):
     image_id: str = Field(..., alias='imageId')
 
 class XlargeImage5(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -1297,7 +1141,6 @@ class XlargeImage5(BaseModel):
     image_id: str = Field(..., alias='imageId')
 
 class XxlargeImage5(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -1305,7 +1148,6 @@ class XxlargeImage5(BaseModel):
     image_id: str = Field(..., alias='imageId')
 
 class DetailIcon(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
     alt: str
@@ -1318,7 +1160,6 @@ class DetailIcon(BaseModel):
     xxlarge_image: XxlargeImage5 = Field(..., alias='xxlargeImage')
 
 class DefaultImage6(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -1328,7 +1169,6 @@ class DefaultImage6(BaseModel):
     image_id: UUID = Field(..., alias='imageId')
 
 class XsmallImage6(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -1338,7 +1178,6 @@ class XsmallImage6(BaseModel):
     image_id: UUID = Field(..., alias='imageId')
 
 class SmallImage6(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -1348,7 +1187,6 @@ class SmallImage6(BaseModel):
     image_id: UUID = Field(..., alias='imageId')
 
 class MediumImage6(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -1358,7 +1196,6 @@ class MediumImage6(BaseModel):
     image_id: UUID = Field(..., alias='imageId')
 
 class LargeImage6(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -1368,7 +1205,6 @@ class LargeImage6(BaseModel):
     image_id: UUID = Field(..., alias='imageId')
 
 class XlargeImage6(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -1378,7 +1214,6 @@ class XlargeImage6(BaseModel):
     image_id: UUID = Field(..., alias='imageId')
 
 class XxlargeImage6(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -1388,7 +1223,6 @@ class XxlargeImage6(BaseModel):
     image_id: UUID = Field(..., alias='imageId')
 
 class TitleVisual(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='_type')
     field_id: UUID = Field(..., alias='_id')
     alt: str
@@ -1401,7 +1235,6 @@ class TitleVisual(BaseModel):
     xxlarge_image: XxlargeImage6 = Field(..., alias='xxlargeImage')
 
 class DefaultImage7(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -1409,7 +1242,6 @@ class DefaultImage7(BaseModel):
     image_id: str = Field(..., alias='imageId')
 
 class XsmallImage7(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -1417,7 +1249,6 @@ class XsmallImage7(BaseModel):
     image_id: str = Field(..., alias='imageId')
 
 class SmallImage7(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -1425,7 +1256,6 @@ class SmallImage7(BaseModel):
     image_id: str = Field(..., alias='imageId')
 
 class MediumImage7(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -1433,7 +1263,6 @@ class MediumImage7(BaseModel):
     image_id: str = Field(..., alias='imageId')
 
 class LargeImage7(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -1441,7 +1270,6 @@ class LargeImage7(BaseModel):
     image_id: str = Field(..., alias='imageId')
 
 class XlargeImage7(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -1449,7 +1277,6 @@ class XlargeImage7(BaseModel):
     image_id: str = Field(..., alias='imageId')
 
 class XxlargeImage7(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -1457,7 +1284,6 @@ class XxlargeImage7(BaseModel):
     image_id: str = Field(..., alias='imageId')
 
 class Image(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
     alt: str
@@ -1470,78 +1296,66 @@ class Image(BaseModel):
     xxlarge_image: XxlargeImage7 = Field(..., alias='xxlargeImage')
 
 class Rating(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     title: str
     image: Image
     advisories: list[None]
 
 class Item(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     display_text: str = Field(..., alias='displayText')
 
 class Credit(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     heading: str
     items: list[Item]
 
 class Labels(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     details: str
     genres: str
     release: str
     runtime: str
 
 class DefaultImage8(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     ripcut_id: UUID = Field(..., alias='ripcutId')
     image_id: UUID = Field(..., alias='imageId')
 
 class XsmallImage8(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     ripcut_id: UUID = Field(..., alias='ripcutId')
     image_id: UUID = Field(..., alias='imageId')
 
 class SmallImage8(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     ripcut_id: UUID = Field(..., alias='ripcutId')
     image_id: UUID = Field(..., alias='imageId')
 
 class MediumImage8(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     ripcut_id: UUID = Field(..., alias='ripcutId')
     image_id: UUID = Field(..., alias='imageId')
 
 class LargeImage8(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     ripcut_id: UUID = Field(..., alias='ripcutId')
     image_id: UUID = Field(..., alias='imageId')
 
 class XlargeImage8(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     ripcut_id: UUID = Field(..., alias='ripcutId')
     image_id: UUID = Field(..., alias='imageId')
 
 class XxlargeImage8(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     ripcut_id: UUID = Field(..., alias='ripcutId')
     image_id: UUID = Field(..., alias='imageId')
 
 class ImageVariants1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='_type')
     field_id: UUID = Field(..., alias='_id')
     alt: str
@@ -1555,20 +1369,16 @@ class ImageVariants1(BaseModel):
     loading: str
 
 class Metadata(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     summary: str
 
 class Glimpse1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     event_urn: str = Field(..., alias='eventUrn')
     payload: Payload
 
 class MetricsData1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     glimpse: Glimpse1
 
 class Episode(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='_type')
     field_id: UUID = Field(..., alias='_id')
     title: str
@@ -1580,12 +1390,10 @@ class Episode(BaseModel):
     metrics_data: MetricsData1 = Field(..., alias='metricsData')
 
 class Season(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     id: UUID
     name: str
 
 class DefaultImage9(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -1594,7 +1402,6 @@ class DefaultImage9(BaseModel):
     image_id: str = Field(..., alias='imageId')
 
 class XsmallImage9(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -1603,7 +1410,6 @@ class XsmallImage9(BaseModel):
     image_id: str = Field(..., alias='imageId')
 
 class SmallImage9(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -1612,7 +1418,6 @@ class SmallImage9(BaseModel):
     image_id: str = Field(..., alias='imageId')
 
 class MediumImage9(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -1621,7 +1426,6 @@ class MediumImage9(BaseModel):
     image_id: str = Field(..., alias='imageId')
 
 class LargeImage9(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -1630,7 +1434,6 @@ class LargeImage9(BaseModel):
     image_id: str = Field(..., alias='imageId')
 
 class XlargeImage9(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -1639,7 +1442,6 @@ class XlargeImage9(BaseModel):
     image_id: str = Field(..., alias='imageId')
 
 class XxlargeImage9(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -1648,36 +1450,29 @@ class XxlargeImage9(BaseModel):
     image_id: str = Field(..., alias='imageId')
 
 class Data14(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     class_name: str = Field(..., alias='className')
 
 class Mark11(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     data: Data14 | None = None
 
 class ContentItem23(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     value: str
     marks: list[Mark11]
 
 class ContentItem22(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     content: list[ContentItem23]
 
 class RichText11(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     content: list[ContentItem22]
 
 class Style2(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     color: str
 
 class ModalContentItem(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
     alt: str | None = None
@@ -1704,11 +1499,9 @@ class ModalContentItem(BaseModel):
     css: str | None = None
 
 class Style3(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     text_align: str = Field(..., alias='textAlign')
 
 class Payload2(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     container_style: str = Field(..., alias='containerStyle')
     container_type: str = Field(..., alias='containerType')
     elements: list[None]
@@ -1718,16 +1511,13 @@ class Payload2(BaseModel):
     container_key: str = Field(..., alias='containerKey')
 
 class Glimpse2(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     event_urn: str = Field(..., alias='eventUrn')
     payload: Payload2
 
 class MetricsData2(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     glimpse: Glimpse2
 
 class EpisodeSelectModal(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
     is_exit_intent: bool = Field(..., alias='isExitIntent')
@@ -1739,56 +1529,48 @@ class EpisodeSelectModal(BaseModel):
     metrics_data: MetricsData2 = Field(..., alias='metricsData')
 
 class DefaultImage10(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     ripcut_id: UUID = Field(..., alias='ripcutId')
     image_id: UUID = Field(..., alias='imageId')
 
 class XsmallImage10(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     ripcut_id: UUID = Field(..., alias='ripcutId')
     image_id: UUID = Field(..., alias='imageId')
 
 class SmallImage10(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     ripcut_id: UUID = Field(..., alias='ripcutId')
     image_id: UUID = Field(..., alias='imageId')
 
 class MediumImage10(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     ripcut_id: UUID = Field(..., alias='ripcutId')
     image_id: UUID = Field(..., alias='imageId')
 
 class LargeImage10(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     ripcut_id: UUID = Field(..., alias='ripcutId')
     image_id: UUID = Field(..., alias='imageId')
 
 class XlargeImage10(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     ripcut_id: UUID = Field(..., alias='ripcutId')
     image_id: UUID = Field(..., alias='imageId')
 
 class XxlargeImage10(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     ripcut_id: UUID = Field(..., alias='ripcutId')
     image_id: UUID = Field(..., alias='imageId')
 
 class ImageVariants2(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='_type')
     field_id: UUID = Field(..., alias='_id')
     alt: str
@@ -1802,7 +1584,6 @@ class ImageVariants2(BaseModel):
     loading: str
 
 class Payload3(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     content_type: str = Field(..., alias='contentType')
     element_id: UUID = Field(..., alias='elementId')
     element_id_type: str = Field(..., alias='elementIdType')
@@ -1816,16 +1597,13 @@ class Payload3(BaseModel):
     content_keys: dict[str, Any] = Field(..., alias='contentKeys')
 
 class Glimpse3(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     event_urn: str = Field(..., alias='eventUrn')
     payload: Payload3
 
 class MetricsData3(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     glimpse: Glimpse3
 
 class Episode1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='_type')
     field_id: UUID = Field(..., alias='_id')
     title: str
@@ -1836,97 +1614,80 @@ class Episode1(BaseModel):
     metrics_data: MetricsData3 = Field(..., alias='metricsData')
 
 class SeoSeason(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     season_id: UUID = Field(..., alias='seasonId')
     season_name: str = Field(..., alias='seasonName')
     episodes: list[Episode1]
 
 class Style4(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     background: str
 
 class Padding(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     top: str
     bottom: str | None = None
 
 class MobileOptions(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     full_width: bool | None = Field(None, alias='fullWidth')
     is_hidden: bool | None = Field(None, alias='isHidden')
 
 class TabletOptions(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     full_width: bool | None = Field(None, alias='fullWidth')
     is_hidden: bool | None = Field(None, alias='isHidden')
 
 class DesktopOptions(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     full_width: bool = Field(..., alias='fullWidth')
 
 class Glimpse4(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     container_key: str = Field(..., alias='containerKey')
     container_type: str = Field(..., alias='containerType')
     container_style: str = Field(..., alias='containerStyle')
     vertical_position: int = Field(..., alias='verticalPosition')
 
 class MetricsData4(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     glimpse: Glimpse4
 
 class PreconnectLink(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     rel: str
     href: str
     cross_origin: str = Field(..., alias='crossOrigin')
 
 class PriorityMetaTag(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     http_equiv: str | None = Field(None, alias='httpEquiv')
     content: str
     name: str | None = None
 
 class MetaTag(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     item_prop: str | None = Field(None, alias='itemProp')
     content: str
     property: str | None = None
     name: str | None = None
 
 class LinkTag(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     rel: str
     href: str
 
 class EpisodeItem(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='@type')
     name: str
     episode_number: int = Field(..., alias='episodeNumber')
 
 class ContainsSeasonItem(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='@type')
     name: str
     season_number: int = Field(..., alias='seasonNumber')
     episode: list[EpisodeItem]
 
 class Item1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='@type')
     field_id: str = Field(..., alias='@id')
     url: str
     name: str
 
 class ItemListElementItem(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='@type')
     position: int
     item: Item1
 
 class FieldGraphItem(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='@type')
     image: str | None = None
     name: str | None = None
@@ -1939,17 +1700,14 @@ class FieldGraphItem(BaseModel):
     item_list_element: list[ItemListElementItem] | None = Field(None, alias='itemListElement')
 
 class LdJson(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_context: str = Field(..., alias='@context')
     field_graph: list[FieldGraphItem] = Field(..., alias='@graph')
 
 class DebugMetaTag(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     content: str
 
 class MainContentItem(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='_type')
     field_id: str | None = Field(None, alias='_id')
     background_image: BackgroundImage | None = Field(None, alias='backgroundImage')
@@ -2002,7 +1760,6 @@ class MainContentItem(BaseModel):
     custom_field: str | None = Field(None, alias='customField')
 
 class Headline(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
     children: str
@@ -2010,7 +1767,6 @@ class Headline(BaseModel):
     class_name: str | None = Field(None, alias='className')
 
 class Child15(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
     html_key: str = Field(..., alias='htmlKey')
@@ -2022,7 +1778,6 @@ class Child15(BaseModel):
     class_name: str | None = Field(None, alias='className')
 
 class Child14(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
     title: str | None = None
@@ -2038,7 +1793,6 @@ class Child14(BaseModel):
     target: str | None = None
 
 class DefaultImage11(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -2046,7 +1800,6 @@ class DefaultImage11(BaseModel):
     ripcut_id: str = Field(..., alias='ripcutId')
 
 class Child13(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
     html_key: str | None = Field(None, alias='htmlKey')
@@ -2068,7 +1821,6 @@ class Child13(BaseModel):
     show_year: bool | None = Field(None, alias='showYear')
 
 class Child12(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
     title: str | None = None
@@ -2079,13 +1831,11 @@ class Child12(BaseModel):
     desktop_alignment: str | None = Field(None, alias='desktopAlignment')
 
 class Block(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
     children: list[Child12]
 
 class Data15(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
     title: str
@@ -2096,18 +1846,15 @@ class Data15(BaseModel):
     field_created_at: AwareDatetime = Field(..., alias='_createdAt')
 
 class Glimpse5(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     container_key: str = Field(..., alias='containerKey')
     container_type: str = Field(..., alias='containerType')
     vertical_position: int = Field(..., alias='verticalPosition')
     container_style: str = Field(..., alias='containerStyle')
 
 class MetricsData5(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     glimpse: Glimpse5
 
 class PostContentItem(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
     data: Data15
@@ -2118,16 +1865,13 @@ class PostContentItem(BaseModel):
     metrics_data: MetricsData5 = Field(..., alias='metricsData')
 
 class Data16(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     class_name: str | None = Field(..., alias='className')
 
 class Mark12(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     data: Data16 | None = None
 
 class Data17(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
     action_key: str = Field(..., alias='actionKey')
@@ -2140,7 +1884,6 @@ class Data17(BaseModel):
     type: str
 
 class ContentItem25(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     value: str | None = None
     marks: list[Mark12] | None = None
@@ -2148,17 +1891,14 @@ class ContentItem25(BaseModel):
     data: Data17 | None = None
 
 class ContentItem24(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     content: list[ContentItem25]
 
 class RichText12(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     content: list[ContentItem24]
 
 class DefaultImage12(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -2167,7 +1907,6 @@ class DefaultImage12(BaseModel):
     image_id: str = Field(..., alias='imageId')
 
 class XsmallImage11(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -2176,7 +1915,6 @@ class XsmallImage11(BaseModel):
     image_id: str = Field(..., alias='imageId')
 
 class SmallImage11(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -2185,7 +1923,6 @@ class SmallImage11(BaseModel):
     image_id: str = Field(..., alias='imageId')
 
 class MediumImage11(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -2194,7 +1931,6 @@ class MediumImage11(BaseModel):
     image_id: str = Field(..., alias='imageId')
 
 class LargeImage11(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -2203,7 +1939,6 @@ class LargeImage11(BaseModel):
     image_id: str = Field(..., alias='imageId')
 
 class XlargeImage11(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -2212,7 +1947,6 @@ class XlargeImage11(BaseModel):
     image_id: str = Field(..., alias='imageId')
 
 class XxlargeImage11(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     source: str
     content_type: str = Field(..., alias='contentType')
     width: int
@@ -2221,11 +1955,9 @@ class XxlargeImage11(BaseModel):
     image_id: str = Field(..., alias='imageId')
 
 class Style5(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     color: str
 
 class ModalContentItem1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
     rich_text: RichText12 | None = Field(None, alias='richText')
@@ -2252,11 +1984,9 @@ class ModalContentItem1(BaseModel):
     css: str | None = None
 
 class Style6(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     text_align: str = Field(..., alias='textAlign')
 
 class Payload4(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     container_style: str = Field(..., alias='containerStyle')
     container_type: str = Field(..., alias='containerType')
     elements: list[None]
@@ -2266,16 +1996,13 @@ class Payload4(BaseModel):
     container_key: str = Field(..., alias='containerKey')
 
 class Glimpse6(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     event_urn: str = Field(..., alias='eventUrn')
     payload: Payload4
 
 class MetricsData6(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     glimpse: Glimpse6
 
 class Modal(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_type: str = Field(..., alias='_type')
     field_id: str = Field(..., alias='_id')
     is_exit_intent: bool = Field(..., alias='isExitIntent')
@@ -2287,19 +2014,16 @@ class Modal(BaseModel):
     metrics_data: MetricsData6 = Field(..., alias='metricsData')
 
 class Url(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_id: str = Field(..., alias='_id')
     key: str | None = None
     url: str
     analytics_name: str
 
 class CannonballLinkManager(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_id: str = Field(..., alias='_id')
     urls: list[Url]
 
 class ImageCardModalConfig(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     signup_url: str = Field(..., alias='signupUrl')
     login_url: str = Field(..., alias='loginUrl')
     signup_text: str = Field(..., alias='signupText')
@@ -2307,12 +2031,10 @@ class ImageCardModalConfig(BaseModel):
     modal_copy: str = Field(..., alias='modalCopy')
 
 class Overrides(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     cannonball_link_manager: CannonballLinkManager = Field(..., alias='cannonballLinkManager')
     image_card_modal_config: ImageCardModalConfig = Field(..., alias='imageCardModalConfig')
 
 class StitchDocument(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     head_content: list[None] = Field(..., alias='headContent')
     pre_content: list[list[PreContentItem]] = Field(..., alias='preContent')
     main_content: list[MainContentItem] = Field(..., alias='mainContent')
@@ -2321,37 +2043,30 @@ class StitchDocument(BaseModel):
     overrides: Overrides
 
 class Glimpse7(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     page_info_block: str = Field(..., alias='pageInfoBlock')
 
 class MetricsData7(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     glimpse: Glimpse7
 
 class Signup(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     label: str
     url: str
 
 class ToastCtaProps(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     signup: Signup
 
 class PageContentRedisHostname(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     eu_west_1: str = Field(..., alias='eu-west-1')
     us_east_1: str = Field(..., alias='us-east-1')
     us_west_2: str = Field(..., alias='us-west-2')
 
 class AppConfig(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     adobe_launch_script_url: str = Field(..., alias='adobeLaunchScriptUrl')
     help_center_url: str = Field(..., alias='helpCenterUrl')
     name: str
     page_content_redis_hostname: PageContentRedisHostname = Field(..., alias='pageContentRedisHostname')
 
 class DictionaryVersions(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     accessibility: str
     application: str
     commerce: str
@@ -2373,7 +2088,6 @@ class DictionaryVersions(BaseModel):
     welch: str
 
 class Commerce(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     account: str
     base: str
     hulu_activation: None
@@ -2416,7 +2130,6 @@ class Commerce(BaseModel):
     yokozuna: None
 
 class Activate(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     wbd_max: str
     espn: None
     hulu: str
@@ -2429,17 +2142,14 @@ class Activate(BaseModel):
     epicgames_us: None
 
 class Activation(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     hulu: str
 
 class Application1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     id: str
     version: str
 
 class Sdk(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     client_id: str = Field(..., alias='clientId')
     client_api_key: str = Field(..., alias='clientApiKey')
     environment: str
@@ -2448,38 +2158,31 @@ class Sdk(BaseModel):
     identity_client_id: str = Field(..., alias='identityClientId')
 
 class GoogleRecaptcha(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     site_key: str = Field(..., alias='siteKey')
 
 class Primary(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     port: int
     compression_level: int = Field(..., alias='compressionLevel')
     default_ttl_seconds: int = Field(..., alias='defaultTtlSeconds')
     type: str
 
 class External(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
 
 class Internal(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
 
 class CacheClients(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     primary: Primary
     external: External
     internal: Internal
 
 class ExploreApiConfig(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     base: str
     version: str
     page_version: str = Field(..., alias='pageVersion')
 
 class Path(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     commerce: Commerce
     activate: Activate
     activation: Activation
@@ -2501,12 +2204,10 @@ class Path(BaseModel):
     orchestration_b2b_api_uri: str = Field(..., alias='orchestrationB2bApiUri')
 
 class Billing(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     gift_card_number_mask: str = Field(..., alias='giftCardNumberMask')
     gift_card_number_min_length: int = Field(..., alias='giftCardNumberMinLength')
 
 class Commerce1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     billing: Billing
     cypher_variable_error_paths_to_crash: list[str] = Field(..., alias='cypherVariableErrorPathsToCrash')
     enabled_analytics_tooling: list[str] = Field(..., alias='enabledAnalyticsTooling')
@@ -2516,7 +2217,6 @@ class Commerce1(BaseModel):
     ravelin: None
 
 class Adobe(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     cross_domains: list[str] = Field(..., alias='crossDomains')
     rsid: str
     rsidname: str
@@ -2530,55 +2230,46 @@ class Adobe(BaseModel):
     web_app_name: str = Field(..., alias='webAppName')
 
 class Tealium(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
 
 class Analytics(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     adobe: Adobe
     partner: str
     tealium: Tealium
 
 class IdentitySdk(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     client_id: str = Field(..., alias='clientId')
     enabled: bool
     environment: str
     rollout_percentage: int = Field(..., alias='rolloutPercentage')
 
 class Script(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     stub_sdk: str = Field(..., alias='stubSDK')
     guuid: UUID
 
 class CategoryPurposes(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     c0001: UUID = Field(..., alias='C0001')
     c0002: UUID = Field(..., alias='C0002')
     c0004: UUID = Field(..., alias='C0004')
 
 class Api(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     tokens: list[str]
     purposes: list[str]
     category_purposes: CategoryPurposes = Field(..., alias='categoryPurposes')
 
 class CategoryPurposes1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     field_1: UUID = Field(..., alias='1')
     field_2: UUID = Field(..., alias='2')
     field_4: UUID = Field(..., alias='4')
 
 class UnifiedConsentApi(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     tokens: list[str]
     purposes: list[str]
     category_purposes: CategoryPurposes1 = Field(..., alias='categoryPurposes')
 
 class ConsentGroups(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     necessary: str
     performance_and_analytics: str = Field(..., alias='performanceAndAnalytics')
     functional: str
@@ -2586,179 +2277,144 @@ class ConsentGroups(BaseModel):
     social_media: str = Field(..., alias='socialMedia')
 
 class OneTrust(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     script: Script
     api: Api
     unified_consent_api: UnifiedConsentApi = Field(..., alias='unifiedConsentApi')
     consent_groups: ConsentGroups = Field(..., alias='consentGroups')
 
 class ArAr(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     dict_: str = Field(..., alias='dict')
     hreflang: str
 
 class CsCz(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     dict_: str = Field(..., alias='dict')
     hreflang: str
 
 class DaDk(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     dict_: str = Field(..., alias='dict')
     hreflang: str
 
 class DeDe(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     dict_: str = Field(..., alias='dict')
     hreflang: str
 
 class ElGr(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     dict_: str = Field(..., alias='dict')
     hreflang: str
 
 class En(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     dict_: str = Field(..., alias='dict')
     hreflang: str
 
 class EnGb(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     dict_: str = Field(..., alias='dict')
     hreflang: str
 
 class Es419(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     dict_: str = Field(..., alias='dict')
     hreflang: str
 
 class EsEs(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     dict_: str = Field(..., alias='dict')
     hreflang: str
 
 class FiFi(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     dict_: str = Field(..., alias='dict')
     hreflang: str
 
 class FrCa(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     dict_: str = Field(..., alias='dict')
     hreflang: str
 
 class FrFr(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     dict_: str = Field(..., alias='dict')
     hreflang: str
 
 class HeIl(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     dict_: str = Field(..., alias='dict')
     hreflang: str
 
 class HuHu(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     dict_: str = Field(..., alias='dict')
     hreflang: str
 
 class HrHr(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     dict_: str = Field(..., alias='dict')
     hreflang: str
 
 class IdId(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     dict_: str = Field(..., alias='dict')
     hreflang: str
 
 class ItIt(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     dict_: str = Field(..., alias='dict')
     hreflang: str
 
 class JaJp(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     dict_: str = Field(..., alias='dict')
     hreflang: str
 
 class KoKr(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     dict_: str = Field(..., alias='dict')
     hreflang: str
 
 class MsMy(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     dict_: str = Field(..., alias='dict')
     hreflang: str
 
 class NlNl(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     dict_: str = Field(..., alias='dict')
     hreflang: str
 
 class NoNo(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     dict_: str = Field(..., alias='dict')
     hreflang: str
 
 class PlPl(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     dict_: str = Field(..., alias='dict')
     hreflang: str
 
 class PtBr(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     dict_: str = Field(..., alias='dict')
     hreflang: str
 
 class PtPt(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     dict_: str = Field(..., alias='dict')
     hreflang: str
 
 class RoRo(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     dict_: str = Field(..., alias='dict')
     hreflang: str
 
 class SkSk(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     dict_: str = Field(..., alias='dict')
     hreflang: str
 
 class SvSe(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     dict_: str = Field(..., alias='dict')
     hreflang: str
 
 class ThTh(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     dict_: str = Field(..., alias='dict')
     hreflang: str
 
 class TrTr(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     dict_: str = Field(..., alias='dict')
     hreflang: str
 
 class ZhHans(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     dict_: str = Field(..., alias='dict')
     hreflang: str
 
 class ZhHant(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     dict_: str = Field(..., alias='dict')
     hreflang: str
 
 class ZhHk(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     dict_: str = Field(..., alias='dict')
     hreflang: str
 
 class SupportedLangsMap(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     ar_ar: ArAr = Field(..., alias='ar-ar')
     cs_cz: CsCz = Field(..., alias='cs-cz')
     da_dk: DaDk = Field(..., alias='da-dk')
@@ -2794,17 +2450,14 @@ class SupportedLangsMap(BaseModel):
     zh_hk: ZhHk = Field(..., alias='zh-hk')
 
 class AuthZ(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     client_id: str = Field(..., alias='clientId')
     authorization_url: str = Field(..., alias='authorizationUrl')
 
 class Convergence(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     auth_z: AuthZ = Field(..., alias='authZ')
     enabled: bool
 
 class RemoteAppConfig(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     bolt_partner_id: None = Field(..., alias='boltPartnerId')
     commerce: Commerce1
     analytics: Analytics
@@ -2817,48 +2470,40 @@ class RemoteAppConfig(BaseModel):
     convergence: Convergence
 
 class Af(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class Nu(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     campaign_code: str = Field(..., alias='campaignCode')
     sku_list: list[str] = Field(..., alias='skuList')
     voucher_code: str = Field(..., alias='voucherCode')
 
 class ChangePayment(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     campaign_code: str = Field(..., alias='campaignCode')
     sku_list: list[str] = Field(..., alias='skuList')
     voucher_code: str = Field(..., alias='voucherCode')
 
 class Purchase(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     campaign_code: str = Field(..., alias='campaignCode')
     sku_list: list[str] = Field(..., alias='skuList')
     voucher_code: str = Field(..., alias='voucherCode')
 
 class UnAuth(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     campaign_code: str = Field(..., alias='campaignCode')
     sku_list: list[str] = Field(..., alias='skuList')
     voucher_code: str = Field(..., alias='voucherCode')
 
 class DefaultProduct(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class SpecialOfferProduct(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     campaign_code: str = Field(..., alias='campaignCode')
     sku_list: list[str] = Field(..., alias='skuList')
     voucher_code: str = Field(..., alias='voucherCode')
 
 class Commerce2(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct = Field(..., alias='defaultProduct')
@@ -2875,13 +2520,11 @@ class Commerce2(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Marketing(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Au(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce2
@@ -2889,23 +2532,18 @@ class Au(BaseModel):
     marketing: Marketing
 
 class Bd(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class Bn(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class Bt(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class Bu(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class Commerce3(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     license_plate_sign_up_url: str = Field(..., alias='licensePlateSignUpURL')
     payment_methods: list[str] = Field(..., alias='paymentMethods')
     show_commerce_flex_account_offer: bool = Field(..., alias='showCommerceFlexAccountOffer')
@@ -2917,18 +2555,15 @@ class Commerce3(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class FeatureConfig(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     enable_cmp: bool = Field(..., alias='enableCMP')
 
 class Marketing1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     enable_parent_country_languages: bool = Field(..., alias='enableParentCountryLanguages')
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Cc(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     parent_country: str = Field(..., alias='parentCountry')
     group: str
@@ -2937,7 +2572,6 @@ class Cc(BaseModel):
     marketing: Marketing1
 
 class Commerce4(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     license_plate_sign_up_url: str = Field(..., alias='licensePlateSignUpURL')
     promotional_offers: dict[str, Any] = Field(..., alias='promotionalOffers')
@@ -2950,7 +2584,6 @@ class Commerce4(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Ck(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     parent_country: str = Field(..., alias='parentCountry')
     group: str
@@ -2959,22 +2592,18 @@ class Ck(BaseModel):
     marketing: Marketing1
 
 class Cn(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class Fj(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class DefaultProduct1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce5(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct1 = Field(..., alias='defaultProduct')
@@ -2991,18 +2620,15 @@ class Commerce5(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class FeatureConfig2(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     display_rights_reserved_year: bool = Field(..., alias='displayRightsReservedYear')
     enable_cmp: bool = Field(..., alias='enableCMP')
 
 class Marketing3(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Hk(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce5
@@ -3010,27 +2636,22 @@ class Hk(BaseModel):
     marketing: Marketing3
 
 class Hm(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class Id(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
     marketing: Marketing3
 
 class In(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class DefaultProduct2(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce6(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct2 = Field(..., alias='defaultProduct')
@@ -3046,7 +2667,6 @@ class Commerce6(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Jp(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce6
@@ -3054,22 +2674,18 @@ class Jp(BaseModel):
     marketing: Marketing3
 
 class Kh(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class Ki(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class DefaultProduct3(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce7(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     card_options: list[str] = Field(..., alias='cardOptions')
     card_options_popover_enabled: bool = Field(..., alias='cardOptionsPopoverEnabled')
     default_product: DefaultProduct3 = Field(..., alias='defaultProduct')
@@ -3085,13 +2701,11 @@ class Commerce7(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class FeatureConfig4(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     display_rights_reserved_year: bool = Field(..., alias='displayRightsReservedYear')
     enable_age_verification: bool = Field(..., alias='enableAgeVerification')
     enable_cmp: bool = Field(..., alias='enableCMP')
 
 class Kr(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce7
@@ -3099,32 +2713,25 @@ class Kr(BaseModel):
     marketing: Marketing3
 
 class La(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class Lk(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class Mm(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class Mo(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class Mv(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class My(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
     marketing: Marketing3
 
 class Commerce8(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     license_plate_sign_up_url: str = Field(..., alias='licensePlateSignUpURL')
     show_commerce_flex_account_offer: bool = Field(..., alias='showCommerceFlexAccountOffer')
@@ -3136,18 +2743,15 @@ class Commerce8(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class FeatureConfig5(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     enable_cmp: bool = Field(..., alias='enableCMP')
 
 class Marketing8(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     enable_parent_country_languages: bool = Field(..., alias='enableParentCountryLanguages')
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Nf(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     parent_country: str = Field(..., alias='parentCountry')
     group: str
@@ -3156,15 +2760,12 @@ class Nf(BaseModel):
     marketing: Marketing8
 
 class Np(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class Nr(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class Commerce9(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     license_plate_sign_up_url: str = Field(..., alias='licensePlateSignUpURL')
     show_commerce_flex_account_offer: bool = Field(..., alias='showCommerceFlexAccountOffer')
@@ -3176,7 +2777,6 @@ class Commerce9(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Nu4(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     parent_country: str = Field(..., alias='parentCountry')
     group: str
@@ -3185,20 +2785,17 @@ class Nu4(BaseModel):
     marketing: Marketing8
 
 class Nu5(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     campaign_code: str = Field(..., alias='campaignCode')
     sku_list: list[str] = Field(..., alias='skuList')
     voucher_code: str = Field(..., alias='voucherCode')
 
 class DefaultProduct4(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce10(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct4 = Field(..., alias='defaultProduct')
@@ -3216,13 +2813,11 @@ class Commerce10(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Marketing10(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Nz(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce10
@@ -3230,31 +2825,25 @@ class Nz(BaseModel):
     marketing: Marketing10
 
 class Pg(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class Ph(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
     marketing: Marketing10
 
 class Pk(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class Sb(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class DefaultProduct5(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce11(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct5 = Field(..., alias='defaultProduct')
@@ -3270,11 +2859,9 @@ class Commerce11(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class FeatureConfig7(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     display_rights_reserved_year: bool = Field(..., alias='displayRightsReservedYear')
 
 class Sg(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce11
@@ -3282,12 +2869,10 @@ class Sg(BaseModel):
     marketing: Marketing10
 
 class Th(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
     marketing: Marketing10
 
 class Commerce12(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     license_plate_sign_up_url: str = Field(..., alias='licensePlateSignUpURL')
     payment_methods: list[str] = Field(..., alias='paymentMethods')
     promotional_offers: dict[str, Any] = Field(..., alias='promotionalOffers')
@@ -3300,18 +2885,15 @@ class Commerce12(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class FeatureConfig8(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     enable_cmp: bool = Field(..., alias='enableCMP')
 
 class Marketing14(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     enable_parent_country_languages: bool = Field(..., alias='enableParentCountryLanguages')
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Tk(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     parent_country: str = Field(..., alias='parentCountry')
     group: str
@@ -3320,30 +2902,24 @@ class Tk(BaseModel):
     marketing: Marketing14
 
 class Tl(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class To(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class Tp(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class Tv(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class DefaultProduct6(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce13(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct6 = Field(..., alias='defaultProduct')
@@ -3360,18 +2936,15 @@ class Commerce13(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class FeatureConfig9(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     display_rights_reserved_year: bool = Field(..., alias='displayRightsReservedYear')
     enable_cmp: bool = Field(..., alias='enableCMP')
 
 class Marketing15(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Tw(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce13
@@ -3379,26 +2952,21 @@ class Tw(BaseModel):
     marketing: Marketing15
 
 class Vn(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class Vu(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class Ws(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class DefaultProduct7(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce14(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct7 = Field(..., alias='defaultProduct')
@@ -3416,11 +2984,9 @@ class Commerce14(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class FeatureConfig10(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     enable_cmp: bool = Field(..., alias='enableCMP')
 
 class Ad(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce14
@@ -3428,13 +2994,11 @@ class Ad(BaseModel):
     marketing: Marketing15
 
 class Ae(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
     feature_config: FeatureConfig10 = Field(..., alias='featureConfig')
     marketing: Marketing15
 
 class Commerce15(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     license_plate_sign_up_url: str = Field(..., alias='licensePlateSignUpURL')
     paypal_client_id: str = Field(..., alias='paypalClientId')
@@ -3449,7 +3013,6 @@ class Commerce15(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Ai(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     parent_country: str = Field(..., alias='parentCountry')
     group: str
@@ -3458,14 +3021,12 @@ class Ai(BaseModel):
     marketing: Marketing15
 
 class DefaultProduct8(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce16(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct8 = Field(..., alias='defaultProduct')
@@ -3482,7 +3043,6 @@ class Commerce16(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Al(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce16
@@ -3490,25 +3050,20 @@ class Al(BaseModel):
     marketing: Marketing15
 
 class Am(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class An(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class Ao(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class Portability(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     campaign_code: str = Field(..., alias='campaignCode')
     sku_list: list[str] = Field(..., alias='skuList')
     voucher_code: str = Field(..., alias='voucherCode')
 
 class DefaultProduct9(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -3516,7 +3071,6 @@ class DefaultProduct9(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce17(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct9 = Field(..., alias='defaultProduct')
@@ -3536,7 +3090,6 @@ class Commerce17(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class At(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce17
@@ -3544,7 +3097,6 @@ class At(BaseModel):
     marketing: Marketing15
 
 class Commerce18(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     license_plate_sign_up_url: str = Field(..., alias='licensePlateSignUpURL')
     payment_methods: list[str] = Field(..., alias='paymentMethods')
@@ -3561,7 +3113,6 @@ class Commerce18(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Aw(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     parent_country: str = Field(..., alias='parentCountry')
     group: str
@@ -3570,7 +3121,6 @@ class Aw(BaseModel):
     marketing: Marketing15
 
 class Commerce19(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     license_plate_sign_up_url: str = Field(..., alias='licensePlateSignUpURL')
     payment_methods: list[str] = Field(..., alias='paymentMethods')
     show_commerce_tiara: bool = Field(..., alias='showCommerceTiara')
@@ -3579,14 +3129,12 @@ class Commerce19(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Marketing22(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     enable_parent_country_languages: bool = Field(..., alias='enableParentCountryLanguages')
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Ax(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     parent_country: str = Field(..., alias='parentCountry')
     group: str
@@ -3595,14 +3143,12 @@ class Ax(BaseModel):
     marketing: Marketing22
 
 class DefaultProduct10(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce20(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct10 = Field(..., alias='defaultProduct')
     license_plate_sign_up_url: str = Field(..., alias='licensePlateSignUpURL')
@@ -3618,13 +3164,11 @@ class Commerce20(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Marketing23(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Ba(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce20
@@ -3632,7 +3176,6 @@ class Ba(BaseModel):
     marketing: Marketing23
 
 class DefaultProduct11(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -3640,7 +3183,6 @@ class DefaultProduct11(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce21(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct11 = Field(..., alias='defaultProduct')
@@ -3659,7 +3201,6 @@ class Commerce21(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Be(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce21
@@ -3667,11 +3208,9 @@ class Be(BaseModel):
     marketing: Marketing23
 
 class Bf(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class DefaultProduct12(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -3679,7 +3218,6 @@ class DefaultProduct12(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce22(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     local_price_enabled: bool = Field(..., alias='localPriceEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
@@ -3698,12 +3236,10 @@ class Commerce22(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class FeatureConfig19(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     enable_cmp: bool = Field(..., alias='enableCMP')
     cmp_enable_browser_lang: bool = Field(..., alias='cmpEnableBrowserLang')
 
 class Bg(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce22
@@ -3711,20 +3247,16 @@ class Bg(BaseModel):
     marketing: Marketing23
 
 class Bh(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
     marketing: Marketing23
 
 class Bi(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class Bj(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class Commerce23(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     special_offer_enabled: bool = Field(..., alias='specialOfferEnabled')
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
@@ -3737,18 +3269,15 @@ class Commerce23(BaseModel):
     show_commerce_unified_cancel_flow: bool = Field(..., alias='showCommerceUnifiedCancelFlow')
 
 class FeatureConfig20(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     enable_cmp: bool = Field(..., alias='enableCMP')
 
 class Marketing27(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     enable_parent_country_languages: bool = Field(..., alias='enableParentCountryLanguages')
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Bl(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     parent_country: str = Field(..., alias='parentCountry')
     group: str
@@ -3757,7 +3286,6 @@ class Bl(BaseModel):
     marketing: Marketing27
 
 class Commerce24(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     license_plate_sign_up_url: str = Field(..., alias='licensePlateSignUpURL')
     paypal_client_id: str = Field(..., alias='paypalClientId')
@@ -3772,13 +3300,11 @@ class Commerce24(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Marketing28(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Bm(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     parent_country: str = Field(..., alias='parentCountry')
     group: str
@@ -3787,7 +3313,6 @@ class Bm(BaseModel):
     marketing: Marketing28
 
 class Commerce25(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     license_plate_sign_up_url: str = Field(..., alias='licensePlateSignUpURL')
     payment_methods: list[str] = Field(..., alias='paymentMethods')
@@ -3802,7 +3327,6 @@ class Commerce25(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Bq(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     parent_country: str = Field(..., alias='parentCountry')
     group: str
@@ -3811,28 +3335,22 @@ class Bq(BaseModel):
     marketing: Marketing28
 
 class Bv(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
     feature_config: FeatureConfig20 = Field(..., alias='featureConfig')
 
 class Bw(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class Cd(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class Cf(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class Cq(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class DefaultProduct13(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -3840,7 +3358,6 @@ class DefaultProduct13(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce26(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct13 = Field(..., alias='defaultProduct')
@@ -3858,7 +3375,6 @@ class Commerce26(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Ch(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce26
@@ -3866,25 +3382,20 @@ class Ch(BaseModel):
     marketing: Marketing28
 
 class Ci(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class Cm(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class Cs(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     feature_config: FeatureConfig20 = Field(..., alias='featureConfig')
 
 class Cv(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class Commerce27(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     license_plate_sign_up_url: str = Field(..., alias='licensePlateSignUpURL')
     payment_methods: list[str] = Field(..., alias='paymentMethods')
@@ -3899,7 +3410,6 @@ class Commerce27(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Cw(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     parent_country: str = Field(..., alias='parentCountry')
     group: str
@@ -3908,7 +3418,6 @@ class Cw(BaseModel):
     marketing: Marketing28
 
 class Commerce28(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     license_plate_sign_up_url: str = Field(..., alias='licensePlateSignUpURL')
     payment_methods: list[str] = Field(..., alias='paymentMethods')
     show_commerce_flex_account_offer: bool = Field(..., alias='showCommerceFlexAccountOffer')
@@ -3920,14 +3429,12 @@ class Commerce28(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Marketing32(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     enable_parent_country_languages: bool = Field(..., alias='enableParentCountryLanguages')
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Cx(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     parent_country: str = Field(..., alias='parentCountry')
     group: str
@@ -3936,13 +3443,11 @@ class Cx(BaseModel):
     marketing: Marketing32
 
 class Cy(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     feature_config: FeatureConfig20 = Field(..., alias='featureConfig')
 
 class DefaultProduct14(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -3950,7 +3455,6 @@ class DefaultProduct14(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce29(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct14 = Field(..., alias='defaultProduct')
@@ -3968,13 +3472,11 @@ class Commerce29(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Marketing33(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Cz(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce29
@@ -3982,7 +3484,6 @@ class Cz(BaseModel):
     marketing: Marketing33
 
 class DefaultProduct15(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -3990,13 +3491,11 @@ class DefaultProduct15(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class RegulatedCancelFlow(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     cancel_footer_nav_to_sub_details: bool = Field(..., alias='cancelFooterNavToSubDetails')
     hide_cancel_footer_when_unauth: bool = Field(..., alias='hideCancelFooterWhenUnauth')
     show_regulated_cancellation_flow: bool = Field(..., alias='showRegulatedCancellationFlow')
 
 class Commerce30(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     annual_auto_downgrade: bool = Field(..., alias='annualAutoDowngrade')
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
@@ -4019,7 +3518,6 @@ class Commerce30(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class De(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce30
@@ -4027,11 +3525,9 @@ class De(BaseModel):
     marketing: Marketing33
 
 class Dj(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class DefaultProduct16(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -4039,7 +3535,6 @@ class DefaultProduct16(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce31(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct16 = Field(..., alias='defaultProduct')
@@ -4058,7 +3553,6 @@ class Commerce31(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Dk(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce31
@@ -4066,12 +3560,10 @@ class Dk(BaseModel):
     marketing: Marketing33
 
 class Dz(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
     marketing: Marketing33
 
 class DefaultProduct17(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -4079,7 +3571,6 @@ class DefaultProduct17(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce32(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct17 = Field(..., alias='defaultProduct')
@@ -4097,12 +3588,10 @@ class Commerce32(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class FeatureConfig32(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     enable_cmp: bool = Field(..., alias='enableCMP')
     cmp_enable_browser_lang: bool = Field(..., alias='cmpEnableBrowserLang')
 
 class Ee(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce32
@@ -4110,25 +3599,20 @@ class Ee(BaseModel):
     marketing: Marketing33
 
 class FeatureConfig33(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     enable_cmp: bool = Field(..., alias='enableCMP')
 
 class Eg(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
     feature_config: FeatureConfig33 = Field(..., alias='featureConfig')
     marketing: Marketing33
 
 class Eh(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class Er(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class DefaultProduct18(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -4136,7 +3620,6 @@ class DefaultProduct18(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce33(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct18 = Field(..., alias='defaultProduct')
@@ -4156,7 +3639,6 @@ class Commerce33(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Es(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce33
@@ -4164,11 +3646,9 @@ class Es(BaseModel):
     marketing: Marketing33
 
 class Et(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class DefaultProduct19(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -4176,7 +3656,6 @@ class DefaultProduct19(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce34(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct19 = Field(..., alias='defaultProduct')
@@ -4196,7 +3675,6 @@ class Commerce34(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Fi(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce34
@@ -4204,7 +3682,6 @@ class Fi(BaseModel):
     marketing: Marketing33
 
 class Commerce35(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     license_plate_sign_up_url: str = Field(..., alias='licensePlateSignUpURL')
     paypal_client_id: str = Field(..., alias='paypalClientId')
@@ -4219,7 +3696,6 @@ class Commerce35(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Fk(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     parent_country: str = Field(..., alias='parentCountry')
     group: str
@@ -4228,7 +3704,6 @@ class Fk(BaseModel):
     marketing: Marketing33
 
 class Commerce36(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     special_offer_enabled: bool = Field(..., alias='specialOfferEnabled')
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
@@ -4241,14 +3716,12 @@ class Commerce36(BaseModel):
     show_commerce_unified_cancel_flow: bool = Field(..., alias='showCommerceUnifiedCancelFlow')
 
 class Marketing42(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     enable_parent_country_languages: bool = Field(..., alias='enableParentCountryLanguages')
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Fo(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     parent_country: str = Field(..., alias='parentCountry')
     group: str
@@ -4257,7 +3730,6 @@ class Fo(BaseModel):
     marketing: Marketing42
 
 class DefaultProduct20(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -4265,7 +3737,6 @@ class DefaultProduct20(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce37(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct20 = Field(..., alias='defaultProduct')
@@ -4288,13 +3759,11 @@ class Commerce37(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Marketing43(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Fr(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce37
@@ -4302,22 +3771,18 @@ class Fr(BaseModel):
     marketing: Marketing43
 
 class Fx(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class Ga(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class DefaultProduct21(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce38(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct21 = Field(..., alias='defaultProduct')
@@ -4335,7 +3800,6 @@ class Commerce38(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Gb(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce38
@@ -4343,7 +3807,6 @@ class Gb(BaseModel):
     marketing: Marketing43
 
 class Commerce39(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     show3_ds_flow: bool = Field(..., alias='show3DSFlow')
     special_offer_enabled: bool = Field(..., alias='specialOfferEnabled')
@@ -4357,14 +3820,12 @@ class Commerce39(BaseModel):
     show_commerce_unified_cancel_flow: bool = Field(..., alias='showCommerceUnifiedCancelFlow')
 
 class Marketing45(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     enable_parent_country_languages: bool = Field(..., alias='enableParentCountryLanguages')
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Gf(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     parent_country: str = Field(..., alias='parentCountry')
     group: str
@@ -4373,7 +3834,6 @@ class Gf(BaseModel):
     marketing: Marketing45
 
 class Commerce40(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     show3_ds_flow: bool = Field(..., alias='show3DSFlow')
     special_offer_enabled: bool = Field(..., alias='specialOfferEnabled')
@@ -4386,7 +3846,6 @@ class Commerce40(BaseModel):
     show_commerce_unified_cancel_flow: bool = Field(..., alias='showCommerceUnifiedCancelFlow')
 
 class Gg(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     parent_country: str = Field(..., alias='parentCountry')
     group: str
     commerce: Commerce40
@@ -4394,11 +3853,9 @@ class Gg(BaseModel):
     marketing: Marketing45
 
 class Gh(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class Commerce41(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     special_offer_enabled: bool = Field(..., alias='specialOfferEnabled')
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
@@ -4410,7 +3867,6 @@ class Commerce41(BaseModel):
     show_commerce_unified_cancel_flow: bool = Field(..., alias='showCommerceUnifiedCancelFlow')
 
 class Gi(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     parent_country: str = Field(..., alias='parentCountry')
     group: str
@@ -4419,14 +3875,12 @@ class Gi(BaseModel):
     marketing: Marketing45
 
 class DefaultProduct22(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce42(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     default_product: DefaultProduct22 = Field(..., alias='defaultProduct')
     show3_ds_flow: bool = Field(..., alias='show3DSFlow')
     special_offer_enabled: bool = Field(..., alias='specialOfferEnabled')
@@ -4440,13 +3894,11 @@ class Commerce42(BaseModel):
     show_commerce_unified_cancel_flow: bool = Field(..., alias='showCommerceUnifiedCancelFlow')
 
 class Marketing48(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Gl(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     parent_country: str = Field(..., alias='parentCountry')
     group: str
@@ -4455,15 +3907,12 @@ class Gl(BaseModel):
     marketing: Marketing48
 
 class Gm(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class Gn(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class Commerce43(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     show3_ds_flow: bool = Field(..., alias='show3DSFlow')
     special_offer_enabled: bool = Field(..., alias='specialOfferEnabled')
@@ -4477,14 +3926,12 @@ class Commerce43(BaseModel):
     show_commerce_unified_cancel_flow: bool = Field(..., alias='showCommerceUnifiedCancelFlow')
 
 class Marketing49(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     enable_parent_country_languages: bool = Field(..., alias='enableParentCountryLanguages')
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Gp(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     parent_country: str = Field(..., alias='parentCountry')
     group: str
@@ -4493,11 +3940,9 @@ class Gp(BaseModel):
     marketing: Marketing49
 
 class Gq(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class DefaultProduct23(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -4505,7 +3950,6 @@ class DefaultProduct23(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce44(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct23 = Field(..., alias='defaultProduct')
@@ -4523,13 +3967,11 @@ class Commerce44(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Marketing50(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Gr(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce44
@@ -4537,7 +3979,6 @@ class Gr(BaseModel):
     marketing: Marketing50
 
 class Commerce45(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     license_plate_sign_up_url: str = Field(..., alias='licensePlateSignUpURL')
     requires_legal_entity: bool = Field(..., alias='requiresLegalEntity')
@@ -4551,7 +3992,6 @@ class Commerce45(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Gs(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     parent_country: str = Field(..., alias='parentCountry')
     group: str
@@ -4560,11 +4000,9 @@ class Gs(BaseModel):
     marketing: Marketing50
 
 class Gw(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class DefaultProduct24(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -4572,7 +4010,6 @@ class DefaultProduct24(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce46(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct24 = Field(..., alias='defaultProduct')
@@ -4590,12 +4027,10 @@ class Commerce46(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class FeatureConfig47(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     enable_cmp: bool = Field(..., alias='enableCMP')
     cmp_enable_browser_lang: bool = Field(..., alias='cmpEnableBrowserLang')
 
 class Hr(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce46
@@ -4603,7 +4038,6 @@ class Hr(BaseModel):
     marketing: Marketing50
 
 class DefaultProduct25(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -4611,7 +4045,6 @@ class DefaultProduct25(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce47(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct25 = Field(..., alias='defaultProduct')
@@ -4629,11 +4062,9 @@ class Commerce47(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class FeatureConfig48(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     enable_cmp: bool = Field(..., alias='enableCMP')
 
 class Hu(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce47
@@ -4641,7 +4072,6 @@ class Hu(BaseModel):
     marketing: Marketing50
 
 class DefaultProduct26(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -4649,7 +4079,6 @@ class DefaultProduct26(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce48(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct26 = Field(..., alias='defaultProduct')
@@ -4668,7 +4097,6 @@ class Commerce48(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Ie(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce48
@@ -4676,12 +4104,10 @@ class Ie(BaseModel):
     marketing: Marketing50
 
 class Il(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
     marketing: Marketing50
 
 class Commerce49(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     show3_ds_flow: bool = Field(..., alias='show3DSFlow')
     special_offer_enabled: bool = Field(..., alias='specialOfferEnabled')
@@ -4694,14 +4120,12 @@ class Commerce49(BaseModel):
     show_commerce_unified_cancel_flow: bool = Field(..., alias='showCommerceUnifiedCancelFlow')
 
 class Marketing56(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     enable_parent_country_languages: bool = Field(..., alias='enableParentCountryLanguages')
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Im(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     parent_country: str = Field(..., alias='parentCountry')
     group: str
     commerce: Commerce49
@@ -4709,7 +4133,6 @@ class Im(BaseModel):
     marketing: Marketing56
 
 class Commerce50(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     payment_methods: list[str] = Field(..., alias='paymentMethods')
     special_offer_enabled: bool = Field(..., alias='specialOfferEnabled')
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
@@ -4721,7 +4144,6 @@ class Commerce50(BaseModel):
     show_commerce_unified_cancel_flow: bool = Field(..., alias='showCommerceUnifiedCancelFlow')
 
 class Io(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     parent_country: str = Field(..., alias='parentCountry')
     group: str
@@ -4730,22 +4152,18 @@ class Io(BaseModel):
     marketing: Marketing56
 
 class Marketing58(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Iq(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
     marketing: Marketing58
 
 class Ir(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class DefaultProduct27(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -4753,7 +4171,6 @@ class DefaultProduct27(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce51(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct27 = Field(..., alias='defaultProduct')
@@ -4772,7 +4189,6 @@ class Commerce51(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Is(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce51
@@ -4780,7 +4196,6 @@ class Is(BaseModel):
     marketing: Marketing58
 
 class DefaultProduct28(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -4788,7 +4203,6 @@ class DefaultProduct28(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce52(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct28 = Field(..., alias='defaultProduct')
@@ -4808,7 +4222,6 @@ class Commerce52(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class It(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce52
@@ -4816,7 +4229,6 @@ class It(BaseModel):
     marketing: Marketing58
 
 class Commerce53(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     show3_ds_flow: bool = Field(..., alias='show3DSFlow')
     special_offer_enabled: bool = Field(..., alias='specialOfferEnabled')
@@ -4829,14 +4241,12 @@ class Commerce53(BaseModel):
     show_commerce_unified_cancel_flow: bool = Field(..., alias='showCommerceUnifiedCancelFlow')
 
 class Marketing61(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     enable_parent_country_languages: bool = Field(..., alias='enableParentCountryLanguages')
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Je(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     parent_country: str = Field(..., alias='parentCountry')
     group: str
     commerce: Commerce53
@@ -4844,32 +4254,26 @@ class Je(BaseModel):
     marketing: Marketing61
 
 class Marketing62(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Jo(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
     marketing: Marketing62
 
 class Ke(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class Km(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class Kw(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
     feature_config: FeatureConfig48 = Field(..., alias='featureConfig')
     marketing: Marketing62
 
 class Commerce54(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     license_plate_sign_up_url: str = Field(..., alias='licensePlateSignUpURL')
     paypal_client_id: str = Field(..., alias='paypalClientId')
@@ -4884,7 +4288,6 @@ class Commerce54(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Ky(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     parent_country: str = Field(..., alias='parentCountry')
     group: str
@@ -4893,12 +4296,10 @@ class Ky(BaseModel):
     marketing: Marketing62
 
 class Lb(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
     marketing: Marketing62
 
 class DefaultProduct29(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -4906,7 +4307,6 @@ class DefaultProduct29(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce55(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct29 = Field(..., alias='defaultProduct')
@@ -4924,7 +4324,6 @@ class Commerce55(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Li(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce55
@@ -4932,15 +4331,12 @@ class Li(BaseModel):
     marketing: Marketing62
 
 class Lr(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class Ls(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class DefaultProduct30(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -4948,7 +4344,6 @@ class DefaultProduct30(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce56(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct30 = Field(..., alias='defaultProduct')
@@ -4966,12 +4361,10 @@ class Commerce56(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class FeatureConfig58(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     enable_cmp: bool = Field(..., alias='enableCMP')
     cmp_enable_browser_lang: bool = Field(..., alias='cmpEnableBrowserLang')
 
 class Lt(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce56
@@ -4979,7 +4372,6 @@ class Lt(BaseModel):
     marketing: Marketing62
 
 class DefaultProduct31(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -4987,7 +4379,6 @@ class DefaultProduct31(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce57(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct31 = Field(..., alias='defaultProduct')
@@ -5006,11 +4397,9 @@ class Commerce57(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class FeatureConfig59(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     enable_cmp: bool = Field(..., alias='enableCMP')
 
 class Lu(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce57
@@ -5018,7 +4407,6 @@ class Lu(BaseModel):
     marketing: Marketing62
 
 class DefaultProduct32(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -5026,7 +4414,6 @@ class DefaultProduct32(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce58(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct32 = Field(..., alias='defaultProduct')
@@ -5044,12 +4431,10 @@ class Commerce58(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class FeatureConfig60(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     enable_cmp: bool = Field(..., alias='enableCMP')
     cmp_enable_browser_lang: bool = Field(..., alias='cmpEnableBrowserLang')
 
 class Lv(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce58
@@ -5057,16 +4442,13 @@ class Lv(BaseModel):
     marketing: Marketing62
 
 class Ly(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class Ma(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
     marketing: Marketing62
 
 class DefaultProduct33(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -5074,7 +4456,6 @@ class DefaultProduct33(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce59(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     default_product: DefaultProduct33 = Field(..., alias='defaultProduct')
     paypal_client_id: str = Field(..., alias='paypalClientId')
@@ -5090,18 +4471,15 @@ class Commerce59(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class FeatureConfig61(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     enable_cmp: bool = Field(..., alias='enableCMP')
 
 class Marketing71(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     enable_parent_country_languages: bool = Field(..., alias='enableParentCountryLanguages')
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Mc(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     parent_country: str = Field(..., alias='parentCountry')
     group: str
@@ -5110,18 +4488,15 @@ class Mc(BaseModel):
     marketing: Marketing71
 
 class Md(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class DefaultProduct34(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce60(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct34 = Field(..., alias='defaultProduct')
@@ -5138,13 +4513,11 @@ class Commerce60(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Marketing72(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Me(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce60
@@ -5152,7 +4525,6 @@ class Me(BaseModel):
     marketing: Marketing72
 
 class Commerce61(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     show3_ds_flow: bool = Field(..., alias='show3DSFlow')
     special_offer_enabled: bool = Field(..., alias='specialOfferEnabled')
@@ -5166,14 +4538,12 @@ class Commerce61(BaseModel):
     show_commerce_unified_cancel_flow: bool = Field(..., alias='showCommerceUnifiedCancelFlow')
 
 class Marketing73(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     enable_parent_country_languages: bool = Field(..., alias='enableParentCountryLanguages')
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Mf(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     parent_country: str = Field(..., alias='parentCountry')
     group: str
@@ -5182,11 +4552,9 @@ class Mf(BaseModel):
     marketing: Marketing73
 
 class Mg(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class Commerce62(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     show_commerce_unified_signup_flow: bool = Field(..., alias='showCommerceUnifiedSignupFlow')
@@ -5197,13 +4565,11 @@ class Commerce62(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Marketing74(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Mh(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     parent_country: str = Field(..., alias='parentCountry')
     group: str
@@ -5212,14 +4578,12 @@ class Mh(BaseModel):
     marketing: Marketing74
 
 class DefaultProduct35(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce63(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct35 = Field(..., alias='defaultProduct')
@@ -5236,7 +4600,6 @@ class Commerce63(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Mk(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce63
@@ -5244,11 +4607,9 @@ class Mk(BaseModel):
     marketing: Marketing74
 
 class Ml(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class Commerce64(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     show3_ds_flow: bool = Field(..., alias='show3DSFlow')
     special_offer_enabled: bool = Field(..., alias='specialOfferEnabled')
@@ -5262,14 +4623,12 @@ class Commerce64(BaseModel):
     show_commerce_unified_cancel_flow: bool = Field(..., alias='showCommerceUnifiedCancelFlow')
 
 class Marketing76(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     enable_parent_country_languages: bool = Field(..., alias='enableParentCountryLanguages')
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Mq(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     parent_country: str = Field(..., alias='parentCountry')
     group: str
@@ -5278,11 +4637,9 @@ class Mq(BaseModel):
     marketing: Marketing76
 
 class Mr(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class Commerce65(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     license_plate_sign_up_url: str = Field(..., alias='licensePlateSignUpURL')
     paypal_client_id: str = Field(..., alias='paypalClientId')
@@ -5297,13 +4654,11 @@ class Commerce65(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Marketing77(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Ms(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     parent_country: str = Field(..., alias='parentCountry')
     group: str
@@ -5312,7 +4667,6 @@ class Ms(BaseModel):
     marketing: Marketing77
 
 class DefaultProduct36(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -5320,7 +4674,6 @@ class DefaultProduct36(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce66(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct36 = Field(..., alias='defaultProduct')
@@ -5338,7 +4691,6 @@ class Commerce66(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Mt(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce66
@@ -5346,14 +4698,12 @@ class Mt(BaseModel):
     marketing: Marketing77
 
 class DefaultProduct37(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce67(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct37 = Field(..., alias='defaultProduct')
@@ -5370,14 +4720,12 @@ class Commerce67(BaseModel):
     show_commerce_unified_cancel_flow: bool = Field(..., alias='showCommerceUnifiedCancelFlow')
 
 class Marketing79(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     enable_parent_country_languages: bool = Field(..., alias='enableParentCountryLanguages')
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Mu(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     parent_country: str = Field(..., alias='parentCountry')
     group: str
@@ -5386,19 +4734,15 @@ class Mu(BaseModel):
     marketing: Marketing79
 
 class Mw(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class Mz(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class Na(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class Commerce68(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     show3_ds_flow: bool = Field(..., alias='show3DSFlow')
     special_offer_enabled: bool = Field(..., alias='specialOfferEnabled')
@@ -5412,7 +4756,6 @@ class Commerce68(BaseModel):
     show_commerce_unified_cancel_flow: bool = Field(..., alias='showCommerceUnifiedCancelFlow')
 
 class Nc(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     parent_country: str = Field(..., alias='parentCountry')
     group: str
@@ -5421,15 +4764,12 @@ class Nc(BaseModel):
     marketing: Marketing79
 
 class Ne(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class Ng(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class DefaultProduct38(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -5437,12 +4777,10 @@ class DefaultProduct38(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class LocalPayment(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     bank_options: list[str] = Field(..., alias='bankOptions')
     client_key: str
 
 class Commerce69(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct38 = Field(..., alias='defaultProduct')
@@ -5462,13 +4800,11 @@ class Commerce69(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Marketing81(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Nl(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce69
@@ -5476,7 +4812,6 @@ class Nl(BaseModel):
     marketing: Marketing81
 
 class DefaultProduct39(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -5484,7 +4819,6 @@ class DefaultProduct39(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce70(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct39 = Field(..., alias='defaultProduct')
@@ -5503,7 +4837,6 @@ class Commerce70(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class No(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce70
@@ -5511,16 +4844,13 @@ class No(BaseModel):
     marketing: Marketing81
 
 class Nt(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class Om(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
     marketing: Marketing81
 
 class Commerce71(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     special_offer_enabled: bool = Field(..., alias='specialOfferEnabled')
@@ -5534,14 +4864,12 @@ class Commerce71(BaseModel):
     show_commerce_unified_cancel_flow: bool = Field(..., alias='showCommerceUnifiedCancelFlow')
 
 class Marketing84(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     enable_parent_country_languages: bool = Field(..., alias='enableParentCountryLanguages')
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Pf(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     parent_country: str = Field(..., alias='parentCountry')
     group: str
@@ -5550,7 +4878,6 @@ class Pf(BaseModel):
     marketing: Marketing84
 
 class DefaultProduct40(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -5558,7 +4885,6 @@ class DefaultProduct40(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce72(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     annual_auto_downgrade: bool = Field(..., alias='annualAutoDowngrade')
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
@@ -5577,13 +4903,11 @@ class Commerce72(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Marketing85(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Pl(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce72
@@ -5591,7 +4915,6 @@ class Pl(BaseModel):
     marketing: Marketing85
 
 class Commerce73(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     special_offer_enabled: bool = Field(..., alias='specialOfferEnabled')
@@ -5605,14 +4928,12 @@ class Commerce73(BaseModel):
     show_commerce_unified_cancel_flow: bool = Field(..., alias='showCommerceUnifiedCancelFlow')
 
 class Marketing86(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     enable_parent_country_languages: bool = Field(..., alias='enableParentCountryLanguages')
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Pm(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     parent_country: str = Field(..., alias='parentCountry')
     group: str
@@ -5621,7 +4942,6 @@ class Pm(BaseModel):
     marketing: Marketing86
 
 class Commerce74(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     special_offer_enabled: bool = Field(..., alias='specialOfferEnabled')
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
@@ -5633,7 +4953,6 @@ class Commerce74(BaseModel):
     show_commerce_unified_cancel_flow: bool = Field(..., alias='showCommerceUnifiedCancelFlow')
 
 class Pn(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     parent_country: str = Field(..., alias='parentCountry')
     group: str
@@ -5642,18 +4961,15 @@ class Pn(BaseModel):
     marketing: Marketing86
 
 class Marketing88(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Ps(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
     marketing: Marketing88
 
 class DefaultProduct41(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -5661,7 +4977,6 @@ class DefaultProduct41(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce75(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct41 = Field(..., alias='defaultProduct')
@@ -5681,7 +4996,6 @@ class Commerce75(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Pt(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce75
@@ -5689,12 +5003,10 @@ class Pt(BaseModel):
     marketing: Marketing88
 
 class Qa(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
     marketing: Marketing88
 
 class Commerce76(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     show3_ds_flow: bool = Field(..., alias='show3DSFlow')
@@ -5709,14 +5021,12 @@ class Commerce76(BaseModel):
     show_commerce_unified_cancel_flow: bool = Field(..., alias='showCommerceUnifiedCancelFlow')
 
 class Marketing91(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     enable_parent_country_languages: bool = Field(..., alias='enableParentCountryLanguages')
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Re(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     parent_country: str = Field(..., alias='parentCountry')
     group: str
@@ -5725,7 +5035,6 @@ class Re(BaseModel):
     marketing: Marketing91
 
 class DefaultProduct42(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -5733,7 +5042,6 @@ class DefaultProduct42(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce77(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct42 = Field(..., alias='defaultProduct')
@@ -5751,13 +5059,11 @@ class Commerce77(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Marketing92(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Ro(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce77
@@ -5765,14 +5071,12 @@ class Ro(BaseModel):
     marketing: Marketing92
 
 class DefaultProduct43(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce78(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct43 = Field(..., alias='defaultProduct')
     license_plate_sign_up_url: str = Field(..., alias='licensePlateSignUpURL')
@@ -5788,7 +5092,6 @@ class Commerce78(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Rs(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce78
@@ -5796,21 +5099,17 @@ class Rs(BaseModel):
     marketing: Marketing92
 
 class Rw(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class Sa(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
     feature_config: FeatureConfig61 = Field(..., alias='featureConfig')
     marketing: Marketing92
 
 class Sc(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class DefaultProduct44(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -5818,7 +5117,6 @@ class DefaultProduct44(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce79(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct44 = Field(..., alias='defaultProduct')
@@ -5837,7 +5135,6 @@ class Commerce79(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Se(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce79
@@ -5845,7 +5142,6 @@ class Se(BaseModel):
     marketing: Marketing92
 
 class Commerce80(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     special_offer_enabled: bool = Field(..., alias='specialOfferEnabled')
@@ -5858,14 +5154,12 @@ class Commerce80(BaseModel):
     show_commerce_unified_cancel_flow: bool = Field(..., alias='showCommerceUnifiedCancelFlow')
 
 class Marketing96(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     enable_parent_country_languages: bool = Field(..., alias='enableParentCountryLanguages')
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Sh(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     parent_country: str = Field(..., alias='parentCountry')
     group: str
@@ -5874,7 +5168,6 @@ class Sh(BaseModel):
     marketing: Marketing96
 
 class DefaultProduct45(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -5882,7 +5175,6 @@ class DefaultProduct45(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce81(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct45 = Field(..., alias='defaultProduct')
@@ -5900,18 +5192,15 @@ class Commerce81(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class FeatureConfig84(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     enable_cmp: bool = Field(..., alias='enableCMP')
     cmp_enable_browser_lang: bool = Field(..., alias='cmpEnableBrowserLang')
 
 class Marketing97(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Si(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce81
@@ -5919,7 +5208,6 @@ class Si(BaseModel):
     marketing: Marketing97
 
 class Commerce82(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     special_offer_enabled: bool = Field(..., alias='specialOfferEnabled')
@@ -5933,18 +5221,15 @@ class Commerce82(BaseModel):
     show_commerce_unified_cancel_flow: bool = Field(..., alias='showCommerceUnifiedCancelFlow')
 
 class FeatureConfig85(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     enable_cmp: bool = Field(..., alias='enableCMP')
 
 class Marketing98(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     enable_parent_country_languages: bool = Field(..., alias='enableParentCountryLanguages')
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Sj(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     parent_country: str = Field(..., alias='parentCountry')
     group: str
@@ -5953,7 +5238,6 @@ class Sj(BaseModel):
     marketing: Marketing98
 
 class DefaultProduct46(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -5961,7 +5245,6 @@ class DefaultProduct46(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce83(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct46 = Field(..., alias='defaultProduct')
@@ -5979,13 +5262,11 @@ class Commerce83(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Marketing99(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Sk(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce83
@@ -5993,18 +5274,15 @@ class Sk(BaseModel):
     marketing: Marketing99
 
 class Sl(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class DefaultProduct47(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce84(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct47 = Field(..., alias='defaultProduct')
@@ -6022,14 +5300,12 @@ class Commerce84(BaseModel):
     show_commerce_unified_cancel_flow: bool = Field(..., alias='showCommerceUnifiedCancelFlow')
 
 class Marketing100(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     enable_parent_country_languages: bool = Field(..., alias='enableParentCountryLanguages')
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Sm(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     parent_country: str = Field(..., alias='parentCountry')
     group: str
@@ -6038,23 +5314,18 @@ class Sm(BaseModel):
     marketing: Marketing100
 
 class Sn(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class So(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class Ss(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class St(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class Commerce85(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     license_plate_sign_up_url: str = Field(..., alias='licensePlateSignUpURL')
@@ -6069,13 +5340,11 @@ class Commerce85(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Marketing101(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Sx(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     parent_country: str = Field(..., alias='parentCountry')
     group: str
@@ -6084,15 +5353,12 @@ class Sx(BaseModel):
     marketing: Marketing101
 
 class Sy(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class Sz(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class Commerce86(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     license_plate_sign_up_url: str = Field(..., alias='licensePlateSignUpURL')
     paypal_client_id: str = Field(..., alias='paypalClientId')
@@ -6107,7 +5373,6 @@ class Commerce86(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Tc(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     parent_country: str = Field(..., alias='parentCountry')
     group: str
@@ -6116,11 +5381,9 @@ class Tc(BaseModel):
     marketing: Marketing101
 
 class Td(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class Commerce87(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     card_options: list[str] = Field(..., alias='cardOptions')
     payment_methods: list[str] = Field(..., alias='paymentMethods')
     special_offer_enabled: bool = Field(..., alias='specialOfferEnabled')
@@ -6134,14 +5397,12 @@ class Commerce87(BaseModel):
     show_commerce_unified_cancel_flow: bool = Field(..., alias='showCommerceUnifiedCancelFlow')
 
 class Marketing103(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     enable_parent_country_languages: bool = Field(..., alias='enableParentCountryLanguages')
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Tf(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     parent_country: str = Field(..., alias='parentCountry')
     group: str
@@ -6150,29 +5411,24 @@ class Tf(BaseModel):
     marketing: Marketing103
 
 class Tg(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class Marketing104(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Tn(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
     marketing: Marketing104
 
 class DefaultProduct48(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce88(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct48 = Field(..., alias='defaultProduct')
     license_plate_sign_up_url: str = Field(..., alias='licensePlateSignUpURL')
@@ -6188,7 +5444,6 @@ class Commerce88(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Tr(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce88
@@ -6196,39 +5451,32 @@ class Tr(BaseModel):
     marketing: Marketing104
 
 class Tz(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class Ua(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class Ug(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class Marketing106(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     enable_parent_country_languages: bool = Field(..., alias='enableParentCountryLanguages')
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Uk(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
     feature_config: FeatureConfig85 = Field(..., alias='featureConfig')
     marketing: Marketing106
 
 class DefaultProduct49(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce89(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct49 = Field(..., alias='defaultProduct')
@@ -6246,7 +5494,6 @@ class Commerce89(BaseModel):
     show_commerce_unified_cancel_flow: bool = Field(..., alias='showCommerceUnifiedCancelFlow')
 
 class Va(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     parent_country: str = Field(..., alias='parentCountry')
     group: str
@@ -6255,7 +5502,6 @@ class Va(BaseModel):
     marketing: Marketing106
 
 class Commerce90(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     license_plate_sign_up_url: str = Field(..., alias='licensePlateSignUpURL')
     paypal_client_id: str = Field(..., alias='paypalClientId')
@@ -6270,13 +5516,11 @@ class Commerce90(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Marketing108(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Vg(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     parent_country: str = Field(..., alias='parentCountry')
     group: str
@@ -6285,7 +5529,6 @@ class Vg(BaseModel):
     marketing: Marketing108
 
 class Commerce91(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     show3_ds_flow: bool = Field(..., alias='show3DSFlow')
     special_offer_enabled: bool = Field(..., alias='specialOfferEnabled')
@@ -6299,14 +5542,12 @@ class Commerce91(BaseModel):
     show_commerce_unified_cancel_flow: bool = Field(..., alias='showCommerceUnifiedCancelFlow')
 
 class Marketing109(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     enable_parent_country_languages: bool = Field(..., alias='enableParentCountryLanguages')
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Wf(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     parent_country: str = Field(..., alias='parentCountry')
     group: str
@@ -6315,7 +5556,6 @@ class Wf(BaseModel):
     marketing: Marketing109
 
 class Commerce92(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     license_plate_sign_up_url: str = Field(..., alias='licensePlateSignUpURL')
     show_commerce_tiara: bool = Field(..., alias='showCommerceTiara')
     show_commerce_unified_signup_flow: bool = Field(..., alias='showCommerceUnifiedSignupFlow')
@@ -6323,18 +5563,15 @@ class Commerce92(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Xk(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce92
     feature_config: dict[str, Any] = Field(..., alias='featureConfig')
 
 class Ye(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class Commerce93(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     show3_ds_flow: bool = Field(..., alias='show3DSFlow')
@@ -6349,7 +5586,6 @@ class Commerce93(BaseModel):
     show_commerce_unified_cancel_flow: bool = Field(..., alias='showCommerceUnifiedCancelFlow')
 
 class Yt(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     parent_country: str = Field(..., alias='parentCountry')
     group: str
@@ -6358,41 +5594,33 @@ class Yt(BaseModel):
     marketing: Marketing109
 
 class Yu(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class Marketing111(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Za(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
     marketing: Marketing111
 
 class Zm(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class Zr(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class Zw(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
 
 class DefaultProduct50(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce94(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct50 = Field(..., alias='defaultProduct')
@@ -6411,7 +5639,6 @@ class Commerce94(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Ag(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce94
@@ -6419,18 +5646,15 @@ class Ag(BaseModel):
     marketing: Marketing111
 
 class CancelSubscriptionNavItemPromoted(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     cancel_subscription_nav_item_period: int = Field(..., alias='cancelSubscriptionNavItemPeriod')
 
 class DefaultProduct51(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce95(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     cancel_subscription_nav_item_promoted: CancelSubscriptionNavItemPromoted = Field(..., alias='cancelSubscriptionNavItemPromoted')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct51 = Field(..., alias='defaultProduct')
@@ -6452,7 +5676,6 @@ class Commerce95(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Ar(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce95
@@ -6460,14 +5683,12 @@ class Ar(BaseModel):
     marketing: Marketing111
 
 class DefaultProduct52(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce96(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct52 = Field(..., alias='defaultProduct')
@@ -6486,7 +5707,6 @@ class Commerce96(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Bb(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce96
@@ -6494,14 +5714,12 @@ class Bb(BaseModel):
     marketing: Marketing111
 
 class DefaultProduct53(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce97(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct53 = Field(..., alias='defaultProduct')
@@ -6521,7 +5739,6 @@ class Commerce97(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Bo(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce97
@@ -6529,14 +5746,12 @@ class Bo(BaseModel):
     marketing: Marketing111
 
 class DefaultProduct54(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce98(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct54 = Field(..., alias='defaultProduct')
@@ -6558,13 +5773,11 @@ class Commerce98(BaseModel):
     starz_play_supported_regions: bool = Field(..., alias='starzPlaySupportedRegions')
 
 class FeatureConfig101(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     display_additional_ratings: bool = Field(..., alias='displayAdditionalRatings')
     display_rating_advisories: bool = Field(..., alias='displayRatingAdvisories')
     enable_cmp: bool = Field(..., alias='enableCMP')
 
 class Br(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce98
@@ -6572,14 +5785,12 @@ class Br(BaseModel):
     marketing: Marketing111
 
 class DefaultProduct55(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce99(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct55 = Field(..., alias='defaultProduct')
@@ -6598,11 +5809,9 @@ class Commerce99(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class FeatureConfig102(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     enable_cmp: bool = Field(..., alias='enableCMP')
 
 class Bs(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce99
@@ -6610,14 +5819,12 @@ class Bs(BaseModel):
     marketing: Marketing111
 
 class DefaultProduct56(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce100(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct56 = Field(..., alias='defaultProduct')
@@ -6636,7 +5843,6 @@ class Commerce100(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Bz(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce100
@@ -6644,14 +5850,12 @@ class Bz(BaseModel):
     marketing: Marketing111
 
 class DefaultProduct57(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce101(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct57 = Field(..., alias='defaultProduct')
@@ -6672,7 +5876,6 @@ class Commerce101(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Cl(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce101
@@ -6680,14 +5883,12 @@ class Cl(BaseModel):
     marketing: Marketing111
 
 class DefaultProduct58(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce102(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct58 = Field(..., alias='defaultProduct')
     license_plate_sign_up_url: str = Field(..., alias='licensePlateSignUpURL')
@@ -6706,7 +5907,6 @@ class Commerce102(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Co(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce102
@@ -6714,14 +5914,12 @@ class Co(BaseModel):
     marketing: Marketing111
 
 class DefaultProduct59(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce103(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct59 = Field(..., alias='defaultProduct')
@@ -6741,7 +5939,6 @@ class Commerce103(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Cr(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce103
@@ -6749,14 +5946,12 @@ class Cr(BaseModel):
     marketing: Marketing111
 
 class DefaultProduct60(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce104(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct60 = Field(..., alias='defaultProduct')
@@ -6775,7 +5970,6 @@ class Commerce104(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Dm(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce104
@@ -6783,14 +5977,12 @@ class Dm(BaseModel):
     marketing: Marketing111
 
 class DefaultProduct61(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce105(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct61 = Field(..., alias='defaultProduct')
@@ -6810,7 +6002,6 @@ class Commerce105(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Do(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce105
@@ -6818,14 +6009,12 @@ class Do(BaseModel):
     marketing: Marketing111
 
 class DefaultProduct62(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce106(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct62 = Field(..., alias='defaultProduct')
@@ -6845,7 +6034,6 @@ class Commerce106(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Ec(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce106
@@ -6853,14 +6041,12 @@ class Ec(BaseModel):
     marketing: Marketing111
 
 class DefaultProduct63(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce107(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct63 = Field(..., alias='defaultProduct')
@@ -6879,7 +6065,6 @@ class Commerce107(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Gd(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce107
@@ -6887,14 +6072,12 @@ class Gd(BaseModel):
     marketing: Marketing111
 
 class DefaultProduct64(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce108(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct64 = Field(..., alias='defaultProduct')
@@ -6914,7 +6097,6 @@ class Commerce108(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Gt(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce108
@@ -6922,14 +6104,12 @@ class Gt(BaseModel):
     marketing: Marketing111
 
 class DefaultProduct65(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce109(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct65 = Field(..., alias='defaultProduct')
@@ -6948,7 +6128,6 @@ class Commerce109(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Gy(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce109
@@ -6956,14 +6135,12 @@ class Gy(BaseModel):
     marketing: Marketing111
 
 class DefaultProduct66(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce110(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct66 = Field(..., alias='defaultProduct')
@@ -6983,7 +6160,6 @@ class Commerce110(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Hn(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce110
@@ -6991,14 +6167,12 @@ class Hn(BaseModel):
     marketing: Marketing111
 
 class DefaultProduct67(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce111(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct67 = Field(..., alias='defaultProduct')
@@ -7016,7 +6190,6 @@ class Commerce111(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Ht(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce111
@@ -7024,14 +6197,12 @@ class Ht(BaseModel):
     marketing: Marketing111
 
 class DefaultProduct68(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce112(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct68 = Field(..., alias='defaultProduct')
@@ -7050,7 +6221,6 @@ class Commerce112(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Jm(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce112
@@ -7058,14 +6228,12 @@ class Jm(BaseModel):
     marketing: Marketing111
 
 class DefaultProduct69(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce113(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct69 = Field(..., alias='defaultProduct')
@@ -7084,7 +6252,6 @@ class Commerce113(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Kn(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce113
@@ -7092,14 +6259,12 @@ class Kn(BaseModel):
     marketing: Marketing111
 
 class DefaultProduct70(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce114(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct70 = Field(..., alias='defaultProduct')
@@ -7118,7 +6283,6 @@ class Commerce114(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Lc(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce114
@@ -7126,14 +6290,12 @@ class Lc(BaseModel):
     marketing: Marketing111
 
 class DefaultProduct71(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce115(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct71 = Field(..., alias='defaultProduct')
@@ -7155,7 +6317,6 @@ class Commerce115(BaseModel):
     starz_play_supported_regions: bool = Field(..., alias='starzPlaySupportedRegions')
 
 class Mx(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce115
@@ -7163,14 +6324,12 @@ class Mx(BaseModel):
     marketing: Marketing111
 
 class DefaultProduct72(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce116(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct72 = Field(..., alias='defaultProduct')
@@ -7190,7 +6349,6 @@ class Commerce116(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Ni(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce116
@@ -7198,14 +6356,12 @@ class Ni(BaseModel):
     marketing: Marketing111
 
 class DefaultProduct73(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce117(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct73 = Field(..., alias='defaultProduct')
@@ -7225,7 +6381,6 @@ class Commerce117(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Pa(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce117
@@ -7233,14 +6388,12 @@ class Pa(BaseModel):
     marketing: Marketing111
 
 class DefaultProduct74(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce118(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct74 = Field(..., alias='defaultProduct')
@@ -7261,7 +6414,6 @@ class Commerce118(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Pe(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce118
@@ -7269,14 +6421,12 @@ class Pe(BaseModel):
     marketing: Marketing111
 
 class DefaultProduct75(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce119(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct75 = Field(..., alias='defaultProduct')
@@ -7296,7 +6446,6 @@ class Commerce119(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Py(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce119
@@ -7304,14 +6453,12 @@ class Py(BaseModel):
     marketing: Marketing111
 
 class DefaultProduct76(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce120(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct76 = Field(..., alias='defaultProduct')
@@ -7330,7 +6477,6 @@ class Commerce120(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Sr(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce120
@@ -7338,14 +6484,12 @@ class Sr(BaseModel):
     marketing: Marketing111
 
 class DefaultProduct77(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce121(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct77 = Field(..., alias='defaultProduct')
@@ -7365,7 +6509,6 @@ class Commerce121(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Sv(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce121
@@ -7373,14 +6516,12 @@ class Sv(BaseModel):
     marketing: Marketing111
 
 class DefaultProduct78(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce122(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct78 = Field(..., alias='defaultProduct')
@@ -7399,7 +6540,6 @@ class Commerce122(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Tt(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce122
@@ -7407,14 +6547,12 @@ class Tt(BaseModel):
     marketing: Marketing111
 
 class DefaultProduct79(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce123(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct79 = Field(..., alias='defaultProduct')
@@ -7434,7 +6572,6 @@ class Commerce123(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Uy(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce123
@@ -7442,14 +6579,12 @@ class Uy(BaseModel):
     marketing: Marketing111
 
 class DefaultProduct80(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce124(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct80 = Field(..., alias='defaultProduct')
@@ -7468,7 +6603,6 @@ class Commerce124(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Vc(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce124
@@ -7476,14 +6610,12 @@ class Vc(BaseModel):
     marketing: Marketing111
 
 class DefaultProduct81(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce125(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct81 = Field(..., alias='defaultProduct')
@@ -7503,7 +6635,6 @@ class Commerce125(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Ve(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce125
@@ -7511,7 +6642,6 @@ class Ve(BaseModel):
     marketing: Marketing111
 
 class Commerce126(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     show_commerce_unified_signup_flow: bool = Field(..., alias='showCommerceUnifiedSignupFlow')
@@ -7521,14 +6651,12 @@ class Commerce126(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Marketing144(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     enable_parent_country_languages: bool = Field(..., alias='enableParentCountryLanguages')
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class As(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     parent_country: str = Field(..., alias='parentCountry')
     group: str
@@ -7537,14 +6665,12 @@ class As(BaseModel):
     marketing: Marketing144
 
 class DefaultProduct82(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce127(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct82 = Field(..., alias='defaultProduct')
@@ -7562,13 +6688,11 @@ class Commerce127(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Marketing145(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Ca(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce127
@@ -7576,7 +6700,6 @@ class Ca(BaseModel):
     marketing: Marketing145
 
 class Commerce128(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     show_commerce_unified_signup_flow: bool = Field(..., alias='showCommerceUnifiedSignupFlow')
@@ -7586,14 +6709,12 @@ class Commerce128(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Marketing146(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     enable_parent_country_languages: bool = Field(..., alias='enableParentCountryLanguages')
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Gu(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     parent_country: str = Field(..., alias='parentCountry')
     group: str
@@ -7602,7 +6723,6 @@ class Gu(BaseModel):
     marketing: Marketing146
 
 class Commerce129(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     show_commerce_unified_signup_flow: bool = Field(..., alias='showCommerceUnifiedSignupFlow')
@@ -7612,7 +6732,6 @@ class Commerce129(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Mp(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     parent_country: str = Field(..., alias='parentCountry')
     group: str
@@ -7621,7 +6740,6 @@ class Mp(BaseModel):
     marketing: Marketing146
 
 class Commerce130(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     show_commerce_unified_signup_flow: bool = Field(..., alias='showCommerceUnifiedSignupFlow')
     show_identity_learn_more: bool = Field(..., alias='showIdentityLearnMore')
@@ -7630,7 +6748,6 @@ class Commerce130(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Pr(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     parent_country: str = Field(..., alias='parentCountry')
     group: str
     commerce: Commerce130
@@ -7638,7 +6755,6 @@ class Pr(BaseModel):
     marketing: Marketing146
 
 class Commerce131(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     sells_bundle: bool = Field(..., alias='sellsBundle')
@@ -7649,13 +6765,11 @@ class Commerce131(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Marketing149(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Um(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     parent_country: str = Field(..., alias='parentCountry')
     group: str
@@ -7664,7 +6778,6 @@ class Um(BaseModel):
     marketing: Marketing149
 
 class AdsTierDevices(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     comcastx1: bool
     cox: bool
     hisense: bool
@@ -7676,14 +6789,12 @@ class AdsTierDevices(BaseModel):
     xbox: bool
 
 class DefaultProduct83(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class DevicesThatSell2PBundle(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     comcast: bool
     comcastx1: bool
     cox: bool
@@ -7697,7 +6808,6 @@ class DevicesThatSell2PBundle(BaseModel):
     xglobal: bool
 
 class DevicesThatSellBundle(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     comcast: bool
     comcastx1: bool
     cox: bool
@@ -7711,67 +6821,54 @@ class DevicesThatSellBundle(BaseModel):
     xglobal: bool
 
 class Amazon(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     url: str
 
 class Cox(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     url: str
 
 class Hisense(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     url: str
 
 class Lg(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     url: str
 
 class Ps1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     url: str
 
 class Ps4(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     url: str
 
 class Samsung(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     url: str
 
 class TivoUs(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     url: str
 
 class Tv1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     url: str
 
 class Vizio(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     url: str
 
 class Xbox(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     url: str
 
 class Xglobal(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     url: str
 
 class LicensePlateFlowNavigation(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     amazon: Amazon = Field(..., alias='AMAZON')
     cox: Cox
     hisense: Hisense
@@ -7786,42 +6883,36 @@ class LicensePlateFlowNavigation(BaseModel):
     xglobal: Xglobal
 
 class NineMonth(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     campaign_code: str = Field(..., alias='campaignCode')
     price: float
     sku_list: list[str] = Field(..., alias='skuList')
     voucher_code: str = Field(..., alias='voucherCode')
 
 class OneYear(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     campaign_code: str = Field(..., alias='campaignCode')
     price: float
     sku_list: list[str] = Field(..., alias='skuList')
     voucher_code: str = Field(..., alias='voucherCode')
 
 class SixMonth(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     campaign_code: str = Field(..., alias='campaignCode')
     price: float
     sku_list: list[str] = Field(..., alias='skuList')
     voucher_code: str = Field(..., alias='voucherCode')
 
 class ThreeYear(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     campaign_code: str = Field(..., alias='campaignCode')
     price: float
     sku_list: list[str] = Field(..., alias='skuList')
     voucher_code: str = Field(..., alias='voucherCode')
 
 class TwoYear(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     campaign_code: str = Field(..., alias='campaignCode')
     price: float
     sku_list: list[str] = Field(..., alias='skuList')
     voucher_code: str = Field(..., alias='voucherCode')
 
 class Ft(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nine_month: NineMonth = Field(..., alias='nineMonth')
     one_year: OneYear = Field(..., alias='oneYear')
     six_month: SixMonth = Field(..., alias='sixMonth')
@@ -7829,7 +6920,6 @@ class Ft(BaseModel):
     two_year: TwoYear = Field(..., alias='twoYear')
 
 class Purchase84(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nine_month: NineMonth = Field(..., alias='nineMonth')
     one_year: OneYear = Field(..., alias='oneYear')
     six_month: SixMonth = Field(..., alias='sixMonth')
@@ -7837,19 +6927,16 @@ class Purchase84(BaseModel):
     two_year: TwoYear = Field(..., alias='twoYear')
 
 class Superbundle(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nine_month: NineMonth = Field(..., alias='nineMonth')
     one_year: OneYear = Field(..., alias='oneYear')
     six_month: SixMonth = Field(..., alias='sixMonth')
 
 class RewardsProducts(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     ft: Ft = Field(..., alias='FT')
     purchase: Purchase84
     superbundle: Superbundle
 
 class Commerce132(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     ads_tier_devices: AdsTierDevices = Field(..., alias='adsTierDevices')
     ads_tier_enabled: bool = Field(..., alias='adsTierEnabled')
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
@@ -7875,12 +6962,10 @@ class Commerce132(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class FeatureConfig135(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     enable_cmp: bool = Field(..., alias='enableCMP')
     enable_identity_consent_sync: bool = Field(..., alias='enableIdentityConsentSync')
 
 class Us(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     footer: list[str]
     group: str
     commerce: Commerce132
@@ -7888,7 +6973,6 @@ class Us(BaseModel):
     marketing: Marketing149
 
 class Commerce133(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     show_commerce_unified_signup_flow: bool = Field(..., alias='showCommerceUnifiedSignupFlow')
     show_identity_learn_more: bool = Field(..., alias='showIdentityLearnMore')
@@ -7897,18 +6981,15 @@ class Commerce133(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class FeatureConfig136(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     enable_cmp: bool = Field(..., alias='enableCMP')
 
 class Marketing151(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     enable_parent_country_languages: bool = Field(..., alias='enableParentCountryLanguages')
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Vi(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     parent_country: str = Field(..., alias='parentCountry')
     group: str
     commerce: Commerce133
@@ -7916,12 +6997,10 @@ class Vi(BaseModel):
     marketing: Marketing151
 
 class Yz(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     group: str
     feature_config: dict[str, Any] = Field(..., alias='featureConfig')
 
 class Countries(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     af: Af = Field(..., alias='AF')
     au: Au = Field(..., alias='AU')
     bd: Bd = Field(..., alias='BD')
@@ -8169,11 +7248,9 @@ class Countries(BaseModel):
     time_stamp: dict[str, Any] = Field(..., alias='timeStamp')
 
 class UseWebPlaybackExperienceOverrides(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     live_linear_playlist_type: str = Field(..., alias='liveLinearPlaylistType')
 
 class FeatureConfig137(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     activation_retry_enabled: bool = Field(..., alias='activationRetryEnabled')
     commerce_unified_activation_callback_provider_ids: list[str] = Field(..., alias='commerceUnifiedActivationCallbackProviderIds')
     commerce_unified_activation_success_enabled_provider_ids: list[str] = Field(..., alias='commerceUnifiedActivationSuccessEnabledProviderIds')
@@ -8288,7 +7365,6 @@ class FeatureConfig137(BaseModel):
     enable_spaceball_whats_on: bool = Field(..., alias='enableSpaceballWhatsOn')
 
 class AppLangMap(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     ar_ae: str = Field(..., alias='ar-ae')
     ar_ar: str = Field(..., alias='ar-ar')
     ar_bh: str = Field(..., alias='ar-bh')
@@ -8533,362 +7609,290 @@ class AppLangMap(BaseModel):
     zh_tw: str = Field(..., alias='zh-tw')
 
 class AnnualStandaloneHidden(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class AnnualStandaloneToggle(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class AnnualStarPlus(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class BundleDefault(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class BundleNoah(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class BundleNoahHidden(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class BundleSash(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class BundleSashHidden(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class CancelSubscription(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class ComboPlus(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class CraveBundlePremium(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class CraveBundleStandardWithAds(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class DisneyHulu(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class FlagshipAdsBundleAddOns(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class FlagshipAdsBundleBilling(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class FlagshipAdsBundleBillingOfferId(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class FlagshipAdsBundleBillingOfferId2(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class FlagshipAdsBundleBillingOfferId3(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class FlagshipAdsBundleBillingOfferId4(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class FlagshipBundlePremiumRetailWildcat(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class FlagshipBundlePremiumWildcat(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class FlagshipBundlePromoWildcat(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class FlagshipBundleRetailWildcat(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class FlagshipNoAdsBundleAddOns(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class FlagshipNoAdsBundleBilling(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class Login(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class MaxAdsBundleAddOns(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class MaxAdsBundleflagship(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class MaxBundleBasic(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class MaxBundlePremium(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class MaxNoAdsBundleAddOns(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class MaxNoAdsBundleflagship(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class MonthlyStandalone(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class MonthlyStandaloneHidden(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class MonthlyStandaloneNoah(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class MonthlyStandaloneSash(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class MonthlyStandaloneToggle(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class PlanSelectCommercePlans(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class PlanSelectIdentitySignup(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class Signup1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class TsnBundleStandardWithAds(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class TsnBundleStandardNoAds(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class TsnBundlePremium(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class TsnCraveBundleStandardWithAds(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class TsnCraveBundlePremium(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class UsufAnnualStandalonePremiumCo(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class UsufAnnualStandalonePremiumHidden(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class UsufAnnualStandalonePremiumToggle(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class UsufAnnualStandaloneStandardCo(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class UsufBundlePremium(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class UsufBundlePremiumHidden(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class UsufBundleTrioBasic(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class UsufBundleTrioBasicDefault(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class UsufBundleTrioBasicHidden(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class UsufDisneyAnnualStandardHidden(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class UsufDisneyAnnualStandardToggle(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class UsufDisneyMonthlyBasic(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class UsufDisneyMonthlyPremiumToggle(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class UsufDisneyMonthlyStandardHidden(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class UsufDisneyMonthlyStandardToggle(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class UsufDuoBasic(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class UsufDuoPremium(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class UsufLogin(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class UsufMonthlyStandalone(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class UsufMonthlyStandaloneBasic(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class UsufMonthlyStandalonePremium(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class UsufMonthlyStandalonePremiumHidden(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class UsufMonthlyStandalonePremiumToggle(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class UsufSignup(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class VenuBundleBasic(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class VenuBundlePremium(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     url: str
     glimpse_name: str = Field(..., alias='glimpseName')
 
 class CannonballLinkManager1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     annual_standalone_hidden: AnnualStandaloneHidden = Field(..., alias='annualStandaloneHidden')
     annual_standalone_toggle: AnnualStandaloneToggle = Field(..., alias='annualStandaloneToggle')
     annual_star_plus: AnnualStarPlus = Field(..., alias='annualStarPlus')
@@ -8962,41 +7966,35 @@ class CannonballLinkManager1(BaseModel):
     venu_bundle_premium: VenuBundlePremium = Field(..., alias='venuBundlePremium')
 
 class Paths(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     stage: str
     stage_preview: str = Field(..., alias='stagePreview')
     prod: str
     preview: str
 
 class Lps(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     environment: str
     organization: str
     space: str
     available_environments: list[str] = Field(..., alias='availableEnvironments')
 
 class Explore(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     environment: str
     organization: str
     space: str
     available_environments: list[str] = Field(..., alias='availableEnvironments')
 
 class ExploreFamily(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     environment: str
     organization: str
     space: str
     available_environments: list[str] = Field(..., alias='availableEnvironments')
 
 class Instances(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     lps: Lps
     explore: Explore
     explore_family: ExploreFamily = Field(..., alias='exploreFamily')
 
 class Cannonball(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     cdn_manifest_domain: str = Field(..., alias='cdnManifestDomain')
     preview_manifest_domain: str = Field(..., alias='previewManifestDomain')
     environment: str
@@ -9006,40 +8004,34 @@ class Cannonball(BaseModel):
     instances: Instances
 
 class Paths1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     stage: str
     prod: str
     preview: str
     stage_preview: str = Field(..., alias='stagePreview')
 
 class Explore1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     organization: str
     space: str
     environment: str
     available_environments: list[str] = Field(..., alias='availableEnvironments')
 
 class Global(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     organization: str
     space: str
     environment: str
     available_environments: list[str] = Field(..., alias='availableEnvironments')
 
 class Instances1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     explore: Explore1
     global_: Global = Field(..., alias='global')
     lps: Lps
     explore_family: ExploreFamily = Field(..., alias='exploreFamily')
 
 class Spaceball(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     paths: Paths1
     instances: Instances1
 
 class Af1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -9048,26 +8040,22 @@ class Af1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Marketing152(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Purchase85(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     campaign_code: str = Field(..., alias='campaignCode')
     sku_list: list[str] = Field(..., alias='skuList')
     voucher_code: str = Field(..., alias='voucherCode')
 
 class DefaultProduct84(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase85
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce134(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct84 = Field(..., alias='defaultProduct')
@@ -9084,7 +8072,6 @@ class Commerce134(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Au1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -9097,7 +8084,6 @@ class Au1(BaseModel):
     commerce: Commerce134
 
 class Bd1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -9106,7 +8092,6 @@ class Bd1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Bn1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -9115,7 +8100,6 @@ class Bn1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Bt1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -9124,7 +8108,6 @@ class Bt1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Bu1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -9133,18 +8116,15 @@ class Bu1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Marketing153(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     enable_parent_country_languages: bool = Field(..., alias='enableParentCountryLanguages')
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class FeatureConfig138(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     enable_cmp: bool = Field(..., alias='enableCMP')
 
 class Commerce135(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     license_plate_sign_up_url: str = Field(..., alias='licensePlateSignUpURL')
     payment_methods: list[str] = Field(..., alias='paymentMethods')
     show_commerce_flex_account_offer: bool = Field(..., alias='showCommerceFlexAccountOffer')
@@ -9156,7 +8136,6 @@ class Commerce135(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Cc1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     parent_country: str = Field(..., alias='parentCountry')
     name: str
@@ -9170,7 +8149,6 @@ class Cc1(BaseModel):
     commerce: Commerce135
 
 class Commerce136(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     license_plate_sign_up_url: str = Field(..., alias='licensePlateSignUpURL')
     promotional_offers: dict[str, Any] = Field(..., alias='promotionalOffers')
@@ -9183,7 +8161,6 @@ class Commerce136(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Ck1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     parent_country: str = Field(..., alias='parentCountry')
     name: str
@@ -9197,7 +8174,6 @@ class Ck1(BaseModel):
     commerce: Commerce136
 
 class Cn1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -9206,7 +8182,6 @@ class Cn1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Fj1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -9215,25 +8190,21 @@ class Fj1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Marketing155(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class FeatureConfig140(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     display_rights_reserved_year: bool = Field(..., alias='displayRightsReservedYear')
     enable_cmp: bool = Field(..., alias='enableCMP')
 
 class DefaultProduct85(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase85
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce137(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct85 = Field(..., alias='defaultProduct')
@@ -9250,7 +8221,6 @@ class Commerce137(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Hk1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -9263,7 +8233,6 @@ class Hk1(BaseModel):
     commerce: Commerce137
 
 class Hm1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -9272,7 +8241,6 @@ class Hm1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Id1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -9282,7 +8250,6 @@ class Id1(BaseModel):
     marketing: Marketing155
 
 class In1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -9291,14 +8258,12 @@ class In1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class DefaultProduct86(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase85
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce138(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct86 = Field(..., alias='defaultProduct')
@@ -9314,7 +8279,6 @@ class Commerce138(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Jp1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -9327,7 +8291,6 @@ class Jp1(BaseModel):
     commerce: Commerce138
 
 class Kh1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -9336,7 +8299,6 @@ class Kh1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Ki1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -9345,20 +8307,17 @@ class Ki1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class FeatureConfig142(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     display_rights_reserved_year: bool = Field(..., alias='displayRightsReservedYear')
     enable_age_verification: bool = Field(..., alias='enableAgeVerification')
     enable_cmp: bool = Field(..., alias='enableCMP')
 
 class DefaultProduct87(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu5 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase85
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce139(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     card_options: list[str] = Field(..., alias='cardOptions')
     card_options_popover_enabled: bool = Field(..., alias='cardOptionsPopoverEnabled')
     default_product: DefaultProduct87 = Field(..., alias='defaultProduct')
@@ -9374,7 +8333,6 @@ class Commerce139(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Kr1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -9387,7 +8345,6 @@ class Kr1(BaseModel):
     commerce: Commerce139
 
 class La1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -9396,7 +8353,6 @@ class La1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Lk1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -9405,7 +8361,6 @@ class Lk1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Mm1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -9414,7 +8369,6 @@ class Mm1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Mo1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -9423,7 +8377,6 @@ class Mo1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Mv1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -9432,7 +8385,6 @@ class Mv1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class My1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -9442,18 +8394,15 @@ class My1(BaseModel):
     marketing: Marketing155
 
 class Marketing160(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     enable_parent_country_languages: bool = Field(..., alias='enableParentCountryLanguages')
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class FeatureConfig143(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     enable_cmp: bool = Field(..., alias='enableCMP')
 
 class Commerce140(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     license_plate_sign_up_url: str = Field(..., alias='licensePlateSignUpURL')
     show_commerce_flex_account_offer: bool = Field(..., alias='showCommerceFlexAccountOffer')
@@ -9465,7 +8414,6 @@ class Commerce140(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Nf1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     parent_country: str = Field(..., alias='parentCountry')
     name: str
@@ -9479,7 +8427,6 @@ class Nf1(BaseModel):
     commerce: Commerce140
 
 class Np1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -9488,7 +8435,6 @@ class Np1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Nr1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -9497,7 +8443,6 @@ class Nr1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Commerce141(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     license_plate_sign_up_url: str = Field(..., alias='licensePlateSignUpURL')
     show_commerce_flex_account_offer: bool = Field(..., alias='showCommerceFlexAccountOffer')
@@ -9509,7 +8454,6 @@ class Commerce141(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Nu89(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     parent_country: str = Field(..., alias='parentCountry')
     name: str
@@ -9523,26 +8467,22 @@ class Nu89(BaseModel):
     commerce: Commerce141
 
 class Marketing162(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Nu90(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     campaign_code: str = Field(..., alias='campaignCode')
     sku_list: list[str] = Field(..., alias='skuList')
     voucher_code: str = Field(..., alias='voucherCode')
 
 class DefaultProduct88(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase85
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce142(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct88 = Field(..., alias='defaultProduct')
@@ -9560,7 +8500,6 @@ class Commerce142(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Nz1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -9573,7 +8512,6 @@ class Nz1(BaseModel):
     commerce: Commerce142
 
 class Pg1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -9582,7 +8520,6 @@ class Pg1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Ph1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -9592,7 +8529,6 @@ class Ph1(BaseModel):
     marketing: Marketing162
 
 class Pk1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -9601,7 +8537,6 @@ class Pk1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Sb1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -9610,18 +8545,15 @@ class Sb1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class FeatureConfig145(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     display_rights_reserved_year: bool = Field(..., alias='displayRightsReservedYear')
 
 class DefaultProduct89(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase85
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce143(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct89 = Field(..., alias='defaultProduct')
@@ -9637,7 +8569,6 @@ class Commerce143(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Sg1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -9650,7 +8581,6 @@ class Sg1(BaseModel):
     commerce: Commerce143
 
 class Th1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -9660,18 +8590,15 @@ class Th1(BaseModel):
     marketing: Marketing162
 
 class Marketing166(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     enable_parent_country_languages: bool = Field(..., alias='enableParentCountryLanguages')
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class FeatureConfig146(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     enable_cmp: bool = Field(..., alias='enableCMP')
 
 class Commerce144(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     license_plate_sign_up_url: str = Field(..., alias='licensePlateSignUpURL')
     payment_methods: list[str] = Field(..., alias='paymentMethods')
     promotional_offers: dict[str, Any] = Field(..., alias='promotionalOffers')
@@ -9684,7 +8611,6 @@ class Commerce144(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Tk1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     parent_country: str = Field(..., alias='parentCountry')
     name: str
@@ -9698,7 +8624,6 @@ class Tk1(BaseModel):
     commerce: Commerce144
 
 class Tl1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -9707,7 +8632,6 @@ class Tl1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class To1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -9716,7 +8640,6 @@ class To1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Tp1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -9725,7 +8648,6 @@ class Tp1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Tv2(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -9734,25 +8656,21 @@ class Tv2(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Marketing167(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class FeatureConfig147(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     display_rights_reserved_year: bool = Field(..., alias='displayRightsReservedYear')
     enable_cmp: bool = Field(..., alias='enableCMP')
 
 class DefaultProduct90(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase85
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce145(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct90 = Field(..., alias='defaultProduct')
@@ -9769,7 +8687,6 @@ class Commerce145(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Tw1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -9782,7 +8699,6 @@ class Tw1(BaseModel):
     commerce: Commerce145
 
 class Vn1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -9791,7 +8707,6 @@ class Vn1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Vu1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -9800,7 +8715,6 @@ class Vu1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Ws1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -9809,18 +8723,15 @@ class Ws1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class FeatureConfig148(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     enable_cmp: bool = Field(..., alias='enableCMP')
 
 class DefaultProduct91(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase85
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce146(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct91 = Field(..., alias='defaultProduct')
@@ -9838,7 +8749,6 @@ class Commerce146(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Ad1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -9851,7 +8761,6 @@ class Ad1(BaseModel):
     commerce: Commerce146
 
 class Ae1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -9862,7 +8771,6 @@ class Ae1(BaseModel):
     feature_config: FeatureConfig148 = Field(..., alias='featureConfig')
 
 class Commerce147(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     license_plate_sign_up_url: str = Field(..., alias='licensePlateSignUpURL')
     paypal_client_id: str = Field(..., alias='paypalClientId')
@@ -9877,7 +8785,6 @@ class Commerce147(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Ai1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     parent_country: str = Field(..., alias='parentCountry')
     name: str
@@ -9891,14 +8798,12 @@ class Ai1(BaseModel):
     commerce: Commerce147
 
 class DefaultProduct92(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase85
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce148(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct92 = Field(..., alias='defaultProduct')
@@ -9915,7 +8820,6 @@ class Commerce148(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Al1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -9928,7 +8832,6 @@ class Al1(BaseModel):
     commerce: Commerce148
 
 class Am1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -9937,7 +8840,6 @@ class Am1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class An1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -9946,7 +8848,6 @@ class An1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Ao1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -9955,7 +8856,6 @@ class Ao1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class DefaultProduct93(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -9963,7 +8863,6 @@ class DefaultProduct93(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce149(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct93 = Field(..., alias='defaultProduct')
@@ -9983,7 +8882,6 @@ class Commerce149(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class At1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -9996,7 +8894,6 @@ class At1(BaseModel):
     commerce: Commerce149
 
 class Commerce150(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     license_plate_sign_up_url: str = Field(..., alias='licensePlateSignUpURL')
     payment_methods: list[str] = Field(..., alias='paymentMethods')
@@ -10013,7 +8910,6 @@ class Commerce150(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Aw1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     parent_country: str = Field(..., alias='parentCountry')
     name: str
@@ -10027,14 +8923,12 @@ class Aw1(BaseModel):
     commerce: Commerce150
 
 class Marketing174(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     enable_parent_country_languages: bool = Field(..., alias='enableParentCountryLanguages')
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Commerce151(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     license_plate_sign_up_url: str = Field(..., alias='licensePlateSignUpURL')
     payment_methods: list[str] = Field(..., alias='paymentMethods')
     show_commerce_tiara: bool = Field(..., alias='showCommerceTiara')
@@ -10043,7 +8937,6 @@ class Commerce151(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Ax1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     parent_country: str = Field(..., alias='parentCountry')
     name: str
@@ -10057,20 +8950,17 @@ class Ax1(BaseModel):
     commerce: Commerce151
 
 class Marketing175(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class DefaultProduct94(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase85
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce152(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct94 = Field(..., alias='defaultProduct')
     license_plate_sign_up_url: str = Field(..., alias='licensePlateSignUpURL')
@@ -10086,7 +8976,6 @@ class Commerce152(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Ba1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -10099,7 +8988,6 @@ class Ba1(BaseModel):
     commerce: Commerce152
 
 class DefaultProduct95(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -10107,7 +8995,6 @@ class DefaultProduct95(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce153(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct95 = Field(..., alias='defaultProduct')
@@ -10126,7 +9013,6 @@ class Commerce153(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Be1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -10139,7 +9025,6 @@ class Be1(BaseModel):
     commerce: Commerce153
 
 class Bf1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -10148,12 +9033,10 @@ class Bf1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class FeatureConfig157(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     enable_cmp: bool = Field(..., alias='enableCMP')
     cmp_enable_browser_lang: bool = Field(..., alias='cmpEnableBrowserLang')
 
 class DefaultProduct96(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -10161,7 +9044,6 @@ class DefaultProduct96(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce154(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     local_price_enabled: bool = Field(..., alias='localPriceEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
@@ -10180,7 +9062,6 @@ class Commerce154(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Bg1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -10193,7 +9074,6 @@ class Bg1(BaseModel):
     commerce: Commerce154
 
 class Bh1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -10203,7 +9083,6 @@ class Bh1(BaseModel):
     marketing: Marketing175
 
 class Bi1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -10212,7 +9091,6 @@ class Bi1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Bj1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -10221,18 +9099,15 @@ class Bj1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Marketing179(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     enable_parent_country_languages: bool = Field(..., alias='enableParentCountryLanguages')
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class FeatureConfig158(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     enable_cmp: bool = Field(..., alias='enableCMP')
 
 class Commerce155(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     special_offer_enabled: bool = Field(..., alias='specialOfferEnabled')
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
@@ -10245,7 +9120,6 @@ class Commerce155(BaseModel):
     show_commerce_unified_cancel_flow: bool = Field(..., alias='showCommerceUnifiedCancelFlow')
 
 class Bl1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     parent_country: str = Field(..., alias='parentCountry')
     name: str
@@ -10259,13 +9133,11 @@ class Bl1(BaseModel):
     commerce: Commerce155
 
 class Marketing180(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Commerce156(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     license_plate_sign_up_url: str = Field(..., alias='licensePlateSignUpURL')
     paypal_client_id: str = Field(..., alias='paypalClientId')
@@ -10280,7 +9152,6 @@ class Commerce156(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Bm1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     parent_country: str = Field(..., alias='parentCountry')
     name: str
@@ -10294,7 +9165,6 @@ class Bm1(BaseModel):
     commerce: Commerce156
 
 class Commerce157(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     license_plate_sign_up_url: str = Field(..., alias='licensePlateSignUpURL')
     payment_methods: list[str] = Field(..., alias='paymentMethods')
@@ -10309,7 +9179,6 @@ class Commerce157(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Bq1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     parent_country: str = Field(..., alias='parentCountry')
     name: str
@@ -10323,7 +9192,6 @@ class Bq1(BaseModel):
     commerce: Commerce157
 
 class Bv1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -10333,7 +9201,6 @@ class Bv1(BaseModel):
     feature_config: FeatureConfig158 = Field(..., alias='featureConfig')
 
 class Bw1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -10342,7 +9209,6 @@ class Bw1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Cd1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -10351,7 +9217,6 @@ class Cd1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Cf1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -10360,7 +9225,6 @@ class Cf1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Cq1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -10369,7 +9233,6 @@ class Cq1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class DefaultProduct97(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -10377,7 +9240,6 @@ class DefaultProduct97(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce158(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct97 = Field(..., alias='defaultProduct')
@@ -10395,7 +9257,6 @@ class Commerce158(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Ch1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -10408,7 +9269,6 @@ class Ch1(BaseModel):
     commerce: Commerce158
 
 class Ci1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -10417,7 +9277,6 @@ class Ci1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Cm1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -10426,7 +9285,6 @@ class Cm1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Cs1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -10437,7 +9295,6 @@ class Cs1(BaseModel):
     feature_config: FeatureConfig158 = Field(..., alias='featureConfig')
 
 class Cv1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -10446,7 +9303,6 @@ class Cv1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Commerce159(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     license_plate_sign_up_url: str = Field(..., alias='licensePlateSignUpURL')
     payment_methods: list[str] = Field(..., alias='paymentMethods')
@@ -10461,7 +9317,6 @@ class Commerce159(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Cw1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     parent_country: str = Field(..., alias='parentCountry')
     name: str
@@ -10475,14 +9330,12 @@ class Cw1(BaseModel):
     commerce: Commerce159
 
 class Marketing184(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     enable_parent_country_languages: bool = Field(..., alias='enableParentCountryLanguages')
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Commerce160(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     license_plate_sign_up_url: str = Field(..., alias='licensePlateSignUpURL')
     payment_methods: list[str] = Field(..., alias='paymentMethods')
     show_commerce_flex_account_offer: bool = Field(..., alias='showCommerceFlexAccountOffer')
@@ -10494,7 +9347,6 @@ class Commerce160(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Cx1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     parent_country: str = Field(..., alias='parentCountry')
     name: str
@@ -10508,7 +9360,6 @@ class Cx1(BaseModel):
     commerce: Commerce160
 
 class Cy1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -10519,13 +9370,11 @@ class Cy1(BaseModel):
     feature_config: FeatureConfig158 = Field(..., alias='featureConfig')
 
 class Marketing185(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class DefaultProduct98(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -10533,7 +9382,6 @@ class DefaultProduct98(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce161(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct98 = Field(..., alias='defaultProduct')
@@ -10551,7 +9399,6 @@ class Commerce161(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Cz1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -10564,7 +9411,6 @@ class Cz1(BaseModel):
     commerce: Commerce161
 
 class DefaultProduct99(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -10572,7 +9418,6 @@ class DefaultProduct99(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce162(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     annual_auto_downgrade: bool = Field(..., alias='annualAutoDowngrade')
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
@@ -10595,7 +9440,6 @@ class Commerce162(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class De1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -10608,7 +9452,6 @@ class De1(BaseModel):
     commerce: Commerce162
 
 class Dj1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -10617,7 +9460,6 @@ class Dj1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class DefaultProduct100(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -10625,7 +9467,6 @@ class DefaultProduct100(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce163(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct100 = Field(..., alias='defaultProduct')
@@ -10644,7 +9485,6 @@ class Commerce163(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Dk1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -10657,7 +9497,6 @@ class Dk1(BaseModel):
     commerce: Commerce163
 
 class Dz1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -10667,12 +9506,10 @@ class Dz1(BaseModel):
     marketing: Marketing185
 
 class FeatureConfig170(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     enable_cmp: bool = Field(..., alias='enableCMP')
     cmp_enable_browser_lang: bool = Field(..., alias='cmpEnableBrowserLang')
 
 class DefaultProduct101(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -10680,7 +9517,6 @@ class DefaultProduct101(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce164(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct101 = Field(..., alias='defaultProduct')
@@ -10698,7 +9534,6 @@ class Commerce164(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Ee1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -10711,11 +9546,9 @@ class Ee1(BaseModel):
     commerce: Commerce164
 
 class FeatureConfig171(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     enable_cmp: bool = Field(..., alias='enableCMP')
 
 class Eg1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -10726,7 +9559,6 @@ class Eg1(BaseModel):
     feature_config: FeatureConfig171 = Field(..., alias='featureConfig')
 
 class Eh1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -10735,7 +9567,6 @@ class Eh1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Er1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -10744,7 +9575,6 @@ class Er1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class DefaultProduct102(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -10752,7 +9582,6 @@ class DefaultProduct102(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce165(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct102 = Field(..., alias='defaultProduct')
@@ -10772,7 +9601,6 @@ class Commerce165(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Es1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -10785,7 +9613,6 @@ class Es1(BaseModel):
     commerce: Commerce165
 
 class Et1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -10794,7 +9621,6 @@ class Et1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class DefaultProduct103(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -10802,7 +9628,6 @@ class DefaultProduct103(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce166(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct103 = Field(..., alias='defaultProduct')
@@ -10822,7 +9647,6 @@ class Commerce166(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Fi1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -10835,7 +9659,6 @@ class Fi1(BaseModel):
     commerce: Commerce166
 
 class Commerce167(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     license_plate_sign_up_url: str = Field(..., alias='licensePlateSignUpURL')
     paypal_client_id: str = Field(..., alias='paypalClientId')
@@ -10850,7 +9673,6 @@ class Commerce167(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Fk1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     parent_country: str = Field(..., alias='parentCountry')
     name: str
@@ -10864,14 +9686,12 @@ class Fk1(BaseModel):
     commerce: Commerce167
 
 class Marketing194(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     enable_parent_country_languages: bool = Field(..., alias='enableParentCountryLanguages')
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Commerce168(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     special_offer_enabled: bool = Field(..., alias='specialOfferEnabled')
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
@@ -10884,7 +9704,6 @@ class Commerce168(BaseModel):
     show_commerce_unified_cancel_flow: bool = Field(..., alias='showCommerceUnifiedCancelFlow')
 
 class Fo1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     parent_country: str = Field(..., alias='parentCountry')
     name: str
@@ -10898,13 +9717,11 @@ class Fo1(BaseModel):
     commerce: Commerce168
 
 class Marketing195(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class DefaultProduct104(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -10912,7 +9729,6 @@ class DefaultProduct104(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce169(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct104 = Field(..., alias='defaultProduct')
@@ -10935,7 +9751,6 @@ class Commerce169(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Fr1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -10948,7 +9763,6 @@ class Fr1(BaseModel):
     commerce: Commerce169
 
 class Fx1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -10957,7 +9771,6 @@ class Fx1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Ga1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -10966,14 +9779,12 @@ class Ga1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class DefaultProduct105(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase85
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce170(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct105 = Field(..., alias='defaultProduct')
@@ -10991,7 +9802,6 @@ class Commerce170(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Gb1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -11004,14 +9814,12 @@ class Gb1(BaseModel):
     commerce: Commerce170
 
 class Marketing197(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     enable_parent_country_languages: bool = Field(..., alias='enableParentCountryLanguages')
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Commerce171(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     show3_ds_flow: bool = Field(..., alias='show3DSFlow')
     special_offer_enabled: bool = Field(..., alias='specialOfferEnabled')
@@ -11025,7 +9833,6 @@ class Commerce171(BaseModel):
     show_commerce_unified_cancel_flow: bool = Field(..., alias='showCommerceUnifiedCancelFlow')
 
 class Gf1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     parent_country: str = Field(..., alias='parentCountry')
     name: str
@@ -11039,7 +9846,6 @@ class Gf1(BaseModel):
     commerce: Commerce171
 
 class Commerce172(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     show3_ds_flow: bool = Field(..., alias='show3DSFlow')
     special_offer_enabled: bool = Field(..., alias='specialOfferEnabled')
@@ -11052,7 +9858,6 @@ class Commerce172(BaseModel):
     show_commerce_unified_cancel_flow: bool = Field(..., alias='showCommerceUnifiedCancelFlow')
 
 class Gg1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     parent_country: str = Field(..., alias='parentCountry')
     name: str
@@ -11065,7 +9870,6 @@ class Gg1(BaseModel):
     commerce: Commerce172
 
 class Gh1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -11074,7 +9878,6 @@ class Gh1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Commerce173(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     special_offer_enabled: bool = Field(..., alias='specialOfferEnabled')
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
@@ -11086,7 +9889,6 @@ class Commerce173(BaseModel):
     show_commerce_unified_cancel_flow: bool = Field(..., alias='showCommerceUnifiedCancelFlow')
 
 class Gi1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     parent_country: str = Field(..., alias='parentCountry')
     name: str
@@ -11100,20 +9902,17 @@ class Gi1(BaseModel):
     commerce: Commerce173
 
 class Marketing200(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class DefaultProduct106(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase85
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce174(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     default_product: DefaultProduct106 = Field(..., alias='defaultProduct')
     show3_ds_flow: bool = Field(..., alias='show3DSFlow')
     special_offer_enabled: bool = Field(..., alias='specialOfferEnabled')
@@ -11127,7 +9926,6 @@ class Commerce174(BaseModel):
     show_commerce_unified_cancel_flow: bool = Field(..., alias='showCommerceUnifiedCancelFlow')
 
 class Gl1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     parent_country: str = Field(..., alias='parentCountry')
     name: str
@@ -11141,7 +9939,6 @@ class Gl1(BaseModel):
     commerce: Commerce174
 
 class Gm1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -11150,7 +9947,6 @@ class Gm1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Gn1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -11159,14 +9955,12 @@ class Gn1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Marketing201(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     enable_parent_country_languages: bool = Field(..., alias='enableParentCountryLanguages')
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Commerce175(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     show3_ds_flow: bool = Field(..., alias='show3DSFlow')
     special_offer_enabled: bool = Field(..., alias='specialOfferEnabled')
@@ -11180,7 +9974,6 @@ class Commerce175(BaseModel):
     show_commerce_unified_cancel_flow: bool = Field(..., alias='showCommerceUnifiedCancelFlow')
 
 class Gp1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     parent_country: str = Field(..., alias='parentCountry')
     name: str
@@ -11194,7 +9987,6 @@ class Gp1(BaseModel):
     commerce: Commerce175
 
 class Gq1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -11203,13 +9995,11 @@ class Gq1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Marketing202(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class DefaultProduct107(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -11217,7 +10007,6 @@ class DefaultProduct107(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce176(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct107 = Field(..., alias='defaultProduct')
@@ -11235,7 +10024,6 @@ class Commerce176(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Gr1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -11248,7 +10036,6 @@ class Gr1(BaseModel):
     commerce: Commerce176
 
 class Commerce177(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     license_plate_sign_up_url: str = Field(..., alias='licensePlateSignUpURL')
     requires_legal_entity: bool = Field(..., alias='requiresLegalEntity')
@@ -11262,7 +10049,6 @@ class Commerce177(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Gs1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     parent_country: str = Field(..., alias='parentCountry')
     name: str
@@ -11276,7 +10062,6 @@ class Gs1(BaseModel):
     commerce: Commerce177
 
 class Gw1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -11285,12 +10070,10 @@ class Gw1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class FeatureConfig185(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     enable_cmp: bool = Field(..., alias='enableCMP')
     cmp_enable_browser_lang: bool = Field(..., alias='cmpEnableBrowserLang')
 
 class DefaultProduct108(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -11298,7 +10081,6 @@ class DefaultProduct108(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce178(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct108 = Field(..., alias='defaultProduct')
@@ -11316,7 +10098,6 @@ class Commerce178(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Hr1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -11329,11 +10110,9 @@ class Hr1(BaseModel):
     commerce: Commerce178
 
 class FeatureConfig186(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     enable_cmp: bool = Field(..., alias='enableCMP')
 
 class DefaultProduct109(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -11341,7 +10120,6 @@ class DefaultProduct109(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce179(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct109 = Field(..., alias='defaultProduct')
@@ -11359,7 +10137,6 @@ class Commerce179(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Hu1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -11372,7 +10149,6 @@ class Hu1(BaseModel):
     commerce: Commerce179
 
 class DefaultProduct110(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -11380,7 +10156,6 @@ class DefaultProduct110(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce180(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct110 = Field(..., alias='defaultProduct')
@@ -11399,7 +10174,6 @@ class Commerce180(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Ie1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -11412,7 +10186,6 @@ class Ie1(BaseModel):
     commerce: Commerce180
 
 class Il1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -11422,14 +10195,12 @@ class Il1(BaseModel):
     marketing: Marketing202
 
 class Marketing208(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     enable_parent_country_languages: bool = Field(..., alias='enableParentCountryLanguages')
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Commerce181(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     show3_ds_flow: bool = Field(..., alias='show3DSFlow')
     special_offer_enabled: bool = Field(..., alias='specialOfferEnabled')
@@ -11442,7 +10213,6 @@ class Commerce181(BaseModel):
     show_commerce_unified_cancel_flow: bool = Field(..., alias='showCommerceUnifiedCancelFlow')
 
 class Im1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     parent_country: str = Field(..., alias='parentCountry')
     name: str
@@ -11455,7 +10225,6 @@ class Im1(BaseModel):
     commerce: Commerce181
 
 class Commerce182(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     payment_methods: list[str] = Field(..., alias='paymentMethods')
     special_offer_enabled: bool = Field(..., alias='specialOfferEnabled')
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
@@ -11467,7 +10236,6 @@ class Commerce182(BaseModel):
     show_commerce_unified_cancel_flow: bool = Field(..., alias='showCommerceUnifiedCancelFlow')
 
 class Io1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     parent_country: str = Field(..., alias='parentCountry')
     name: str
@@ -11481,13 +10249,11 @@ class Io1(BaseModel):
     commerce: Commerce182
 
 class Marketing210(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Iq1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -11497,7 +10263,6 @@ class Iq1(BaseModel):
     marketing: Marketing210
 
 class Ir1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -11506,7 +10271,6 @@ class Ir1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class DefaultProduct111(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -11514,7 +10278,6 @@ class DefaultProduct111(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce183(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct111 = Field(..., alias='defaultProduct')
@@ -11533,7 +10296,6 @@ class Commerce183(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Is1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -11546,7 +10308,6 @@ class Is1(BaseModel):
     commerce: Commerce183
 
 class DefaultProduct112(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -11554,7 +10315,6 @@ class DefaultProduct112(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce184(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct112 = Field(..., alias='defaultProduct')
@@ -11574,7 +10334,6 @@ class Commerce184(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class It1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -11587,14 +10346,12 @@ class It1(BaseModel):
     commerce: Commerce184
 
 class Marketing213(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     enable_parent_country_languages: bool = Field(..., alias='enableParentCountryLanguages')
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Commerce185(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     show3_ds_flow: bool = Field(..., alias='show3DSFlow')
     special_offer_enabled: bool = Field(..., alias='specialOfferEnabled')
@@ -11607,7 +10364,6 @@ class Commerce185(BaseModel):
     show_commerce_unified_cancel_flow: bool = Field(..., alias='showCommerceUnifiedCancelFlow')
 
 class Je1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     parent_country: str = Field(..., alias='parentCountry')
     name: str
@@ -11620,13 +10376,11 @@ class Je1(BaseModel):
     commerce: Commerce185
 
 class Marketing214(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Jo1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -11636,7 +10390,6 @@ class Jo1(BaseModel):
     marketing: Marketing214
 
 class Ke1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -11645,7 +10398,6 @@ class Ke1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Km1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -11654,7 +10406,6 @@ class Km1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Kw1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -11665,7 +10416,6 @@ class Kw1(BaseModel):
     feature_config: FeatureConfig186 = Field(..., alias='featureConfig')
 
 class Commerce186(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     license_plate_sign_up_url: str = Field(..., alias='licensePlateSignUpURL')
     paypal_client_id: str = Field(..., alias='paypalClientId')
@@ -11680,7 +10430,6 @@ class Commerce186(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Ky1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     parent_country: str = Field(..., alias='parentCountry')
     name: str
@@ -11694,7 +10443,6 @@ class Ky1(BaseModel):
     commerce: Commerce186
 
 class Lb1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -11704,7 +10452,6 @@ class Lb1(BaseModel):
     marketing: Marketing214
 
 class DefaultProduct113(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -11712,7 +10459,6 @@ class DefaultProduct113(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce187(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct113 = Field(..., alias='defaultProduct')
@@ -11730,7 +10476,6 @@ class Commerce187(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Li1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -11743,7 +10488,6 @@ class Li1(BaseModel):
     commerce: Commerce187
 
 class Lr1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -11752,7 +10496,6 @@ class Lr1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Ls1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -11761,12 +10504,10 @@ class Ls1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class FeatureConfig196(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     enable_cmp: bool = Field(..., alias='enableCMP')
     cmp_enable_browser_lang: bool = Field(..., alias='cmpEnableBrowserLang')
 
 class DefaultProduct114(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -11774,7 +10515,6 @@ class DefaultProduct114(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce188(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct114 = Field(..., alias='defaultProduct')
@@ -11792,7 +10532,6 @@ class Commerce188(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Lt1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -11805,11 +10544,9 @@ class Lt1(BaseModel):
     commerce: Commerce188
 
 class FeatureConfig197(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     enable_cmp: bool = Field(..., alias='enableCMP')
 
 class DefaultProduct115(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -11817,7 +10554,6 @@ class DefaultProduct115(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce189(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct115 = Field(..., alias='defaultProduct')
@@ -11836,7 +10572,6 @@ class Commerce189(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Lu1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -11849,12 +10584,10 @@ class Lu1(BaseModel):
     commerce: Commerce189
 
 class FeatureConfig198(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     enable_cmp: bool = Field(..., alias='enableCMP')
     cmp_enable_browser_lang: bool = Field(..., alias='cmpEnableBrowserLang')
 
 class DefaultProduct116(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -11862,7 +10595,6 @@ class DefaultProduct116(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce190(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct116 = Field(..., alias='defaultProduct')
@@ -11880,7 +10612,6 @@ class Commerce190(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Lv1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -11893,7 +10624,6 @@ class Lv1(BaseModel):
     commerce: Commerce190
 
 class Ly1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -11902,7 +10632,6 @@ class Ly1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Ma1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -11912,18 +10641,15 @@ class Ma1(BaseModel):
     marketing: Marketing214
 
 class Marketing223(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     enable_parent_country_languages: bool = Field(..., alias='enableParentCountryLanguages')
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class FeatureConfig199(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     enable_cmp: bool = Field(..., alias='enableCMP')
 
 class DefaultProduct117(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -11931,7 +10657,6 @@ class DefaultProduct117(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce191(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     default_product: DefaultProduct117 = Field(..., alias='defaultProduct')
     paypal_client_id: str = Field(..., alias='paypalClientId')
@@ -11947,7 +10672,6 @@ class Commerce191(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Mc1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     parent_country: str = Field(..., alias='parentCountry')
     name: str
@@ -11961,7 +10685,6 @@ class Mc1(BaseModel):
     commerce: Commerce191
 
 class Md1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -11970,20 +10693,17 @@ class Md1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Marketing224(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class DefaultProduct118(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase85
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce192(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct118 = Field(..., alias='defaultProduct')
@@ -12000,7 +10720,6 @@ class Commerce192(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Me1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -12013,14 +10732,12 @@ class Me1(BaseModel):
     commerce: Commerce192
 
 class Marketing225(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     enable_parent_country_languages: bool = Field(..., alias='enableParentCountryLanguages')
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Commerce193(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     show3_ds_flow: bool = Field(..., alias='show3DSFlow')
     special_offer_enabled: bool = Field(..., alias='specialOfferEnabled')
@@ -12034,7 +10751,6 @@ class Commerce193(BaseModel):
     show_commerce_unified_cancel_flow: bool = Field(..., alias='showCommerceUnifiedCancelFlow')
 
 class Mf1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     parent_country: str = Field(..., alias='parentCountry')
     name: str
@@ -12048,7 +10764,6 @@ class Mf1(BaseModel):
     commerce: Commerce193
 
 class Mg1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -12057,13 +10772,11 @@ class Mg1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Marketing226(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Commerce194(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     show_commerce_unified_signup_flow: bool = Field(..., alias='showCommerceUnifiedSignupFlow')
@@ -12074,7 +10787,6 @@ class Commerce194(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Mh1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     parent_country: str = Field(..., alias='parentCountry')
     name: str
@@ -12088,14 +10800,12 @@ class Mh1(BaseModel):
     commerce: Commerce194
 
 class DefaultProduct119(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase85
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce195(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct119 = Field(..., alias='defaultProduct')
@@ -12112,7 +10822,6 @@ class Commerce195(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Mk1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -12125,7 +10834,6 @@ class Mk1(BaseModel):
     commerce: Commerce195
 
 class Ml1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -12134,14 +10842,12 @@ class Ml1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Marketing228(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     enable_parent_country_languages: bool = Field(..., alias='enableParentCountryLanguages')
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Commerce196(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     show3_ds_flow: bool = Field(..., alias='show3DSFlow')
     special_offer_enabled: bool = Field(..., alias='specialOfferEnabled')
@@ -12155,7 +10861,6 @@ class Commerce196(BaseModel):
     show_commerce_unified_cancel_flow: bool = Field(..., alias='showCommerceUnifiedCancelFlow')
 
 class Mq1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     parent_country: str = Field(..., alias='parentCountry')
     name: str
@@ -12169,7 +10874,6 @@ class Mq1(BaseModel):
     commerce: Commerce196
 
 class Mr1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -12178,13 +10882,11 @@ class Mr1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Marketing229(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Commerce197(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     license_plate_sign_up_url: str = Field(..., alias='licensePlateSignUpURL')
     paypal_client_id: str = Field(..., alias='paypalClientId')
@@ -12199,7 +10901,6 @@ class Commerce197(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Ms1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     parent_country: str = Field(..., alias='parentCountry')
     name: str
@@ -12213,7 +10914,6 @@ class Ms1(BaseModel):
     commerce: Commerce197
 
 class DefaultProduct120(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -12221,7 +10921,6 @@ class DefaultProduct120(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce198(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct120 = Field(..., alias='defaultProduct')
@@ -12239,7 +10938,6 @@ class Commerce198(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Mt1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -12252,21 +10950,18 @@ class Mt1(BaseModel):
     commerce: Commerce198
 
 class Marketing231(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     enable_parent_country_languages: bool = Field(..., alias='enableParentCountryLanguages')
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class DefaultProduct121(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase85
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce199(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct121 = Field(..., alias='defaultProduct')
@@ -12283,7 +10978,6 @@ class Commerce199(BaseModel):
     show_commerce_unified_cancel_flow: bool = Field(..., alias='showCommerceUnifiedCancelFlow')
 
 class Mu1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     parent_country: str = Field(..., alias='parentCountry')
     name: str
@@ -12297,7 +10991,6 @@ class Mu1(BaseModel):
     commerce: Commerce199
 
 class Mw1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -12306,7 +10999,6 @@ class Mw1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Mz1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -12315,7 +11007,6 @@ class Mz1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Na1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -12324,7 +11015,6 @@ class Na1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Commerce200(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     show3_ds_flow: bool = Field(..., alias='show3DSFlow')
     special_offer_enabled: bool = Field(..., alias='specialOfferEnabled')
@@ -12338,7 +11028,6 @@ class Commerce200(BaseModel):
     show_commerce_unified_cancel_flow: bool = Field(..., alias='showCommerceUnifiedCancelFlow')
 
 class Nc1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     parent_country: str = Field(..., alias='parentCountry')
     name: str
@@ -12352,7 +11041,6 @@ class Nc1(BaseModel):
     commerce: Commerce200
 
 class Ne1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -12361,7 +11049,6 @@ class Ne1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Ng1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -12370,13 +11057,11 @@ class Ng1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Marketing233(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class DefaultProduct122(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -12384,7 +11069,6 @@ class DefaultProduct122(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce201(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct122 = Field(..., alias='defaultProduct')
@@ -12404,7 +11088,6 @@ class Commerce201(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Nl1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -12417,7 +11100,6 @@ class Nl1(BaseModel):
     commerce: Commerce201
 
 class DefaultProduct123(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -12425,7 +11107,6 @@ class DefaultProduct123(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce202(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct123 = Field(..., alias='defaultProduct')
@@ -12444,7 +11125,6 @@ class Commerce202(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class No1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -12457,7 +11137,6 @@ class No1(BaseModel):
     commerce: Commerce202
 
 class Nt1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -12466,7 +11145,6 @@ class Nt1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Om1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -12476,14 +11154,12 @@ class Om1(BaseModel):
     marketing: Marketing233
 
 class Marketing236(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     enable_parent_country_languages: bool = Field(..., alias='enableParentCountryLanguages')
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Commerce203(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     special_offer_enabled: bool = Field(..., alias='specialOfferEnabled')
@@ -12497,7 +11173,6 @@ class Commerce203(BaseModel):
     show_commerce_unified_cancel_flow: bool = Field(..., alias='showCommerceUnifiedCancelFlow')
 
 class Pf1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     parent_country: str = Field(..., alias='parentCountry')
     name: str
@@ -12511,13 +11186,11 @@ class Pf1(BaseModel):
     commerce: Commerce203
 
 class Marketing237(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class DefaultProduct124(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -12525,7 +11198,6 @@ class DefaultProduct124(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce204(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     annual_auto_downgrade: bool = Field(..., alias='annualAutoDowngrade')
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
@@ -12544,7 +11216,6 @@ class Commerce204(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Pl1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -12557,14 +11228,12 @@ class Pl1(BaseModel):
     commerce: Commerce204
 
 class Marketing238(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     enable_parent_country_languages: bool = Field(..., alias='enableParentCountryLanguages')
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Commerce205(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     special_offer_enabled: bool = Field(..., alias='specialOfferEnabled')
@@ -12578,7 +11247,6 @@ class Commerce205(BaseModel):
     show_commerce_unified_cancel_flow: bool = Field(..., alias='showCommerceUnifiedCancelFlow')
 
 class Pm1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     parent_country: str = Field(..., alias='parentCountry')
     name: str
@@ -12592,7 +11260,6 @@ class Pm1(BaseModel):
     commerce: Commerce205
 
 class Commerce206(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     special_offer_enabled: bool = Field(..., alias='specialOfferEnabled')
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
@@ -12604,7 +11271,6 @@ class Commerce206(BaseModel):
     show_commerce_unified_cancel_flow: bool = Field(..., alias='showCommerceUnifiedCancelFlow')
 
 class Pn1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     parent_country: str = Field(..., alias='parentCountry')
     name: str
@@ -12618,13 +11284,11 @@ class Pn1(BaseModel):
     commerce: Commerce206
 
 class Marketing240(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Ps2(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -12634,7 +11298,6 @@ class Ps2(BaseModel):
     marketing: Marketing240
 
 class DefaultProduct125(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -12642,7 +11305,6 @@ class DefaultProduct125(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce207(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct125 = Field(..., alias='defaultProduct')
@@ -12662,7 +11324,6 @@ class Commerce207(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Pt1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -12675,7 +11336,6 @@ class Pt1(BaseModel):
     commerce: Commerce207
 
 class Qa1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -12685,14 +11345,12 @@ class Qa1(BaseModel):
     marketing: Marketing240
 
 class Marketing243(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     enable_parent_country_languages: bool = Field(..., alias='enableParentCountryLanguages')
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Commerce208(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     show3_ds_flow: bool = Field(..., alias='show3DSFlow')
@@ -12707,7 +11365,6 @@ class Commerce208(BaseModel):
     show_commerce_unified_cancel_flow: bool = Field(..., alias='showCommerceUnifiedCancelFlow')
 
 class Re1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     parent_country: str = Field(..., alias='parentCountry')
     name: str
@@ -12721,13 +11378,11 @@ class Re1(BaseModel):
     commerce: Commerce208
 
 class Marketing244(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class DefaultProduct126(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -12735,7 +11390,6 @@ class DefaultProduct126(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce209(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct126 = Field(..., alias='defaultProduct')
@@ -12753,7 +11407,6 @@ class Commerce209(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Ro1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -12766,14 +11419,12 @@ class Ro1(BaseModel):
     commerce: Commerce209
 
 class DefaultProduct127(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase85
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce210(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct127 = Field(..., alias='defaultProduct')
     license_plate_sign_up_url: str = Field(..., alias='licensePlateSignUpURL')
@@ -12789,7 +11440,6 @@ class Commerce210(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Rs1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -12802,7 +11452,6 @@ class Rs1(BaseModel):
     commerce: Commerce210
 
 class Rw1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -12811,7 +11460,6 @@ class Rw1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Sa1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -12822,7 +11470,6 @@ class Sa1(BaseModel):
     feature_config: FeatureConfig199 = Field(..., alias='featureConfig')
 
 class Sc1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -12831,7 +11478,6 @@ class Sc1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class DefaultProduct128(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -12839,7 +11485,6 @@ class DefaultProduct128(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce211(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct128 = Field(..., alias='defaultProduct')
@@ -12858,7 +11503,6 @@ class Commerce211(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Se1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -12871,14 +11515,12 @@ class Se1(BaseModel):
     commerce: Commerce211
 
 class Marketing248(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     enable_parent_country_languages: bool = Field(..., alias='enableParentCountryLanguages')
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Commerce212(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     special_offer_enabled: bool = Field(..., alias='specialOfferEnabled')
@@ -12891,7 +11533,6 @@ class Commerce212(BaseModel):
     show_commerce_unified_cancel_flow: bool = Field(..., alias='showCommerceUnifiedCancelFlow')
 
 class Sh1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     parent_country: str = Field(..., alias='parentCountry')
     name: str
@@ -12905,18 +11546,15 @@ class Sh1(BaseModel):
     commerce: Commerce212
 
 class Marketing249(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class FeatureConfig222(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     enable_cmp: bool = Field(..., alias='enableCMP')
     cmp_enable_browser_lang: bool = Field(..., alias='cmpEnableBrowserLang')
 
 class DefaultProduct129(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -12924,7 +11562,6 @@ class DefaultProduct129(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce213(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct129 = Field(..., alias='defaultProduct')
@@ -12942,7 +11579,6 @@ class Commerce213(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Si1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -12955,18 +11591,15 @@ class Si1(BaseModel):
     commerce: Commerce213
 
 class Marketing250(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     enable_parent_country_languages: bool = Field(..., alias='enableParentCountryLanguages')
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class FeatureConfig223(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     enable_cmp: bool = Field(..., alias='enableCMP')
 
 class Commerce214(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     special_offer_enabled: bool = Field(..., alias='specialOfferEnabled')
@@ -12980,7 +11613,6 @@ class Commerce214(BaseModel):
     show_commerce_unified_cancel_flow: bool = Field(..., alias='showCommerceUnifiedCancelFlow')
 
 class Sj1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     parent_country: str = Field(..., alias='parentCountry')
     name: str
@@ -12994,13 +11626,11 @@ class Sj1(BaseModel):
     commerce: Commerce214
 
 class Marketing251(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class DefaultProduct130(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     portability: Portability
@@ -13008,7 +11638,6 @@ class DefaultProduct130(BaseModel):
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce215(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct130 = Field(..., alias='defaultProduct')
@@ -13026,7 +11655,6 @@ class Commerce215(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Sk1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -13039,7 +11667,6 @@ class Sk1(BaseModel):
     commerce: Commerce215
 
 class Sl1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -13048,21 +11675,18 @@ class Sl1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Marketing252(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     enable_parent_country_languages: bool = Field(..., alias='enableParentCountryLanguages')
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class DefaultProduct131(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase85
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce216(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct131 = Field(..., alias='defaultProduct')
@@ -13080,7 +11704,6 @@ class Commerce216(BaseModel):
     show_commerce_unified_cancel_flow: bool = Field(..., alias='showCommerceUnifiedCancelFlow')
 
 class Sm1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     parent_country: str = Field(..., alias='parentCountry')
     name: str
@@ -13094,7 +11717,6 @@ class Sm1(BaseModel):
     commerce: Commerce216
 
 class Sn1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -13103,7 +11725,6 @@ class Sn1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class So1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -13112,7 +11733,6 @@ class So1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Ss1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -13121,7 +11741,6 @@ class Ss1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class St1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -13130,13 +11749,11 @@ class St1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Marketing253(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Commerce217(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     license_plate_sign_up_url: str = Field(..., alias='licensePlateSignUpURL')
@@ -13151,7 +11768,6 @@ class Commerce217(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Sx1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     parent_country: str = Field(..., alias='parentCountry')
     name: str
@@ -13165,7 +11781,6 @@ class Sx1(BaseModel):
     commerce: Commerce217
 
 class Sy1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -13174,7 +11789,6 @@ class Sy1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Sz1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -13183,7 +11797,6 @@ class Sz1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Commerce218(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     license_plate_sign_up_url: str = Field(..., alias='licensePlateSignUpURL')
     paypal_client_id: str = Field(..., alias='paypalClientId')
@@ -13198,7 +11811,6 @@ class Commerce218(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Tc1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     parent_country: str = Field(..., alias='parentCountry')
     name: str
@@ -13212,7 +11824,6 @@ class Tc1(BaseModel):
     commerce: Commerce218
 
 class Td1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -13221,14 +11832,12 @@ class Td1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Marketing255(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     enable_parent_country_languages: bool = Field(..., alias='enableParentCountryLanguages')
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Commerce219(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     card_options: list[str] = Field(..., alias='cardOptions')
     payment_methods: list[str] = Field(..., alias='paymentMethods')
     special_offer_enabled: bool = Field(..., alias='specialOfferEnabled')
@@ -13242,7 +11851,6 @@ class Commerce219(BaseModel):
     show_commerce_unified_cancel_flow: bool = Field(..., alias='showCommerceUnifiedCancelFlow')
 
 class Tf1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     parent_country: str = Field(..., alias='parentCountry')
     name: str
@@ -13256,7 +11864,6 @@ class Tf1(BaseModel):
     commerce: Commerce219
 
 class Tg1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -13265,13 +11872,11 @@ class Tg1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Marketing256(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Tn1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -13281,14 +11886,12 @@ class Tn1(BaseModel):
     marketing: Marketing256
 
 class DefaultProduct132(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase85
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce220(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct132 = Field(..., alias='defaultProduct')
     license_plate_sign_up_url: str = Field(..., alias='licensePlateSignUpURL')
@@ -13304,7 +11907,6 @@ class Commerce220(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Tr1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -13317,7 +11919,6 @@ class Tr1(BaseModel):
     commerce: Commerce220
 
 class Tz1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -13326,7 +11927,6 @@ class Tz1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Ua1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -13335,7 +11935,6 @@ class Ua1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Ug1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -13344,14 +11943,12 @@ class Ug1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Marketing258(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     enable_parent_country_languages: bool = Field(..., alias='enableParentCountryLanguages')
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Uk1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -13362,14 +11959,12 @@ class Uk1(BaseModel):
     feature_config: FeatureConfig223 = Field(..., alias='featureConfig')
 
 class DefaultProduct133(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase85
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce221(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct133 = Field(..., alias='defaultProduct')
@@ -13387,7 +11982,6 @@ class Commerce221(BaseModel):
     show_commerce_unified_cancel_flow: bool = Field(..., alias='showCommerceUnifiedCancelFlow')
 
 class Va1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     parent_country: str = Field(..., alias='parentCountry')
     name: str
@@ -13401,13 +11995,11 @@ class Va1(BaseModel):
     commerce: Commerce221
 
 class Marketing260(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Commerce222(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     license_plate_sign_up_url: str = Field(..., alias='licensePlateSignUpURL')
     paypal_client_id: str = Field(..., alias='paypalClientId')
@@ -13422,7 +12014,6 @@ class Commerce222(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Vg1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     parent_country: str = Field(..., alias='parentCountry')
     name: str
@@ -13436,14 +12027,12 @@ class Vg1(BaseModel):
     commerce: Commerce222
 
 class Marketing261(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     enable_parent_country_languages: bool = Field(..., alias='enableParentCountryLanguages')
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Commerce223(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     show3_ds_flow: bool = Field(..., alias='show3DSFlow')
     special_offer_enabled: bool = Field(..., alias='specialOfferEnabled')
@@ -13457,7 +12046,6 @@ class Commerce223(BaseModel):
     show_commerce_unified_cancel_flow: bool = Field(..., alias='showCommerceUnifiedCancelFlow')
 
 class Wf1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     parent_country: str = Field(..., alias='parentCountry')
     name: str
@@ -13471,7 +12059,6 @@ class Wf1(BaseModel):
     commerce: Commerce223
 
 class Commerce224(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     license_plate_sign_up_url: str = Field(..., alias='licensePlateSignUpURL')
     show_commerce_tiara: bool = Field(..., alias='showCommerceTiara')
     show_commerce_unified_signup_flow: bool = Field(..., alias='showCommerceUnifiedSignupFlow')
@@ -13479,7 +12066,6 @@ class Commerce224(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Xk1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -13491,7 +12077,6 @@ class Xk1(BaseModel):
     commerce: Commerce224
 
 class Ye1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -13500,7 +12085,6 @@ class Ye1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Commerce225(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     show3_ds_flow: bool = Field(..., alias='show3DSFlow')
@@ -13515,7 +12099,6 @@ class Commerce225(BaseModel):
     show_commerce_unified_cancel_flow: bool = Field(..., alias='showCommerceUnifiedCancelFlow')
 
 class Yt1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     parent_country: str = Field(..., alias='parentCountry')
     name: str
@@ -13529,7 +12112,6 @@ class Yt1(BaseModel):
     commerce: Commerce225
 
 class Yu1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -13538,13 +12120,11 @@ class Yu1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Marketing263(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Za1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -13554,7 +12134,6 @@ class Za1(BaseModel):
     marketing: Marketing263
 
 class Zm1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -13563,7 +12142,6 @@ class Zm1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Zr1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -13572,7 +12150,6 @@ class Zr1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Zw1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -13581,14 +12158,12 @@ class Zw1(BaseModel):
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class DefaultProduct134(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase85
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce226(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct134 = Field(..., alias='defaultProduct')
@@ -13607,7 +12182,6 @@ class Commerce226(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Ag1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -13620,14 +12194,12 @@ class Ag1(BaseModel):
     commerce: Commerce226
 
 class DefaultProduct135(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase85
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce227(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     cancel_subscription_nav_item_promoted: CancelSubscriptionNavItemPromoted = Field(..., alias='cancelSubscriptionNavItemPromoted')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct135 = Field(..., alias='defaultProduct')
@@ -13649,7 +12221,6 @@ class Commerce227(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Ar1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -13662,14 +12233,12 @@ class Ar1(BaseModel):
     commerce: Commerce227
 
 class DefaultProduct136(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase85
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce228(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct136 = Field(..., alias='defaultProduct')
@@ -13688,7 +12257,6 @@ class Commerce228(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Bb1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -13701,14 +12269,12 @@ class Bb1(BaseModel):
     commerce: Commerce228
 
 class DefaultProduct137(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase85
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce229(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct137 = Field(..., alias='defaultProduct')
@@ -13728,7 +12294,6 @@ class Commerce229(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Bo1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -13741,20 +12306,17 @@ class Bo1(BaseModel):
     commerce: Commerce229
 
 class FeatureConfig239(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     display_additional_ratings: bool = Field(..., alias='displayAdditionalRatings')
     display_rating_advisories: bool = Field(..., alias='displayRatingAdvisories')
     enable_cmp: bool = Field(..., alias='enableCMP')
 
 class DefaultProduct138(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase85
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce230(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct138 = Field(..., alias='defaultProduct')
@@ -13776,7 +12338,6 @@ class Commerce230(BaseModel):
     starz_play_supported_regions: bool = Field(..., alias='starzPlaySupportedRegions')
 
 class Br1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -13789,18 +12350,15 @@ class Br1(BaseModel):
     commerce: Commerce230
 
 class FeatureConfig240(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     enable_cmp: bool = Field(..., alias='enableCMP')
 
 class DefaultProduct139(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase85
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce231(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct139 = Field(..., alias='defaultProduct')
@@ -13819,7 +12377,6 @@ class Commerce231(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Bs1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -13832,14 +12389,12 @@ class Bs1(BaseModel):
     commerce: Commerce231
 
 class DefaultProduct140(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase85
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce232(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct140 = Field(..., alias='defaultProduct')
@@ -13858,7 +12413,6 @@ class Commerce232(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Bz1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -13871,14 +12425,12 @@ class Bz1(BaseModel):
     commerce: Commerce232
 
 class DefaultProduct141(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase85
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce233(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct141 = Field(..., alias='defaultProduct')
@@ -13899,7 +12451,6 @@ class Commerce233(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Cl1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -13912,14 +12463,12 @@ class Cl1(BaseModel):
     commerce: Commerce233
 
 class DefaultProduct142(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase85
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce234(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct142 = Field(..., alias='defaultProduct')
     license_plate_sign_up_url: str = Field(..., alias='licensePlateSignUpURL')
@@ -13938,7 +12487,6 @@ class Commerce234(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Co1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -13951,14 +12499,12 @@ class Co1(BaseModel):
     commerce: Commerce234
 
 class DefaultProduct143(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase85
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce235(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct143 = Field(..., alias='defaultProduct')
@@ -13978,7 +12524,6 @@ class Commerce235(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Cr1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -13991,14 +12536,12 @@ class Cr1(BaseModel):
     commerce: Commerce235
 
 class DefaultProduct144(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase85
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce236(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct144 = Field(..., alias='defaultProduct')
@@ -14017,7 +12560,6 @@ class Commerce236(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Dm1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -14030,14 +12572,12 @@ class Dm1(BaseModel):
     commerce: Commerce236
 
 class DefaultProduct145(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase85
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce237(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct145 = Field(..., alias='defaultProduct')
@@ -14057,7 +12597,6 @@ class Commerce237(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Do1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -14070,14 +12609,12 @@ class Do1(BaseModel):
     commerce: Commerce237
 
 class DefaultProduct146(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase85
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce238(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct146 = Field(..., alias='defaultProduct')
@@ -14097,7 +12634,6 @@ class Commerce238(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Ec1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -14110,14 +12646,12 @@ class Ec1(BaseModel):
     commerce: Commerce238
 
 class DefaultProduct147(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase85
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce239(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct147 = Field(..., alias='defaultProduct')
@@ -14136,7 +12670,6 @@ class Commerce239(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Gd1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -14149,14 +12682,12 @@ class Gd1(BaseModel):
     commerce: Commerce239
 
 class DefaultProduct148(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase85
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce240(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct148 = Field(..., alias='defaultProduct')
@@ -14176,7 +12707,6 @@ class Commerce240(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Gt1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -14189,14 +12719,12 @@ class Gt1(BaseModel):
     commerce: Commerce240
 
 class DefaultProduct149(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase85
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce241(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct149 = Field(..., alias='defaultProduct')
@@ -14215,7 +12743,6 @@ class Commerce241(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Gy1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -14228,14 +12755,12 @@ class Gy1(BaseModel):
     commerce: Commerce241
 
 class DefaultProduct150(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase85
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce242(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct150 = Field(..., alias='defaultProduct')
@@ -14255,7 +12780,6 @@ class Commerce242(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Hn1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -14268,14 +12792,12 @@ class Hn1(BaseModel):
     commerce: Commerce242
 
 class DefaultProduct151(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase85
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce243(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct151 = Field(..., alias='defaultProduct')
@@ -14293,7 +12815,6 @@ class Commerce243(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Ht1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -14306,14 +12827,12 @@ class Ht1(BaseModel):
     commerce: Commerce243
 
 class DefaultProduct152(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase85
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce244(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct152 = Field(..., alias='defaultProduct')
@@ -14332,7 +12851,6 @@ class Commerce244(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Jm1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -14345,14 +12863,12 @@ class Jm1(BaseModel):
     commerce: Commerce244
 
 class DefaultProduct153(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase85
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce245(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct153 = Field(..., alias='defaultProduct')
@@ -14371,7 +12887,6 @@ class Commerce245(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Kn1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -14384,14 +12899,12 @@ class Kn1(BaseModel):
     commerce: Commerce245
 
 class DefaultProduct154(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase85
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce246(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct154 = Field(..., alias='defaultProduct')
@@ -14410,7 +12923,6 @@ class Commerce246(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Lc1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -14423,14 +12935,12 @@ class Lc1(BaseModel):
     commerce: Commerce246
 
 class DefaultProduct155(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase85
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce247(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct155 = Field(..., alias='defaultProduct')
@@ -14452,7 +12962,6 @@ class Commerce247(BaseModel):
     starz_play_supported_regions: bool = Field(..., alias='starzPlaySupportedRegions')
 
 class Mx1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -14465,14 +12974,12 @@ class Mx1(BaseModel):
     commerce: Commerce247
 
 class DefaultProduct156(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase85
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce248(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct156 = Field(..., alias='defaultProduct')
@@ -14492,7 +12999,6 @@ class Commerce248(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Ni1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -14505,14 +13011,12 @@ class Ni1(BaseModel):
     commerce: Commerce248
 
 class DefaultProduct157(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase85
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce249(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct157 = Field(..., alias='defaultProduct')
@@ -14532,7 +13036,6 @@ class Commerce249(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Pa1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -14545,14 +13048,12 @@ class Pa1(BaseModel):
     commerce: Commerce249
 
 class DefaultProduct158(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase85
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce250(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct158 = Field(..., alias='defaultProduct')
@@ -14573,7 +13074,6 @@ class Commerce250(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Pe1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -14586,14 +13086,12 @@ class Pe1(BaseModel):
     commerce: Commerce250
 
 class DefaultProduct159(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase85
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce251(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct159 = Field(..., alias='defaultProduct')
@@ -14613,7 +13111,6 @@ class Commerce251(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Py1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -14626,14 +13123,12 @@ class Py1(BaseModel):
     commerce: Commerce251
 
 class DefaultProduct160(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase85
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce252(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct160 = Field(..., alias='defaultProduct')
@@ -14652,7 +13147,6 @@ class Commerce252(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Sr1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -14665,14 +13159,12 @@ class Sr1(BaseModel):
     commerce: Commerce252
 
 class DefaultProduct161(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase85
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce253(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct161 = Field(..., alias='defaultProduct')
@@ -14692,7 +13184,6 @@ class Commerce253(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Sv1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -14705,14 +13196,12 @@ class Sv1(BaseModel):
     commerce: Commerce253
 
 class DefaultProduct162(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase85
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce254(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct162 = Field(..., alias='defaultProduct')
@@ -14731,7 +13220,6 @@ class Commerce254(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Tt1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -14744,14 +13232,12 @@ class Tt1(BaseModel):
     commerce: Commerce254
 
 class DefaultProduct163(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase85
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce255(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct163 = Field(..., alias='defaultProduct')
@@ -14771,7 +13257,6 @@ class Commerce255(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Uy1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -14784,14 +13269,12 @@ class Uy1(BaseModel):
     commerce: Commerce255
 
 class DefaultProduct164(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase85
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce256(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct164 = Field(..., alias='defaultProduct')
@@ -14810,7 +13293,6 @@ class Commerce256(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Vc1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -14823,14 +13305,12 @@ class Vc1(BaseModel):
     commerce: Commerce256
 
 class DefaultProduct165(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase85
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce257(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct165 = Field(..., alias='defaultProduct')
@@ -14850,7 +13330,6 @@ class Commerce257(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Ve1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -14863,14 +13342,12 @@ class Ve1(BaseModel):
     commerce: Commerce257
 
 class Marketing296(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     enable_parent_country_languages: bool = Field(..., alias='enableParentCountryLanguages')
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Commerce258(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     show_commerce_unified_signup_flow: bool = Field(..., alias='showCommerceUnifiedSignupFlow')
@@ -14880,7 +13357,6 @@ class Commerce258(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class As1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     parent_country: str = Field(..., alias='parentCountry')
     name: str
@@ -14894,20 +13370,17 @@ class As1(BaseModel):
     commerce: Commerce258
 
 class Marketing297(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class DefaultProduct166(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase85
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Commerce259(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     default_product: DefaultProduct166 = Field(..., alias='defaultProduct')
@@ -14925,7 +13398,6 @@ class Commerce259(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Ca1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -14938,14 +13410,12 @@ class Ca1(BaseModel):
     commerce: Commerce259
 
 class Marketing298(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     enable_parent_country_languages: bool = Field(..., alias='enableParentCountryLanguages')
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Commerce260(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     show_commerce_unified_signup_flow: bool = Field(..., alias='showCommerceUnifiedSignupFlow')
@@ -14955,7 +13425,6 @@ class Commerce260(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Gu1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     parent_country: str = Field(..., alias='parentCountry')
     name: str
@@ -14969,7 +13438,6 @@ class Gu1(BaseModel):
     commerce: Commerce260
 
 class Commerce261(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     show_commerce_unified_signup_flow: bool = Field(..., alias='showCommerceUnifiedSignupFlow')
@@ -14979,7 +13447,6 @@ class Commerce261(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Mp1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     parent_country: str = Field(..., alias='parentCountry')
     name: str
@@ -14993,7 +13460,6 @@ class Mp1(BaseModel):
     commerce: Commerce261
 
 class Commerce262(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     show_commerce_unified_signup_flow: bool = Field(..., alias='showCommerceUnifiedSignupFlow')
     show_identity_learn_more: bool = Field(..., alias='showIdentityLearnMore')
@@ -15002,7 +13468,6 @@ class Commerce262(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Pr1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     parent_country: str = Field(..., alias='parentCountry')
     name: str
@@ -15015,13 +13480,11 @@ class Pr1(BaseModel):
     commerce: Commerce262
 
 class Marketing301(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class Commerce263(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     card_options: list[str] = Field(..., alias='cardOptions')
     sells_bundle: bool = Field(..., alias='sellsBundle')
@@ -15032,7 +13495,6 @@ class Commerce263(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Um1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     parent_country: str = Field(..., alias='parentCountry')
     name: str
@@ -15046,29 +13508,24 @@ class Um1(BaseModel):
     commerce: Commerce263
 
 class FeatureConfig273(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     enable_cmp: bool = Field(..., alias='enableCMP')
     enable_identity_consent_sync: bool = Field(..., alias='enableIdentityConsentSync')
 
 class DefaultProduct167(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nu: Nu90 = Field(..., alias='NU')
     change_payment: ChangePayment = Field(..., alias='changePayment')
     purchase: Purchase85
     un_auth: UnAuth = Field(..., alias='unAuth')
 
 class Ps3(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     url: str
 
 class Tv3(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     type: str
     url: str
 
 class LicensePlateFlowNavigation1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     amazon: Amazon = Field(..., alias='AMAZON')
     cox: Cox
     hisense: Hisense
@@ -15083,7 +13540,6 @@ class LicensePlateFlowNavigation1(BaseModel):
     xglobal: Xglobal
 
 class Ft1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nine_month: NineMonth = Field(..., alias='nineMonth')
     one_year: OneYear = Field(..., alias='oneYear')
     six_month: SixMonth = Field(..., alias='sixMonth')
@@ -15091,7 +13547,6 @@ class Ft1(BaseModel):
     two_year: TwoYear = Field(..., alias='twoYear')
 
 class Purchase169(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nine_month: NineMonth = Field(..., alias='nineMonth')
     one_year: OneYear = Field(..., alias='oneYear')
     six_month: SixMonth = Field(..., alias='sixMonth')
@@ -15099,19 +13554,16 @@ class Purchase169(BaseModel):
     two_year: TwoYear = Field(..., alias='twoYear')
 
 class Superbundle1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     nine_month: NineMonth = Field(..., alias='nineMonth')
     one_year: OneYear = Field(..., alias='oneYear')
     six_month: SixMonth = Field(..., alias='sixMonth')
 
 class RewardsProducts1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     ft: Ft1 = Field(..., alias='FT')
     purchase: Purchase169
     superbundle: Superbundle1
 
 class Commerce264(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     ads_tier_devices: AdsTierDevices = Field(..., alias='adsTierDevices')
     ads_tier_enabled: bool = Field(..., alias='adsTierEnabled')
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
@@ -15137,7 +13589,6 @@ class Commerce264(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Us1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -15150,18 +13601,15 @@ class Us1(BaseModel):
     commerce: Commerce264
 
 class Marketing303(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     name: str
     lang: str
     enable_parent_country_languages: bool = Field(..., alias='enableParentCountryLanguages')
     region_languages: list[str] = Field(..., alias='regionLanguages')
 
 class FeatureConfig274(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     enable_cmp: bool = Field(..., alias='enableCMP')
 
 class Commerce265(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     braintree_paypal_enabled: bool = Field(..., alias='braintreePaypalEnabled')
     show_commerce_unified_signup_flow: bool = Field(..., alias='showCommerceUnifiedSignupFlow')
     show_identity_learn_more: bool = Field(..., alias='showIdentityLearnMore')
@@ -15170,7 +13618,6 @@ class Commerce265(BaseModel):
     special_offer_product: SpecialOfferProduct = Field(..., alias='specialOfferProduct')
 
 class Vi1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     parent_country: str = Field(..., alias='parentCountry')
     name: str
@@ -15183,7 +13630,6 @@ class Vi1(BaseModel):
     commerce: Commerce265
 
 class Yz1(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     is_eu: bool = Field(..., alias='isEU')
     name: str
     group: str
@@ -15193,7 +13639,6 @@ class Yz1(BaseModel):
     feature_config: dict[str, Any] = Field(..., alias='featureConfig')
 
 class CountriesConfig(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     af: Af1 = Field(..., alias='AF')
     au: Au1 = Field(..., alias='AU')
     bd: Bd1 = Field(..., alias='BD')
@@ -15441,7 +13886,6 @@ class CountriesConfig(BaseModel):
     time_stamp: str = Field(..., alias='timeStamp')
 
 class LangDisplayNames(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     ar: str
     bg: str
     cs: str
@@ -15473,7 +13917,6 @@ class LangDisplayNames(BaseModel):
     zh: str
 
 class RemoteConfig(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     app_config: AppConfig = Field(..., alias='appConfig')
     dictionary_versions: DictionaryVersions = Field(..., alias='dictionaryVersions')
     path: Path
@@ -15490,20 +13933,17 @@ class RemoteConfig(BaseModel):
     lang_display_names: LangDisplayNames = Field(..., alias='langDisplayNames')
 
 class CannonballInstance(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     instance: str
     available_environments: list[str] = Field(..., alias='availableEnvironments')
     current_environment: str = Field(..., alias='currentEnvironment')
 
 class Debug(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     cannonball_edit_url: str = Field(..., alias='cannonballEditUrl')
     entity_id: str = Field(..., alias='entityId')
     cannonball_instances: list[CannonballInstance] = Field(..., alias='cannonballInstances')
     common_available_environments: list[str] = Field(..., alias='commonAvailableEnvironments')
 
 class PageProps(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     available_locales: list[str] = Field(..., alias='availableLocales')
     dictionary: Dictionary
     feature_flags: FeatureFlags = Field(..., alias='featureFlags')
@@ -15523,22 +13963,18 @@ class PageProps(BaseModel):
     debug: Debug
 
 class Props(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     page_props: PageProps = Field(..., alias='pageProps')
     field__n_ssp: bool = Field(..., alias='__N_SSP')
 
 class Query(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     season: UUID | None = None
     slug: str
 
 class PinnedPlatformOptions(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     pinned_platform_name: str = Field(..., alias='pinnedPlatformName')
     pinned_platform_version: str = Field(..., alias='pinnedPlatformVersion')
 
 class RuntimeConfig(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     pinned_platform_options: PinnedPlatformOptions = Field(..., alias='pinnedPlatformOptions')
     git_commit: str = Field(..., alias='gitCommit')
     is_debug_tooling_enabled: bool = Field(..., alias='isDebugToolingEnabled')
@@ -15548,7 +13984,6 @@ class RuntimeConfig(BaseModel):
     remote_dictionaries_to_load: str = Field(..., alias='remoteDictionariesToLoad')
 
 class EntityModel(BaseModel):
-    model_config = ConfigDict(defer_build=True)
     props: Props
     page: str
     query: Query
