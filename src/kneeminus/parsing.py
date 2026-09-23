@@ -35,6 +35,10 @@ ENTITY_SLUG_PREFIX = "entity-"
 EPISODE_TITLE = re.compile(r"^S(?P<season>\d+):E(?P<episode>\d+)\s+(?P<name>.+)$")
 """How an episode title writes which season and episode it is."""
 
+NUMBERED_EPISODE_TITLE = re.compile(
+    r"^(?:[^:]+:\s*)?E(?P<episode>\d+)\s+(?P<name>.+)$",
+)
+
 
 # TODO: Validate
 def mapping(value: Any) -> dict[str, Any]:  # noqa: ANN401 - Any JSON value.
@@ -134,6 +138,9 @@ def episode_numbers(title: Any) -> tuple[int | None, int | None, str | None]:  #
     if name is None:
         return None, None, None
     found = EPISODE_TITLE.match(name)
+    if found is not None:
+        return int(found["season"]), int(found["episode"]), found["name"]
+    found = NUMBERED_EPISODE_TITLE.match(name)
     if found is None:
         return None, None, name
-    return int(found["season"]), int(found["episode"]), found["name"]
+    return None, int(found["episode"]), found["name"]
