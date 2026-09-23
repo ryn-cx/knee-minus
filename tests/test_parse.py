@@ -31,6 +31,12 @@ MOVIE_RUNTIME_MS = 6204000
 SEASON_EPISODE_COUNT = 8
 """How many episodes each season of The Mandalorian has."""
 
+RECOMMENDATION_COUNT = 8
+"""How many titles Moana 2 lists under "You May Also Like"."""
+
+MOANA_ID = "entity-e8896bfa-1052-41f7-ae2e-00255d77cf05"
+"""Moana, the first title Moana 2 recommends."""
+
 
 # TODO: Validate
 @pytest.fixture(scope="session")
@@ -62,6 +68,19 @@ def test_movie(client: KneeMinus) -> None:
     assert movie.background_image
     assert movie.background_image.url.startswith("https://")
     assert not movie.seasons
+
+
+# TODO: Validate
+def test_recommendations(client: KneeMinus) -> None:
+    movie = client.entity.load(recorded(MOVIE_ID))
+    first_recommendation = movie.recommendations[0]
+
+    assert len(movie.recommendations) == RECOMMENDATION_COUNT
+    assert first_recommendation.title == "Moana"
+    assert first_recommendation.page_id == MOANA_ID
+    assert str(first_recommendation.entity_id) in MOANA_ID
+    assert first_recommendation.url.endswith(MOANA_ID)
+    assert str(first_recommendation.image.image_id) in first_recommendation.image.url
 
 
 # TODO: Validate
@@ -104,3 +123,4 @@ def test_empty_page(client: KneeMinus) -> None:
     assert not page.has_content
     assert page.title is None
     assert not page.seasons
+    assert not page.recommendations

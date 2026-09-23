@@ -46,6 +46,14 @@ class Season(BaseModel):
     is_selected: bool
     episodes: list[Episode]
 
+class Recommendation(BaseModel):
+    model_config = ConfigDict(defer_build=True)
+    page_id: str
+    entity_id: UUID
+    title: str
+    url: str
+    image: Image
+
 class EntityModel(BaseModel):
     model_config = ConfigDict(defer_build=True)
     page_id: str
@@ -72,6 +80,7 @@ class EntityModel(BaseModel):
     title_visual: TitleVisual | None
     selected_season_id: UUID | None
     seasons: list[Season]
+    recommendations: list[Recommendation]
     _raw_input: Any = PrivateAttr(default=None)
 
     @model_validator(mode='wrap')

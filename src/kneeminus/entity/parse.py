@@ -28,6 +28,15 @@ DETAILS_TYPE = "MediaDetails"
 EPISODES_TYPE = "Episodes"
 """The component that lists the episodes of the season being shown."""
 
+RECOMMENDATIONS_SECTION_ID = "you-may-also-like"
+"""The id of the section that lists the "You May Also Like" titles."""
+
+IMAGE_CARD_TYPE = "ImageCard"
+"""The component a recommended title is shown as."""
+
+BROWSE_PATH = "/browse/"
+"""What a recommended title's link starts with, before its slug."""
+
 FIRST_YEAR = re.compile(r"\d{4}")
 """The year a release is written with, which is the first one of a range."""
 
@@ -73,6 +82,9 @@ def parse_entity(page: Any) -> dict[str, Any]:  # noqa: ANN401 - Any JSON value.
         "title_visual": image(hero.get("titleVisual")),
         "selected_season_id": text_or_none(episodes.get("selectedSeasonId")),
         "seasons": _seasons(episodes),
+        "recommendations": _recommendations(
+            _section(main_content, RECOMMENDATIONS_SECTION_ID),
+        ),
     }
 
 
@@ -82,6 +94,16 @@ def _component(main_content: list[Any], component_type: str) -> dict[str, Any]:
     for listed_component in main_content:
         component = mapping(listed_component)
         if component.get("_type") == component_type:
+            return component
+    return {}
+
+
+# TODO: Validate
+def _section(main_content: list[Any], section_id: str) -> dict[str, Any]:
+    """Return the section of the page with this id."""
+    for listed_component in main_content:
+        component = mapping(listed_component)
+        if component.get("id") == section_id:
             return component
     return {}
 
@@ -238,4 +260,30 @@ def _episode(listed_episode: Any, position: int) -> dict[str, Any]:  # noqa: ANN
         "episode_number": episode_number or position,
         "summary": plain_text(mapping(episode.get("metadata")).get("summary")),
         "image": image(episode.get("imageVariants")),
+    }
+
+
+# TODO: Validate
+def _recommendations(section: dict[str, Any]) -> list[dict[str, Any]]:
+    """Return the titles listed under "You May Also Like"."""
+    return [
+        _recommendation(card)
+        for slider in sequence(section.get("children"))
+        for slider_item in sequence(mapping(slider).get("children"))
+        for listed_card in sequence(mapping(slider_item).get("children"))
+        if (card := mapping(listed_card)).get("_type") == IMAGE_CARD_TYPE
+    ]
+
+
+# TODO: Validate
+def _recommendation(card: dict[str, Any]) -> dict[str, Any]:
+    """Return one recommended title, as the card that lists it gives it."""
+    card_url = text_or_none(card.get("url"))
+    page_id = card_url.removeprefix(BROWSE_PATH) if card_url else None
+    return {
+        "page_id": page_id,
+        "entity_id": entity_id(page_id),
+        "title": text_or_none(card.get("title")),
+        "url": browse_url(page_id),
+        "image": image(card.get("imageVariants")),
     }

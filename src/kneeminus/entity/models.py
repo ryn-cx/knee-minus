@@ -20,6 +20,7 @@ if TYPE_CHECKING:
         EntityModel,
         Episode,
         Image,
+        Recommendation,
         Season,
         TitleVisual,
     )
@@ -30,6 +31,7 @@ else:
         EntityModel,
         Episode,
         Image,
+        Recommendation,
         Season,
         TitleVisual,
     )
@@ -40,6 +42,7 @@ __all__ = [
     "EntityModel",
     "Episode",
     "Image",
+    "Recommendation",
     "Season",
     "TitleVisual",
     "model_validate_json",
