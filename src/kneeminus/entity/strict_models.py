@@ -35,7 +35,7 @@ class Episode(BaseModel):
     name: str
     season_number: int
     episode_number: int
-    summary: str
+    summary: str | None
     image: Image
 
 class Season(BaseModel):

@@ -75,9 +75,9 @@ class EntityModel(BaseModel):
     advisories: list[Any] | None = None
     features: list[str] | None = None
     credits: list[Credit] | None = None
-    background_image: Any | BackgroundImage | None = None
-    title_visual: Any | TitleVisual | None = None
-    selected_season_id: Any | UUID | None = None
+    background_image: BackgroundImage | None = None
+    title_visual: TitleVisual | None = None
+    selected_season_id: UUID | None = None
     seasons: list[Season] | None = None
     recommendations: list[Recommendation] | None = None
     _raw_input: Any = PrivateAttr(default=None)
