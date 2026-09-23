@@ -13,7 +13,10 @@ uv add git+https://github.com/ryn-cx/kneeminus
 ## Usage
 
 Every endpoint is called for the parsed model, and `download()` and `load()` are
-the halves of that call.
+the halves of that call. A page is read as the JSON it was rendered from, and
+what comes back is what the page says about the title: its name, synopsis,
+release, genres, rating, credits, artwork, and every season with the episodes
+the page lists.
 
 ```python
 from kneeminus import KneeMinus
@@ -28,4 +31,10 @@ season_one = client.entity(
 
 downloaded = client.entity.download("entity-422f6dcc-226f-44e7-98d4-22de69b31cf3")
 entity = client.entity.load(downloaded)
+```
+
+```python
+entity.title  # 'The Mandalorian'
+entity.genres  # ['Action and Adventure', 'Science Fiction']
+entity.seasons[0].episodes[0].name  # 'Chapter 1: The Mandalorian'
 ```
