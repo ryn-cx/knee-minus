@@ -16,12 +16,21 @@ BROWSE_URL = "https://www.disneyplus.com/browse/{slug}"
 
 RIPCUT_URL = (
     "https://disney.images.edge.bamgrid.com/ripcut-delivery/v2/variant/disney/"
-    "{image_id}/compose?format=webp&width={width}"
+    "{image_id}/compose?format=webp"
 )
-"""Where an image is served, for an image the page names but does not link to."""
+"""Where an image is served, before the size it is asked for."""
 
-IMAGE_WIDTH = 800
-"""How wide an image built from its id is asked for."""
+EPISODE_IMAGE_URL = RIPCUT_URL + "&width=2560"
+"""The URL of an episode image at full size."""
+
+EPISODE_THUMBNAIL_URL = RIPCUT_URL + "&label=standard_regular_list_178&width=800"
+"""The URL of an episode image's thumbnail."""
+
+TITLE_IMAGE_URL = RIPCUT_URL + "&width=3840"
+"""The URL of a title image at full size."""
+
+TITLE_THUMBNAIL_URL = RIPCUT_URL + "&width=768"
+"""The URL of a title image's thumbnail."""
 
 LINE_BREAK_TAG = re.compile(r"<br\s*/?>", re.IGNORECASE)
 """The tag a summary breaks its lines with."""
@@ -101,31 +110,42 @@ def entity_id(slug: Any) -> str | None:  # noqa: ANN401 - Any JSON value.
 
 
 # TODO: Validate
-def image(raw_image: Any) -> dict[str, Any] | None:  # noqa: ANN401 - Any JSON value.
-    """Return one image, as the component that carries it gives it.
+def episode_image(raw_image: Any) -> dict[str, Any] | None:  # noqa: ANN401 - Any JSON value.
+    """Return an episode's image."""
+    return _image(raw_image, EPISODE_IMAGE_URL, EPISODE_THUMBNAIL_URL)
 
-    An image the page loads later carries no address, so its address is built
-    from the id it is served under.
-    """
+
+# TODO: Validate
+def title_image(raw_image: Any) -> dict[str, Any] | None:  # noqa: ANN401 - Any JSON value.
+    """Return a title's image."""
+    return _image(raw_image, TITLE_IMAGE_URL, TITLE_THUMBNAIL_URL)
+
+
+# TODO: Validate
+def _image(
+    raw_image: Any,  # noqa: ANN401 - Any JSON value.
+    url_template: str,
+    thumbnail_url_template: str,
+) -> dict[str, Any] | None:
+    """Return one image, with its URLs built from its id."""
     named_image = mapping(raw_image)
     if not named_image:
         return None
-    default_image = mapping(named_image.get("defaultImage"))
-    image_id = text_or_none(default_image.get("ripcutId"))
-    url = text_or_none(default_image.get("source"))
+    image_id = text_or_none(mapping(named_image.get("defaultImage")).get("ripcutId"))
     return {
         "image_id": image_id,
         "alt": text_or_none(named_image.get("alt")),
-        "url": url or _built_url(image_id),
+        "url": _image_url(url_template, image_id),
+        "thumbnail_url": _image_url(thumbnail_url_template, image_id),
     }
 
 
 # TODO: Validate
-def _built_url(image_id: str | None) -> str | None:
-    """Return the address an image with this id is served at."""
+def _image_url(url_template: str, image_id: str | None) -> str | None:
+    """Return the URL of the image with this id."""
     if not image_id:
         return None
-    return RIPCUT_URL.format(image_id=image_id, width=IMAGE_WIDTH)
+    return url_template.format(image_id=image_id)
 
 
 # TODO: Validate

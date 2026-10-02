@@ -9,14 +9,15 @@ from typing import Any
 from kneeminus.parsing import (
     browse_url,
     entity_id,
+    episode_image,
     episode_numbers,
-    image,
     mapping,
     number_or_none,
     plain_text,
     sequence,
     text_or_none,
     texts,
+    title_image,
 )
 
 HERO_TYPE = "DetailEntityHero"
@@ -78,8 +79,8 @@ def parse_entity(page: Any) -> dict[str, Any]:  # noqa: ANN401 - Any JSON value.
         "advisories": _advisories(details),
         "features": _features(hero, maturity_rating),
         "credits": _credits(details),
-        "background_image": image(hero.get("backgroundImage")),
-        "title_visual": image(hero.get("titleVisual")),
+        "background_image": title_image(hero.get("backgroundImage")),
+        "title_visual": title_image(hero.get("titleVisual")),
         "selected_season_id": text_or_none(episodes.get("selectedSeasonId")),
         "seasons": _seasons(episodes),
         "recommendations": _recommendations(
@@ -259,7 +260,7 @@ def _episode(listed_episode: Any, position: int) -> dict[str, Any]:  # noqa: ANN
         "season_number": season_number,
         "episode_number": episode_number or position,
         "summary": plain_text(mapping(episode.get("metadata")).get("summary")),
-        "image": image(episode.get("imageVariants")),
+        "image": episode_image(episode.get("imageVariants")),
     }
 
 
@@ -285,5 +286,5 @@ def _recommendation(card: dict[str, Any]) -> dict[str, Any]:
         "entity_id": entity_id(page_id),
         "title": text_or_none(card.get("title")),
         "url": browse_url(page_id),
-        "image": image(card.get("imageVariants")),
+        "image": title_image(card.get("imageVariants")),
     }

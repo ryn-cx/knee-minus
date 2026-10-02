@@ -15,18 +15,21 @@ class BackgroundImage(BaseModel):
     image_id: UUID | Any = Field(default=None, union_mode='left_to_right')
     alt: str | Any = Field(default=None, union_mode='left_to_right')
     url: str | Any = Field(default=None, union_mode='left_to_right')
+    thumbnail_url: str | Any = Field(default=None, union_mode='left_to_right')
 
 class TitleVisual(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
     image_id: UUID | Any = Field(default=None, union_mode='left_to_right')
     alt: str | Any = Field(default=None, union_mode='left_to_right')
     url: str | Any = Field(default=None, union_mode='left_to_right')
+    thumbnail_url: str | Any = Field(default=None, union_mode='left_to_right')
 
 class Image(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
     image_id: UUID | Any = Field(default=None, union_mode='left_to_right')
     alt: str | Any = Field(default=None, union_mode='left_to_right')
     url: str | Any = Field(default=None, union_mode='left_to_right')
+    thumbnail_url: str | Any = Field(default=None, union_mode='left_to_right')
 
 class Episode(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
