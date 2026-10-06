@@ -4,7 +4,6 @@
 from __future__ import annotations
 
 import json
-from http import HTTPStatus
 from logging import NullHandler, getLogger
 from uuid import UUID
 
@@ -75,14 +74,6 @@ class Entity(BaseEndpoint):
             )
         except ResourceNotFoundError as err:
             raise EntityNotFoundError(slug, err.status_code, err.response) from err
-        return self._validate_download(response, slug)
-
-    # TODO: Validate
-    def _validate_download(self, response: str, slug: str) -> str:
-        """Check that the page is the one that was asked for."""
-        page_id = json.loads(response)["props"]["pageProps"]["pageId"]
-        if page_id != slug:
-            raise EntityNotFoundError(slug, HTTPStatus.OK, response)
         return response
 
     # TODO: Validate
