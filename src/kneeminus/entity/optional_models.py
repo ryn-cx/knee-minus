@@ -12,7 +12,7 @@ class Credit(BaseModel):
 
 class BackgroundImage(BaseModel):
     model_config = ConfigDict(extra='ignore', defer_build=True)
-    image_id: UUID | Any = Field(default=None, union_mode='left_to_right')
+    image_id: UUID | str | Any = Field(default=None, union_mode='left_to_right')
     alt: str | Any = Field(default=None, union_mode='left_to_right')
     url: str | Any = Field(default=None, union_mode='left_to_right')
     thumbnail_url: str | Any = Field(default=None, union_mode='left_to_right')

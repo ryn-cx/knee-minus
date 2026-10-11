@@ -1,5 +1,6 @@
 from typing import Self
 from pydantic import ModelWrapValidatorHandler, PrivateAttr, model_validator
+from pydantic import Field
 from pydantic import ConfigDict
 from pydantic import BaseModel
 from uuid import UUID
@@ -12,7 +13,7 @@ class Credit(BaseModel):
 
 class BackgroundImage(BaseModel):
     model_config = ConfigDict(defer_build=True)
-    image_id: UUID
+    image_id: UUID | str = Field(union_mode='left_to_right')
     alt: str
     url: str
     thumbnail_url: str
@@ -36,7 +37,7 @@ class Episode(BaseModel):
     episode_id: UUID
     title: str
     name: str
-    season_number: int
+    season_number: int | None
     episode_number: int
     summary: str | None
     image: Image
