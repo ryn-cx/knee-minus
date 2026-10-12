@@ -16,21 +16,18 @@ class BackgroundImage(BaseModel):
     image_id: UUID | str = Field(union_mode='left_to_right')
     alt: str
     url: str
-    thumbnail_url: str
 
 class TitleVisual(BaseModel):
     model_config = ConfigDict(defer_build=True)
     image_id: UUID
     alt: str
     url: str
-    thumbnail_url: str
 
 class Image(BaseModel):
     model_config = ConfigDict(defer_build=True)
     image_id: UUID
     alt: str
     url: str
-    thumbnail_url: str
 
 class Episode(BaseModel):
     model_config = ConfigDict(defer_build=True)

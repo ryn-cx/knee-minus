@@ -20,17 +20,12 @@ RIPCUT_URL = (
 )
 """Where an image is served, before the size it is asked for."""
 
-EPISODE_IMAGE_URL = RIPCUT_URL + "&width=2560"
-"""The URL of an episode image at full size."""
+IMAGE_URL = RIPCUT_URL + "&width=7680"
 
-EPISODE_THUMBNAIL_URL = RIPCUT_URL + "&label=standard_regular_list_178&width=800"
-"""The URL of an episode image's thumbnail."""
-
-TITLE_IMAGE_URL = RIPCUT_URL + "&width=3840"
-"""The URL of a title image at full size."""
-
-TITLE_THUMBNAIL_URL = RIPCUT_URL + "&width=768"
-"""The URL of a title image's thumbnail."""
+TITLE_VISUAL_URL = (
+    "https://disney.images.edge.bamgrid.com/ripcut-delivery/v2/variant/disney/"
+    "{image_id}/trim?format=webp&width=7680"
+)
 
 LINE_BREAK_TAG = re.compile(r"<br\s*/?>", re.IGNORECASE)
 """The tag a summary breaks its lines with."""
@@ -112,20 +107,24 @@ def entity_id(slug: Any) -> str | None:  # noqa: ANN401 - Any JSON value.
 # TODO: Validate
 def episode_image(raw_image: Any) -> dict[str, Any] | None:  # noqa: ANN401 - Any JSON value.
     """Return an episode's image."""
-    return _image(raw_image, EPISODE_IMAGE_URL, EPISODE_THUMBNAIL_URL)
+    return _image(raw_image, IMAGE_URL)
 
 
 # TODO: Validate
 def title_image(raw_image: Any) -> dict[str, Any] | None:  # noqa: ANN401 - Any JSON value.
     """Return a title's image."""
-    return _image(raw_image, TITLE_IMAGE_URL, TITLE_THUMBNAIL_URL)
+    return _image(raw_image, IMAGE_URL)
+
+
+# TODO: Validate
+def title_visual(raw_image: Any) -> dict[str, Any] | None:  # noqa: ANN401 - Any JSON value.
+    return _image(raw_image, TITLE_VISUAL_URL)
 
 
 # TODO: Validate
 def _image(
     raw_image: Any,  # noqa: ANN401 - Any JSON value.
     url_template: str,
-    thumbnail_url_template: str,
 ) -> dict[str, Any] | None:
     """Return one image, with its URLs built from its id."""
     named_image = mapping(raw_image)
@@ -136,7 +135,6 @@ def _image(
         "image_id": image_id,
         "alt": text_or_none(named_image.get("alt")),
         "url": _image_url(url_template, image_id),
-        "thumbnail_url": _image_url(thumbnail_url_template, image_id),
     }
 
 

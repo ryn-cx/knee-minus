@@ -18,6 +18,7 @@ from kneeminus.parsing import (
     text_or_none,
     texts,
     title_image,
+    title_visual,
 )
 
 HERO_TYPE = "DetailEntityHero"
@@ -80,7 +81,7 @@ def parse_entity(page: Any) -> dict[str, Any]:  # noqa: ANN401 - Any JSON value.
         "features": _features(hero, maturity_rating),
         "credits": _credits(details),
         "background_image": title_image(hero.get("backgroundImage")),
-        "title_visual": title_image(hero.get("titleVisual")),
+        "title_visual": title_visual(hero.get("titleVisual")),
         "selected_season_id": text_or_none(episodes.get("selectedSeasonId")),
         "seasons": _seasons(episodes),
         "recommendations": _recommendations(
